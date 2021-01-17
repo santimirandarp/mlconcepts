@@ -1,5 +1,6 @@
 import ds
 import numpy as np 
+
 """
 Binary Regression
   Setup
