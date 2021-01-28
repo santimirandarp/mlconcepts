@@ -1,106 +1,114 @@
-% preamble
-\documentclass{article}
-\usepackage{amsmath}
+\documentclass[14pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath} % for using & and align formulas
+\usepackage{parskip} % new paragraph adds a blank line before
+\setlength{\parindent}{0in} % no indent
+\renewcommand{\familydefault}{\sfdefault} %change font to ss
+\usepackage{graphicx} %include images
 
-\author{Mister Nobody}
-\title{ML By Examples}
 \begin{document}
-\maketitle
-\tableofcontents
-\section{Linear Regression}
+\include{Intro}
+\section{Example: Multivariable Linear Regression}
 
-Take the following linear equation:
-
-$$y = w\cdot{}x + b$$
-
-In ML the naming convention is $y$: label, $x$: feature, $w$: weight, $b$: bias. 
-
-We can use Linear Regression \textbf{Model} and to find $w$ and $b$ that minimize the error (find the best equation).
-
-We need pairs ($x_i$, $y_i$) to \textbf{train} a mathematical equation (find best $w$ and $b$). 
-
-The most common type of Machine Learning is called Supervised Learning, where we need both Features (x) and Labels (y) so we can train the Model. This examples are on Supervised Learning.
-
-\subsection{Best Parameters}
-
-To find the best weight and bias we minimize the Mean Square Error:
-
-$$ MSE(w,b) = \frac{1}{m}\sum_{i=0}^m (y_{d} - y_{p})^2 $$
-
-$m$ is the number of samples, $d$ stands for data point, $p$ for predicted.
-
-In ML the error function is called the Cost Function. And Loss function is just the element-wise difference ($y_d - y_p$)
-
-Let's write this on a small piece of code:
-
-\begin{verbatim}
-def cost_function(X, Y, w, b):
-    dPoints = len(X)
-    err = 0.0
-    for i in range(dPoints):
-        err += (Y[i] - (w*X[i] + b))**2
-    return err / dPoints
-\end{verbatim}
-We can also write that down using vectorization:
-
-\begin{verbatim}
-import numpy as np
-
-def cost_function(X, Y, w, b):
-    dPoints = len(X)
-    err = 0.0
-    for i in range(dPoints):
-        err = np.sum(np.square(Y - np.dot(w,X)+ b))
-    return err / dPoints
-\end{verbatim}
-
-We want the MSE(w,b) to be as small as possible. We can compute the gradient by deriving the MSE.
-
-$$dMSE = \frac{dMSE}{db} + \frac{dMSE}{dw}$$
-
-So the total variation is adding up variations on $b$ when $w$ is constant, and the opposite. 
-
-We think of MSE as $MSE = A(w,b)^2$ and use the Chain Rule (very frequent on ML) $dMSE = 2A\cdot(dA/db + dA/dw)$. The gradient is:
-
+A linear regression model for 2 features:
+\begin{align*}
+ y &= w_1\cdot x_1 + w_2\cdot x_2 + b \\
+   &= \vec{w}\cdot\vec{x} + b
+\end{align*}
+$w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\vec{x}$ is for one sample. Many samples are represented as a matrix:
 \begin{align}
-\frac{dMSE}{dw} &= \sum 2(y_i - (mx_i + b)) \cdot -x_i\\
-\frac{dMSE}{db} &= \sum 2(y_i - (mx_i + b)) \cdot -1
+[y1, y2] = 
+  [w1, w2]\cdot{}
+  \begin{bmatrix}
+  x_1 & x_1\\
+  x_2 & x_2 
+  \end{bmatrix}
+ +  b
 \end{align}
-We can use it to minimize the Cost by updating $w$ and $b$. 
+$y_i$ is the result for each sample (columns in the matrix).
 
+We need to do forward and backward propagation.
+\include{ex_forward}
+\subsection{General Derivation}
+The problem is to find $w_i, b$ such that the multidimensional "plane" has small error respect to each datapoint. Then for a new datapoint we will have a trained predictor.
+
+In linear regression, the model is:
+\begin{align*}
+ y &= w_1\cdot x_1 + w_2\cdot x_2 +\ldots+ w_n\cdot x_n\\
+   &= \sum_i^n w_i\cdot x_i + b \\
+   &= \vec{w}\cdot\vec{x} + b
+\end{align*}
+Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write $\vec{y} = \vec{w}\cdot\mathbf{X} + \vec{b}$. This is represented:
+\begin{equation}
+  [y_1 y_2 \ldots y_n] = 
+  [w_1 w_2 \ldots w_n] \cdot
+  \begin{bmatrix}
+    x_{11} & x_{12} & \ldots & x_{1m}\\
+    x_{21} & x_{22} & \ldots & x_{2m}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    x_{n1} & x_{22} & \ldots & x_{nm}\\
+  \end{bmatrix}
+  + [b_1 b_2 \ldots b_n]
+\end{equation}
+There are $m$ examples-columns with $n$ features-rows. Hence $[\mathbf{X}] = m\times{}n$
+
+The Loss $= L(w,b)$ in linear regression is the \textit{Square Error}:
+\begin{align*}
+  L(\vec{w},b) &= (y - \hat{y})^2\\
+  &= (y_k - \vec{w}_j\cdot \vec{x}_j - b)^2
+\end{align*}
+The cost in any method/model measures how well it's doing with he current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
 \begin{align}
- w & =  w - \frac{dMSE}{dw}\cdot\alpha
- b & =  b - \frac{dMSE}{db}\cdot\alpha
+  C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\\
+  &=\frac{1}{m}\sum_{i=0}^m (\vec{y}_i - \vec{\hat{y}}_i)\cdot{}(\vec{y}_i - \vec{\hat{y}}_i)\\
+  &= \frac{1}{m} (\vec{y} - \vec{w}\mathbf{X} - \vec{b})\cdot{}(\vec{y} - \vec{w}\mathbf{X} - \vec{b})
 \end{align}
+$C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples.
 
-There is no graphical justification why we update $w$ and $b$ like that, but think of it like this: we are moving $w$ against the gradient multiplied by a constant (alpha) which is normally called learning rate.
+The cost is a ``bowl'', we will reach the global minimum (or close).
+We use the Cost derivative to find the better weight and bias. 
+
+\begin{align*}
+  dC(\vec{w}, \vec{b}) &= \frac{dC}{dw} + \frac{dC}{db}\\
+  &= \frac{1}{m} d(\sum^m_0 L_i)\\
+  &= \frac{1}{m} \sum^m_{i=0} dL_i(\vec{w}, b_i)\\
+  &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{d\vec{w}} + \frac{dL_i}{db}\\
+  &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{dw_1} +\ldots +\frac{dL_i}{dw_n} + \frac{dL}{db}
+\end{align*}
+
+Take a particular column $k$:
+\begin{align*}
+  dL_k &= 2A * (\frac{dA}{dw_1}+ \frac{dA}{dw_2}+ \frac{dA}{db})\\
+  A_k &= A(w_1, \ldots, w_n, b)\\
+      &= y_k - \vec{w}\cdot{}\vec{x}_k - b \\
+      &= y_k - w_1\cdot{}x_{1k}-\ldots{}-w_n\cdot{}x_{nk} - b \\
+  dA_k &=  -x_{1k} -x_{2k} - x_{nk} -1 
+\end{align*}
+There is no graphical justification as to why we update $w$ and $b$ like that, but we are moving $w$ against (minus) the gradient multiplied by a constant (alpha) called \textit{learning rate}.
 
 The minus sign is because the gradient always points away from the minimum and we want towards it (in one dimension there are only 2 directions). 
 
-Because the $y_d - y_p$ is squared, MSE is a parabola for $b$ and $w$ then it makes sense: the farther away we are from the minimum the larger the gradient, and the more we want to update $w$ and $b$
+The process is called \textit{Gradient Descent}.
 
-This is not that simple for other methods and many variables. But gives the general idea.
+Because the $y_d - y_p$ is squared, MSE is a parabola for $b$ and $w$ then it makes sense: the farther away we are from the minimum the larger the gradient, and the more we want to update $w$ and $b$.
 
 
-\subsection{Summary}
+
+
+
+
+\section{Summary}
+
 \begin{itemize}
-  \item Model: equation to fit the data,
-  \item Cost: Evaluates the error,
-  \item Training. Compute dw, db to update parameters (w, b)
+ \item Model/Architecture*: equation to fit the data,
+ \item FordP: Calculate the Cost, Evaluates the error,
+ \item BackP: Training. Use cost, update $w$, $b$.
 \end{itemize}
+* Technically, model is only once the parameters are defined (after training). 
+\begin{center}
+Model =  Architecture + parameters (fixed ones). 
+\end{center}
 
-The first 2 steps are called forward propagation, the third is backward propagation.
-
-
-\section{Binary Regression}
-Linear regression fits linear data, Binary fits binary data. Binary data is 0 or 1 on a plot. Then we can't use linear regression. 
-
-The \textbf{Model} used here is not a straight line but a sigmoid function:
-
-$$
-\sigma(y) =  \frac{1}{1+e^{-y}}\\
-y =  w\cdot{}x + b
-$$
-
-The Cost function (computes error) is different too.
+FP means from $X$ to $C$; BP from $L$ to $z$, in \textit{terms of the chain rule}.
+\include{Other}
 \end{document}

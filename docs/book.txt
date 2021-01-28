@@ -1,0 +1,32 @@
+Perceptron (neuron), multiperceptrons => take binary inputs
+
+Each perceptron (neuron) has a single output.
+
+"I've described perceptrons as a method for weighing evidence to make decisions"
+
+Neurons behavior:
+1 if wx+b > 0
+0 if wx+b < 0
+
+On sigmoid functions, this behaviour is instead continuous, this is, the value of a neuron (activation) ranges from 0-1.
+
+Sigmoid Neurons
+
+* z = wx+b
+* sigmoid = 1/(1+e^(-z))
+
+1 > sigmoid(z)  > 0
+
+The closer to 1 implies "firing", 0 the opposite.
+
+Neural Net, FP
+
+x, w, b => z  -----> sigma(z) ----> a 
+
+a, w', b' => z ----> sigma(z') ---> a' ----> Loss
+
+And then backwards
+
+a^[layer]
+
+We can imagine a neural network as 
