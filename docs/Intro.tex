@@ -1,12 +1,18 @@
 
 \section{New Problem Space}
-Deep Learning models non-linear patterns of data. This opens up a new range of problems to solve. 
+Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new range of problems to solve. 
 
 \section{The steps}
-The most important pieces, mathematically, are \textit{forward} and \textit{backward} propagation. They consist in calculating the cost and updating parameters, respectively.
+There are two main steps: \textit{forward} and \textit{backward} propagation. 
 
-\begin{itemize}
-\item Forward: Compute Loss and Cost. 
-\item Backward: Minimize cost, we need to derive it, and find a way to move towards the minimum. We use \textit{Gradient Descent}.
-\end{itemize}
+Suppose a mathematical function is given to us:
+$$ y(x_1,x_2) = a x_1 + b x_2 + c$$
+where $a$, $b$, $c$ are \textit{parameters}.
 
+In \textit{Forward Propagation} we initialize a set of parameters (say $a,b,c=0$, and use an equation to estimate the output ($y$). We input the $y$ to another function ``$C$'' which is small if we're doing well, or large if bad.
+
+In \textit{Backward Propagation} we minimize $C$, by differentiation, and find a way to move our function parameters towards the minimum. We use \textit{Gradient Descent}.
+
+Basically, we run an estimation, compute $C$, and use this to update our function, iteratively.
+
+We will see examples in detail, starting with multivariable linear regression, that is, a previous step to \textit{Deep Learning} and Neural Networks.
