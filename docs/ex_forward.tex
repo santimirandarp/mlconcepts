@@ -68,12 +68,12 @@ Where ``sum'' implies we sum all values from the resulting array, and $b$ will b
 
 We also found each partial derivative:
 \begin{align}
-  dC &= \frac{dC}{dw} = sum(dw+db)\\
- dC &= sum(2A\times{}\mathbf{X}) - sum(2A\times{}1)\\
+  dC &= \frac{dC}{dw} + \frac{dC}{db} \\
+ dC &= -sum(2A\times{}\mathbf{X}) - sum(2A\times{}1)
 \end{align}
 To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
 \begin{align}
-  \vec{w} &= \vec{w} -\frac{dC}{dw}\times{}d\vec{w}\cdot{}\alpha\\
-  \vec{b} &= \vec{b} -\frac{dC}{db}\times{}d\vec{b}\cdot{}\alpha
+  \vec{w} &= \vec{w} -\frac{dC}{dw}\cdot{}\alpha\\
+  \vec{b} &= \vec{b} -\frac{dC}{db}\cdot{}\alpha
 \end{align}
 $\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max incresing direction otherwise).

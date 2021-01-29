@@ -1,6 +1,6 @@
 import ds
 import numpy as np 
-
+import matplotlib.pyplot as plt
 """
 Binary Regression
   Setup
@@ -72,7 +72,7 @@ def init_wb(dim):
     b = 0
     return w, b
 
-def model(X, Y, cycles=2000, rate=0.5):
+def model(X, Y, cycles=100, rate=0.5):
    """
    Features, Y real
    """
@@ -91,7 +91,6 @@ Predict
     We use them to predict
 """
 w, b = model(train_X, train_Y)
-
 
 def predict(w, b, test_X, test_Y, classes):
    pred = sigmoid(np.dot(w.T, test_X)+b)
