@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.4)  29 JAN 2021 06:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.4)  29 JAN 2021 06:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -184,78 +184,68 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\openout2 = `Intro.aux'.
+(./ML.toc)
+\tf@toc=\write4
+\openout4 = `ML.toc'.
 
-
-(./Intro.tex
-LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 6.
-) [1
-
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+\openout2 = `Intro.aux'.
+
+ (./Intro.tex
+<ML.jpg, id=8, 4625.28pt x 3468.96pt>
+File: ML.jpg Graphic file (type jpg)
+<use ML.jpg>
+Package pdftex.def Info: ML.jpg  used on input line 8.
+(pdftex.def)             Requested size: 310.4979pt x 232.84787pt.
+LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 15.
+
+[2
+
+ <./ML.jpg>]) [3]
 \openout2 = `linear.aux'.
 
+ (./linear.tex [4
 
-(./linear.tex [2
 
-
-] [3] [4] [5]
-
-LaTeX Warning: Reference `dA' on page 6 undefined on input line 197.
-
-[6]) [7]
+] [5] [6] [7] [8]) [9]
 \openout2 = `Other.aux'.
 
  (./Other.tex
-<overfitting.png, id=37, 451.6875pt x 333.245pt>
+<overfitting.png, id=44, 451.6875pt x 333.245pt>
 File: overfitting.png Graphic file (type png)
 <use overfitting.png>
 Package pdftex.def Info: overfitting.png  used on input line 4.
 (pdftex.def)             Requested size: 345.0pt x 254.55022pt.
- [8
+)
+[10
 
 
- <./overfitting.png>]
-<ML.jpg, id=43, 4625.28pt x 3468.96pt>
-File: ML.jpg Graphic file (type jpg)
-<use ML.jpg>
-Package pdftex.def Info: ML.jpg  used on input line 21.
-(pdftex.def)             Requested size: 310.4979pt x 232.84787pt.
-File: ML.jpg Graphic file (type jpg)
-<use ML.jpg>
-Package pdftex.def Info: ML.jpg  used on input line 28.
-(pdftex.def)             Requested size: 310.4979pt x 232.84787pt.
-) [9 <./ML.jpg>] [10] (./ML.aux
-(./Intro.aux) (./linear.aux) (./Other.aux))
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+ <./overfitting.png>] (./ML.aux (./Intro.aux) (./linear.aux) (./Other.aux)) ) 
 Here is how much of TeX's memory you used:
- 2886 strings out of 483183
- 40057 string characters out of 5966293
- 285514 words of memory out of 5000000
- 17876 multiletter control sequences out of 15000+600000
+ 2891 strings out of 483183
+ 40087 string characters out of 5966293
+ 285524 words of memory out of 5000000
+ 17878 multiletter control sequences out of 15000+600000
  536044 words of font info for 37 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  33i,14n,27p,828b,224s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
-10.pfb>
-Output written on ML.pdf (10 pages, 2800723 bytes).
+</
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.p
+fb>
+Output written on ML.pdf (10 pages, 2800605 bytes).
 PDF statistics:
  89 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream
