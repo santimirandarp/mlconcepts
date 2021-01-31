@@ -4,7 +4,7 @@ A linear regression model for 2 features:
  y &= w_1\cdot x_1 + w_2\cdot x_2 + b \\
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
-$w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\vec{x}$ is for one sample. Many samples are represented as a matrix:
+$w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\vec{x}$ is for one sample. Two or more samples are represented as a matrix:
 \begin{align}
 [y1, y2] = 
   [w1, w2]\cdot{}
@@ -64,7 +64,7 @@ We need the Cost's derivative to find better weights and bias. The complicated t
 \begin{align}
   dC(\vec{w},b) &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}\nonumber\\
   &= d(\sum_{i=0}^{i=2}L_i) = \sum_{i=0}^{i=2}dL_i(\vec{w},b) \label{diffp}\\
-  &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial \vec{w}} + \frac{\partial L}{\partial b}\nonumber
+  &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial w_i} + \frac{\partial L}{\partial b}\nonumber
 \end{align}
 Equation \ref{diffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
@@ -76,11 +76,11 @@ We named $A_k$ to the difference $y_i-\hat{y}_i$.
 So $dC$ was reduced to:
 \begin{align}
   dC &= \frac{1}{2}\sum_{i=0}^{i=2} dL_i\\
-  &= \frac{1}{2}\times{}2\cdot{}\sum_{i=0}^{i=2}A_i(w_1, w_2, b)\cdot{}dA_i\\
-  &= \frac{1}{2}\times{}2\cdot{}d\mathbf{A}\cdot{}\mathbf{A}^T
+  &= \frac{1}{2}\times{}2\sum_{i=0}^{i=2}A_i(w_1, w_2, b)\cdot{}dA_i\\
+  &= \frac{1}{2}\times{}2(\nabla\cdot\vec{A})\cdot{}\vec{A}
 \end{align}
-The $2$ were purposedly left, as one of those will normally be a different number, which one? 
-This is a nice expression but we don't actually need $dC$. We need the partials.
+The $2$ were purposedly left, as one of those will normally be a different number, which one? We don't actually need $dC$, but the partials.
+$\nabla\cdot\vec{A}$ is a fancy way to say $d\vec{A}$ but it's the correct way to write it. The parenthesis are relevant for the computational adaptation of the algorithm.
 
 We need $dw$ and $db$; and for this $dA_k$:
 \begin{align*}
@@ -99,20 +99,18 @@ where
 
 This can be expressed in compact form:
 \begin{align}
-  dC &= sum(-\frac{1}{2}\times{}2\cdot{}\mathbf{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\cdot{}\mathbf{A}\times{}1)\\
-  dC &= \frac{\partial C}{\partial w} + \frac{\partial C}{\partial b}  \nonumber
+  dC &= sum(-\frac{1}{2}\times{}2\vec{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\vec{A}\times{}1)\\
+  &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}  \nonumber
 \end{align}
-We don't need the sum. We also found each partial derivative.
 
 To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
 \begin{align}
-  \vec{w} &= \vec{w} -\frac{\partial C}{\partial w}\cdot{}\alpha\\
-  \vec{b} &= \vec{b} -\frac{\partial C}{\partial b}\cdot{}\alpha
+  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\cdot{}\alpha\\
+  b &= b -\frac{\partial C}{\partial b}\cdot{}\alpha
 \end{align}
 $\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max incresing direction otherwise).
 
-
-
+In deep neural networks $b$ will explicitly be a vector.
 
 
 
