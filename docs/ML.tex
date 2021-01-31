@@ -5,12 +5,14 @@
 \setlength{\parindent}{0in} % no indent
 \renewcommand{\familydefault}{\sfdefault} %change font to ss
 \usepackage{graphicx} %include images
+\graphicspath{{images/}}
 \usepackage{fancyvrb}
 \usepackage{hyperref} %for links on labels and table of contents
 
 \begin{document}
 \tableofcontents
-\include{Intro}
-\include{linear}
-\include{Other}
+\include{parts/Intro}
+\include{parts/linear}
+\include{parts/sigmoid}
+\include{parts/Other}
 \end{document}

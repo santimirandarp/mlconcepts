@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.4)  29 JAN 2021 21:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  30 JAN 2021 05:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -161,34 +161,9 @@ Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-
-! LaTeX Error: File `letltxmacro.sty' not found.
-
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
-
-Enter file name: exiit
-
-! LaTeX Error: File `exiit.sty' not found.
-
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
-
-Enter file name: exit
-
-! LaTeX Error: File `exit.sty' not found.
-
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
-
-Enter file name: 
-
-LaTeX Warning: You have requested, on input line 132, version
-               `2008/06/13' of package letltxmacro,
-               but only version
-               `'
-               is available.
-
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
 (/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
@@ -242,23 +217,216 @@ Package hyperref Info: backreferencing OFF on input line 6445.
 Package hyperref Info: Link coloring OFF on input line 6450.
 Package hyperref Info: Link coloring with OCG OFF on input line 6455.
 Package hyperref Info: PDF/A mode OFF on input line 6460.
+LaTeX Info: Redefining \ref on input line 6500.
+LaTeX Info: Redefining \pageref on input line 6504.
 
-! Undefined control sequence.
-l.6499 \LetLtxMacro
-                   \NoHy@OrgRef\ref
-? exit
- 
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
+)
+\Hy@abspage=\count197
+\c@Item=\count198
+\c@Hfootnote=\count199
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
+Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
+)
+\Fld@listcount=\count266
+\c@bookmark@seq@number=\count267
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip52
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count268
+\l__pdf_internal_box=\box48
+)
+
+LaTeX Warning: Unused global option(s):
+    [14pt].
+
+(./ML.aux (./parts/Intro.aux) (./parts/linear.aux) (./parts/sigmoid.aux)
+(./parts/Other.aux))
+\openout1 = `ML.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count269
+\scratchdimen=\dimen150
+\scratchbox=\box49
+\nofMPsegments=\count270
+\nofMParguments=\count271
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count272
+\MPscratchDim=\dimen151
+\MPnumerator=\count273
+\makeMPintoPDFobject=\count274
+\everyMPtoPDFconversion=\toks23
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\AtBeginShipoutBox=\box50
+Package hyperref Info: Link coloring OFF on input line 12.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count275
+)
+LaTeX Info: Redefining \ref on input line 12.
+LaTeX Info: Redefining \pageref on input line 12.
+LaTeX Info: Redefining \nameref on input line 12.
+
+(./ML.out) (./ML.out)
+\@outlinefile=\write4
+\openout4 = `ML.out'.
+
+ (./ML.toc)
+\tf@toc=\write5
+\openout5 = `ML.toc'.
+
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+\openout2 = `parts/Intro.aux'.
+
+ (./parts/Intro.tex
+<images/ML.jpg, id=62, 4625.28pt x 3468.96pt>
+File: images/ML.jpg Graphic file (type jpg)
+<use images/ML.jpg>
+Package pdftex.def Info: images/ML.jpg  used on input line 8.
+(pdftex.def)             Requested size: 310.4979pt x 232.84787pt.
+<images/1L-NN.jpg, id=65, 4045.1125pt x 3419.77625pt>
+File: images/1L-NN.jpg Graphic file (type jpg)
+<use images/1L-NN.jpg>
+Package pdftex.def Info: images/1L-NN.jpg  used on input line 17.
+(pdftex.def)             Requested size: 4045.10269pt x 3419.76794pt.
+<images/2L-NN.jpg, id=66, 4441.59375pt x 2919.90875pt>
+File: images/2L-NN.jpg Graphic file (type jpg)
+<use images/2L-NN.jpg>
+Package pdftex.def Info: images/2L-NN.jpg  used on input line 25.
+(pdftex.def)             Requested size: 4441.58298pt x 2919.90167pt.
+LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 31.
+ [2
+
+ <./images/ML.jpg>] [3 <./images/1L-NN.jpg>]
+[4 <./images/2L-NN.jpg>]) [5]
+\openout2 = `parts/linear.aux'.
+
+ (./parts/linear.tex
+<images/line_plot.png, id=91, 791.95876pt x 629.35126pt>
+File: images/line_plot.png Graphic file (type png)
+<use images/line_plot.png>
+Package pdftex.def Info: images/line_plot.png  used on input line 27.
+(pdftex.def)             Requested size: 310.4979pt x 246.74242pt.
+ [6
+
+
+ <./images/line_plot.png>]
+[7] [8] [9] [10]) [11]
+\openout2 = `parts/sigmoid.aux'.
+
+ (./parts/sigmoid.tex
+<images/sigmoid_plot.png, id=154, 791.95876pt x 629.35126pt>
+File: images/sigmoid_plot.png Graphic file (type png)
+<use images/sigmoid_plot.png>
+Package pdftex.def Info: images/sigmoid_plot.png  used on input line 13.
+(pdftex.def)             Requested size: 310.4979pt x 246.74242pt.
+) [12
+
+
+ <./images/sigmoid_plot.png>]
+\openout2 = `parts/Other.aux'.
+
+
+(./parts/Other.tex
+<images/overfitting.png, id=162, 451.6875pt x 333.245pt>
+File: images/overfitting.png Graphic file (type png)
+<use images/overfitting.png>
+Package pdftex.def Info: images/overfitting.png  used on input line 4.
+(pdftex.def)             Requested size: 345.0pt x 254.55022pt.
+) [13
+
+
+ <./images/overfitting.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 18.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 18.
+ (./ML.aux
+(./parts/Intro.aux) (./parts/linear.aux) (./parts/sigmoid.aux)
+(./parts/Other.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 18.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 18.
+Package rerunfilecheck Info: File `ML.out' has not changed.
+(rerunfilecheck)             Checksum: 8786D234D711B3E060B9DF84A2B59EA2;609.
+ ) 
 Here is how much of TeX's memory you used:
- 5032 strings out of 483183
- 72614 string characters out of 5966293
- 328128 words of memory out of 5000000
- 20020 multiletter control sequences out of 15000+600000
- 532338 words of font info for 24 fonts, out of 8000000 for 9000
+ 6654 strings out of 483183
+ 99221 string characters out of 5966292
+ 367777 words of memory out of 5000000
+ 21483 multiletter control sequences out of 15000+600000
+ 536044 words of font info for 37 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 33i,0n,29p,828b,36s stack positions out of 5000i,500n,10000p,200000b,80000s
-No pages of output.
+ 34i,14n,32p,828b,365s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+
+Output written on ML.pdf (13 pages, 7002590 bytes).
 PDF statistics:
- 0 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 225 PDF objects out of 1000 (max. 8388607)
+ 186 compressed objects within 2 object streams
+ 52 named destinations out of 1000 (max. 500000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

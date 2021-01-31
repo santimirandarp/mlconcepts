@@ -1,9 +1,10 @@
-\contentsline {section}{\numberline {1}High Level View}{2}%
-\contentsline {section}{\numberline {2}The steps}{2}%
-\contentsline {section}{\numberline {3}Example: Multivariable Linear Regression}{6}%
-\contentsline {subsection}{\numberline {3.1}Forward Propagation}{6}%
-\contentsline {subsection}{\numberline {3.2}Backward Propagation}{7}%
-\contentsline {section}{\numberline {4}Linear Regression: General Derivation}{8}%
-\contentsline {subsection}{\numberline {4.1}Forward Propagation}{9}%
-\contentsline {subsection}{\numberline {4.2}Backward Propagation}{9}%
-\contentsline {section}{\numberline {5}Related Concepts}{12}%
+\contentsline {section}{\numberline {1}High Level View}{2}{section.1}%
+\contentsline {section}{\numberline {2}The steps}{2}{section.2}%
+\contentsline {section}{\numberline {3}Example: Multivariable Linear Regression}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Forward Propagation}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Backward Propagation}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Linear Regression: General Derivation}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Forward Propagation}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Backward Propagation}{10}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Sigmoid}{12}{section.5}%
+\contentsline {section}{\numberline {6}Related Concepts}{13}{section.6}%
