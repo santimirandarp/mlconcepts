@@ -5,7 +5,7 @@ A linear regression model for 2 features:
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
 $w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\vec{x}$ is for one sample. Two or more samples are represented as a matrix:
-\begin{align}
+\begin{align*}
 [y1, y2] = 
   [w1, w2]\cdot{}
   \begin{bmatrix}
@@ -13,7 +13,7 @@ $w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\v
   x_2 & x_2 
   \end{bmatrix}
  +  b
-\end{align}
+\end{align*}
 $y_i$ is the result for each sample (columns in the matrix).
 
 We need to do forward and backward propagation.
@@ -125,7 +125,7 @@ In linear regression, the model is:
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
 Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write $\vec{y} = \vec{w}\cdot\mathbf{X} + \vec{b}$. This is represented:
-\begin{equation}
+\begin{equation*}
   [y_1, y_2, \ldots, y_n] = 
   [w_1, w_2, \ldots, w_n] \cdot
   \begin{bmatrix}
@@ -135,7 +135,7 @@ Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write
     x_{n1} & x_{22} & \ldots & x_{nm}\\
   \end{bmatrix}
   + [b_1, b_2, \ldots, b_n]
-\end{equation}
+\end{equation*}
 There are $m$ examples-columns with $n$ features-rows. Hence $[\mathbf{X}] = m\times{}n$
 
 \subsection{Forward Propagation}
@@ -146,11 +146,11 @@ Take the $k$ column. The Loss $= L(w,b)$ in linear regression is the \textit{Squ
 \end{align*}
 The cost in any method/model measures how well it's doing with the current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
 \begin{align}
-  C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\\
-  &=\frac{1}{m}\sum_{i=0}^m (\vec{y}_i - \vec{\hat{y}}_i)\cdot{}(\vec{y}_i - \vec{\hat{y}}_i)\\
-  &= \frac{1}{m} (\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b})
+  C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\nonumber\\
+  &=\frac{1}{m}(\vec{y}_i - \vec{\hat{y}}_i)\cdot{}(\vec{y}_i - \vec{\hat{y}}_i)\label{eq:cmulti}\\
+  &= \frac{1}{m} (\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b}) \nonumber
 \end{align}
-$C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples.
+$C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples. $C$ is computed from \ref{eq:cmulti}.
 
 In Python it'd look like:
 \begin{center}
@@ -168,13 +168,13 @@ We use the Cost derivative to find the better weight and bias.
 \begin{align}
   dC(\vec{w}, \vec{b}) &= \frac{dC}{d\vec{w}} + \frac{dC}{db}\nonumber\\
   &= \frac{1}{m} d(\sum^m_0 L_i)\nonumber\\
-  &= \frac{1}{m} \sum^m_{i=0} dL_i(\vec{w}, b_i)\label{mvdiffp}\\
+  &= \frac{1}{m} \sum^m_{i=0} dL_i(\vec{w}, b_i)\label{eq:diff}\\
   &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{d\vec{w}} + \frac{dL_i}{db}\nonumber\\
   &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{dw_1} +\ldots +\frac{dL_i}{dw_n} + \frac{dL}{db} \nonumber
 \end{align}
 
 Take a particular column $k$:
-Equation \ref{mvdiffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
+Equation \ref{eq:diff} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
   L_k(\vec{w},b) &= (y_k - \hat{y_k})^2\\
     &= A_k(w_1, w_2,\ldots, w_n, b)^2\\
@@ -184,7 +184,7 @@ We named $A_k$ to the difference $y_i-\hat{y}_i$.
 
 \begin{align*}
   A_k  &= y_k - \sum_j w_j\cdot{}\mathbf{X}_{jk} - b \\
-  &= y_k - w_1\cdot{}x_{1k} \ldots{}-w_n\cdot{}x_{nk} - b \\
+  &= y_k - w_1\,x_{1k} \ldots{}-w_n\,x_{nk} - b \\
 \end{align*}
 
 \begin{align}

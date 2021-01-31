@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  31 JAN 2021 22:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  31 JAN 2021 23:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,7 +370,7 @@ Package pdftex.def Info: images/line_plot.png  used on input line 27.
 \openout2 = `parts/sigmoid.aux'.
 
  (./parts/sigmoid.tex
-<images/sigmoid_plot.png, id=156, 791.95876pt x 629.35126pt>
+<images/sigmoid_plot.png, id=153, 791.95876pt x 629.35126pt>
 File: images/sigmoid_plot.png Graphic file (type png)
 <use images/sigmoid_plot.png>
 Package pdftex.def Info: images/sigmoid_plot.png  used on input line 13.
@@ -383,7 +383,7 @@ Package pdftex.def Info: images/sigmoid_plot.png  used on input line 13.
 
 
 (./parts/Other.tex
-<images/overfitting.png, id=164, 451.6875pt x 333.245pt>
+<images/overfitting.png, id=161, 451.6875pt x 333.245pt>
 File: images/overfitting.png Graphic file (type png)
 <use images/overfitting.png>
 Package pdftex.def Info: images/overfitting.png  used on input line 4.
@@ -403,10 +403,10 @@ Package rerunfilecheck Info: File `ML.out' has not changed.
 (rerunfilecheck)             Checksum: 8786D234D711B3E060B9DF84A2B59EA2;609.
  ) 
 Here is how much of TeX's memory you used:
- 6653 strings out of 483183
- 99204 string characters out of 5966292
- 368823 words of memory out of 5000000
- 21484 multiletter control sequences out of 15000+600000
+ 6650 strings out of 483183
+ 99163 string characters out of 5966292
+ 367870 words of memory out of 5000000
+ 21485 multiletter control sequences out of 15000+600000
  536044 words of font info for 37 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,14n,32p,828b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -423,10 +423,10 @@ nts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
 
-Output written on ML.pdf (13 pages, 292247 bytes).
+Output written on ML.pdf (13 pages, 292186 bytes).
 PDF statistics:
- 227 PDF objects out of 1000 (max. 8388607)
- 185 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 223 PDF objects out of 1000 (max. 8388607)
+ 181 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
