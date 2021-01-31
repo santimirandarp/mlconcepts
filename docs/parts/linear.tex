@@ -41,7 +41,7 @@ In Linear Regression, the Cost is the averaged sum of $L_i$, and it's the \texti
 \begin{align}
   C(w_1, w_2, b) &= \frac{1}{2} \sum_{i=0}^{i=2} L_i(w_1, w_2, b)\\
   &= \frac{1}{2}([y_1, y_2] - [\hat{y}_1, \hat{y}_2])\cdot{}([y_1, y_2]-[\hat{y}_1, \hat{y}_2])\\
-  &=\frac{1}{2}([y_1, y_2] - [w_1, w_2]\mathbf{X}-b)\cdot{}([y_1, y_2] - [w_1,w_2]\mathbf{X} -b) \label{cost}
+  &=\frac{1}{2}([y_1, y_2] - [w_1, w_2]\cdot{}\mathbf{X}-b)\cdot{}([y_1, y_2] - [w_1,w_2]\cdot{}\mathbf{X} -b) \label{cost}
 \end{align}
 $\frac{1}{2}$ is to average over examples. Equation \ref{cost} is what we implement into code.
 Outliers may be critical on the effect of weights and biases.
@@ -64,30 +64,30 @@ We need the Cost's derivative to find better weights and bias. The complicated t
 \begin{align}
   dC(\vec{w},b) &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}\nonumber\\
   &= d(\sum_{i=0}^{i=2}L_i) = \sum_{i=0}^{i=2}dL_i(\vec{w},b) \label{diffp}\\
-  &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial w_i} + \frac{\partial L}{\partial b}\nonumber
+  &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial \vec{w}} + \frac{\partial L}{\partial b}\nonumber
 \end{align}
 Equation \ref{diffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
   L_k(\vec{w},b) &= (y_k - \hat{y_k})^2\\
     L_k &= A_k(w_1, w_2, b)^2\\
-    dL_k &= 2\cdot{}A_k(w1,w2,b)\cdot{}dA_k
+    dL_k &= 2\,A_k(w1,w2,b)\,dA_k
 \end{align*}
 We named $A_k$ to the difference $y_i-\hat{y}_i$.
 So $dC$ was reduced to:
 \begin{align}
   dC &= \frac{1}{2}\sum_{i=0}^{i=2} dL_i\\
-  &= \frac{1}{2}\times{}2\sum_{i=0}^{i=2}A_i(w_1, w_2, b)\cdot{}dA_i\\
-  &= \frac{1}{2}\times{}2(\nabla\cdot\vec{A})\cdot{}\vec{A}
+  &= \frac{1}{2}\,{}2\sum_{i=0}^{i=2}A_i(w_1, w_2, b)\,dA_i\\
+  &= \frac{1}{2}\,{}2(\nabla\cdot\vec{A})\cdot{}\vec{A}
 \end{align}
 The $2$ were purposedly left, as one of those will normally be a different number, which one? We don't actually need $dC$, but the partials.
 $\nabla\cdot\vec{A}$ is a fancy way to say $d\vec{A}$ but it's the correct way to write it. The parenthesis are relevant for the computational adaptation of the algorithm.
 
 We need $dw$ and $db$; and for this $dA_k$:
 \begin{align*}
-  dL_k  &= 2A_k\cdot{}(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A}{\partial b}) \\
+  dL_k  &= 2A_k\,(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A}{\partial b}) \\
   A_k &= A_k(w_1, w_2, b)\\
   &= y_k - \vec{w}\cdot{}\vec{x_k} - b\\
-  &= y_k - w_1\cdot{}x_{1k} - w_2\cdot{}x_{2k}-b\\
+  &= y_k - w_1\,x_{1k} - w_2\,x_{2k}-b\\
   dA_k &= -x_{1k} - x_{2k} -1
 \end{align*}
 where 
@@ -120,8 +120,8 @@ The problem is to find $w_i$, $b$ such that the multidimensional ``plane'' has s
 
 In linear regression, the model is:
 \begin{align*}
- y &= w_1\cdot x_1 + w_2\cdot x_2 +\ldots+ w_n\cdot x_n\\
-   &= \sum_i^n w_i\cdot x_i + b \\
+ y &= w_1\, x_1 + w_2\, x_2 +\ldots+ w_n\, x_n\\
+   &= \sum_i^n w_i\, x_i + b \\
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
 Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write $\vec{y} = \vec{w}\cdot\mathbf{X} + \vec{b}$. This is represented:
@@ -144,11 +144,11 @@ Take the $k$ column. The Loss $= L(w,b)$ in linear regression is the \textit{Squ
   L_k(\vec{w},b) &= (y_k - \hat{y}_k)^2\\
   &= (y_k - \sum_{j=0}^n w_j\cdot{}{\mathbf{X}}_{jk} - b)^2
 \end{align*}
-The cost in any method/model measures how well it's doing with he current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
+The cost in any method/model measures how well it's doing with the current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
 \begin{align}
   C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\\
   &=\frac{1}{m}\sum_{i=0}^m (\vec{y}_i - \vec{\hat{y}}_i)\cdot{}(\vec{y}_i - \vec{\hat{y}}_i)\\
-  &= \frac{1}{m} (\vec{y} - \vec{w}\mathbf{X} - \vec{b})\cdot{}(\vec{y} - \vec{w}\mathbf{X} - \vec{b})
+  &= \frac{1}{m} (\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b})
 \end{align}
 $C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples.
 
@@ -166,7 +166,7 @@ The cost is a ``bowl'', we will reach the global minimum (or close).
 We use the Cost derivative to find the better weight and bias. 
 
 \begin{align}
-  dC(\vec{w}, \vec{b}) &= \frac{dC}{dw} + \frac{dC}{db}\nonumber\\
+  dC(\vec{w}, \vec{b}) &= \frac{dC}{d\vec{w}} + \frac{dC}{db}\nonumber\\
   &= \frac{1}{m} d(\sum^m_0 L_i)\nonumber\\
   &= \frac{1}{m} \sum^m_{i=0} dL_i(\vec{w}, b_i)\label{mvdiffp}\\
   &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{d\vec{w}} + \frac{dL_i}{db}\nonumber\\
@@ -178,7 +178,7 @@ Equation \ref{mvdiffp} makes use of linearity property of diff. We sum over colu
 \begin{align*}
   L_k(\vec{w},b) &= (y_k - \hat{y_k})^2\\
     &= A_k(w_1, w_2,\ldots, w_n, b)^2\\
-  dL_k &= 2\cdot{}A_k(w_1,w_2,\ldots, w_n, b)\cdot{}dA_k
+  dL_k &= 2\,A_k(w_1,w_2,\ldots, w_n, b)\cdot{}dA_k
 \end{align*}
 We named $A_k$ to the difference $y_i-\hat{y}_i$.
 
