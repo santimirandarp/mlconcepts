@@ -126,15 +126,15 @@ In linear regression, the model is:
 \end{align*}
 Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write $\vec{y} = \vec{w}\cdot\mathbf{X} + \vec{b}$. This is represented:
 \begin{equation}
-  [y_1 y_2 \ldots y_n] = 
-  [w_1 w_2 \ldots w_n] \cdot
+  [y_1, y_2, \ldots, y_n] = 
+  [w_1, w_2, \ldots, w_n] \cdot
   \begin{bmatrix}
     x_{11} & x_{12} & \ldots & x_{1m}\\
     x_{21} & x_{22} & \ldots & x_{2m}\\
     \vdots & \vdots & \ddots & \vdots\\
     x_{n1} & x_{22} & \ldots & x_{nm}\\
   \end{bmatrix}
-  + [b_1 b_2 \ldots b_n]
+  + [b_1, b_2, \ldots, b_n]
 \end{equation}
 There are $m$ examples-columns with $n$ features-rows. Hence $[\mathbf{X}] = m\times{}n$
 
@@ -184,12 +184,12 @@ We named $A_k$ to the difference $y_i-\hat{y}_i$.
 
 \begin{align*}
   A_k  &= y_k - \sum_j w_j\cdot{}\mathbf{X}_{jk} - b \\
-  A_k  &= y_k - w_1\cdot{}x_{1k} \ldots{}-w_n\cdot{}x_{nk} - b \\
+  &= y_k - w_1\cdot{}x_{1k} \ldots{}-w_n\cdot{}x_{nk} - b \\
 \end{align*}
 
 \begin{align}
   dA_k = \frac{\partial A}{\partial w_1}+ \ldots + \frac{\partial A}{\partial w_n}+ \frac{\partial A}{\partial b} \nonumber
-  dA_k &=  -x_{1k} -x_{2k} \ldots - x_{nk} -1 \label{dA}
+  &=  -x_{1k} -x_{2k} \ldots - x_{nk} -1 \label{dA}
 \end{align}
 
 Replacing previous formulas on $dC$, we get:
@@ -210,7 +210,7 @@ This is a nice expression but we don't actually need $dC$. We need the partials.
 This can be expressed in compact form:
 \begin{align}
   dC &= sum(-\frac{1}{2}\times{}2\cdot{}\mathbf{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\cdot{}\mathbf{A}\times{}1)\\
-  dC &= \frac{\partial C}{\partial w} + \frac{\partial C}{\partial b}  \nonumber
+  &= \frac{\partial C}{\partial w} + \frac{\partial C}{\partial b}  \nonumber
 \end{align}
 We don't need the sum. We also found each partial derivative.
 
