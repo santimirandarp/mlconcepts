@@ -2,9 +2,9 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 
-X = np.array([[11,20,30,40,50,80,90,100]]) # 4,1
+X = np.array([[11,20,30,40,50,80,90,100]]) 
 #X = (X - np.mean(X))/(np.max(X)-np.min(X))
-Y = np.array([[1,1,1,1,1,0,0,0]]) #1,4
+Y = np.array([[1,1,1,1,1,0,0,0]]) 
 
 # forward propagation
 
