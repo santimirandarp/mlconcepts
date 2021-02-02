@@ -10,7 +10,6 @@ On its core, Machine Learning about is a program that changes from exposure to d
 
 Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found neural network diagrams (see Figures \ref{fig:single} and \ref{fig:shallow}). The second image has been simplified (update isn't included).
 
-
 \begin{figure}
  \centering
  \includegraphics[width=\textwidth]{1L-NN.png}
@@ -34,6 +33,8 @@ $$ \hat{y}(x_1,x_2) = a x_1 + b x_2 + c$$
 where $a$, $b$, $c$ are \textit{parameters}.
 
 In \textit{Forward Propagation} we initialize a set of parameters (say $a,b,c=0$), and use the equation to estimate the real output ($y$). Both values are input to ``$C(y, \hat{y})$'' which is small if we're doing well, or large if bad.
+
+In the next chapters $y$, $\hat{y}$ are $a$ and $\hat{a}$; this is just the notation used in machine learning.
 
 In \textit{Backward Propagation} we minimize $C$, by differentiation, and find a way to move our function parameters towards the minimum. We use \textit{Gradient Descent} for this task.
 

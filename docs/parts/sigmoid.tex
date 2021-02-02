@@ -1,12 +1,14 @@
 \section{Sigmoid}
 The derivation is similar to Linear regression. The plot for the equation:
 \[
-y = \frac{1}{1+e^{-(\vec{w}\cdot{}\vec{x}+b)}}
+  \hat{a}(\vec{x})= \frac{1}{1+e^{-(\vec{w}\cdot{}\vec{x}+b)}}
 \]
 
-for one dimension is on figure \ref{fig:sigmoid}. By tuning $W$ and $b$  we can find the best fit. 
+for one dimension is on figure \ref{fig:sigmoid}. By tuning $w$ and $b$  we can find the best fit. 
 
-The sign of $W$ reflects the line over $y$ axis, and the slope. Also $b$ translates over $x$.
+From now, the output is named $a$ and $\hat{a}$.
+
+The sign of $w$ reflects the line over $y$ axis, the magnitude controls the slope. Again, $b$ translates over $x$.
 
 \begin{figure}[h]
  \centering
@@ -14,7 +16,50 @@ The sign of $W$ reflects the line over $y$ axis, and the slope. Also $b$ transla
   \caption{Sigmoid plot} \label{fig:sigmoid}
 \end{figure}
 
+\subsection{Forward Propagation}
+This step is similar, but we have a new Loss, and $\hat{y}$. 
+The Loss is the cross entropy loss.
+\begin{align}
+  \hat{a}_i &= \frac{1}{1+e^{-(\vec{w}\cdot \vec{x}_i + b)}}\\
+  L_i &= a_i\,\log(\hat{a}_i) + (1-a_i)\,\log(1-\hat{a}_i)
+\end{align}
+Again $\vec{w}\cdot{}\vec{x}_i$ is shorthand for $\sum_{j} w_j\,\mathbf{X}_{ji}$
 
+We calculate cost again:
+\begin{align*}
+  C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)
+\end{align*}
 
+This is coded:
+\begin{verbatim}
+1/m*(np.dot(A, np.log(Ap).T) + np.dot(1-A, np.log(1-Ap).T))
+\end{verbatim}
+And each derivative $dL_i$.
 
+\subsection{Backward propagation}
 
+\begin{align}
+  \frac{\partial L_i}{\partial \vec{w}} = 
+  \frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z}\,\frac{\partial z}{\partial \vec{w}}\\
+  \frac{\partial L_i}{\partial b} = 
+  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z}\,\frac{\partial z}{\partial b}
+\end{align}
+The first two derivatives are the same, let's compute them right away. There are many steps, so we won't need any textual explanation.
+
+\begin{align*}
+  \frac{\partial L_i}{\partial \hat{a}_i} &= \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \\
+  \frac{\partial \hat{a}}{\partial z} &= \ldots  \label{eq:derZ}\\
+  a(z)&= \frac{1}{1+e^{-z}}\\
+  a(u)&=\frac{1}{u}\\
+  da&=-u^{-2}\,du\\
+  \frac{da}{dz}&=-\left(\frac{1}{1+e^{-z}}\right)^{-2}\,e^{-z}(-1)\\
+  &=\left(\frac{1}{1+e^{-z}}\right)^{-2}\,(e^{-z} + 1 -1)\\
+  &= \hat{a}^2\,(\frac{1}{\hat{a}} -1) \\
+  \frac{\partial \hat{a}_i}{\partial z} &= \hat{a}_i\,(1-\hat{a}_i)
+\end{align*}
+\begin{align*}
+  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z} &= \left[ \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \right]\,\hat{a}_i\,(1-\hat{a}_i)\\
+  &= a_i - \hat{a}_i
+\end{align*}
+
+So part of the derivative turns out to be simple to calculate. Still $dw$, $db$ are needed.

@@ -1,26 +1,26 @@
 \section{Example: Multivariable Linear Regression}
 A linear regression model for 2 features:
 \begin{align*}
- y &= w_1\cdot x_1 + w_2\cdot x_2 + b \\
+ a &= w_1\cdot x_1 + w_2\cdot x_2 + b \\
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
 $w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\vec{x}$ is for one sample. Two or more samples are represented as a matrix:
 \begin{align*}
-[y1, y2] = 
-  [w1, w2]\cdot{}
+[a_1, a_2] = 
+  [w_1, w_2]\cdot{}
   \begin{bmatrix}
   x_1 & x_1\\
   x_2 & x_2 
   \end{bmatrix}
  +  b
 \end{align*}
-$y_i$ is the result for each sample (columns in the matrix).
+$a_i$ is the result for each sample (columns in the matrix).
 
 We need to do forward and backward propagation.
 
 The same than for a line (figure \ref{fig:line}) by tuning $W$ and $b$  we can find the best fit. Without $b$ the line has to go through the origin. 
 
-The sign of $W$ reflects the line over $y$ axis, and the magnitude controls the slope. Also $b$ translates over $x$.
+The sign of $W$ reflects the line over Y($a$) axis, and the magnitude controls the slope. Also $b$ translates over $x$.
 
 \begin{figure}[h]
  \centering
@@ -32,16 +32,16 @@ The sign of $W$ reflects the line over $y$ axis, and the magnitude controls the 
 \subsection{Forward Propagation}
 The Loss $= Loss(w,b)$ in linear regression is the \textit{Square Error}:
 \begin{align*}
-  L_i(\vec{w}, b) &= (y_i - \hat{y})^2\\
-  &=(y_i -\vec{w}\cdot{}\vec{x}_{i} -b)^2
+  L_i(\vec{w}, b) &= (a_i - \hat{a})^2\\
+  &=(a_i -\vec{w}\cdot{}\vec{x}_{i} -b)^2
 \end{align*}
 $\vec{w}\cdot{}\vec{x}_i$ can also be denoted $\sum_jw_j\cdot{}\mathbf{X}_{ji}$. In the first form we multiply the vector $w$ and the column $i$ (dot product).
 
 In Linear Regression, the Cost is the averaged sum of $L_i$, and it's the \textit{Mean Square Error}:
 \begin{align}
   C(w_1, w_2, b) &= \frac{1}{2} \sum_{i=0}^{i=2} L_i(w_1, w_2, b)\\
-  &= \frac{1}{2}([y_1, y_2] - [\hat{y}_1, \hat{y}_2])\cdot{}([y_1, y_2]-[\hat{y}_1, \hat{y}_2])\\
-  &=\frac{1}{2}([y_1, y_2] - [w_1, w_2]\cdot{}\mathbf{X}-b)\cdot{}([y_1, y_2] - [w_1,w_2]\cdot{}\mathbf{X} -b) \label{cost}
+  &= \frac{1}{2}([a_1, a_2] - [\hat{a}_1, \hat{a}_2])\cdot{}([a_1, a_2]-[\hat{a}_1, \hat{a}_2])\\
+  &=\frac{1}{2}([a_1, a_2] - [w_1, w_2]\cdot{}\mathbf{X}-b)\cdot{}([a_1, a_2] - [w_1,w_2]\cdot{}\mathbf{X} -b) \label{cost}
 \end{align}
 $\frac{1}{2}$ is to average over examples. Equation \ref{cost} is what we implement into code.
 Outliers may be critical on the effect of weights and biases.
@@ -49,8 +49,8 @@ Outliers may be critical on the effect of weights and biases.
 In Python it'd look like:
 \begin{center}
   \begin{BVerbatim}
-  Y' = np.dot(w,X) - b
-  diff = Y-Y' 
+  A' = np.dot(w,X) - b
+  diff = A-A' 
   cost = 1/2*np.dot(diff, diff.T)
   \end{BVerbatim}
 \end{center}
@@ -60,6 +60,18 @@ In Python it'd look like:
 
 
 \subsection{Backward Propagation}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{derivative.png}
+  \caption{Derivative}\label{fig:basics}
+\end{figure}
+
+For a function of a single variable $C(x)$ the derivative at a point $x_0$ is the slope (figure \ref{fig:basics}) at $x_0$, this is, the ratio $\frac{\Delta C}{\Delta x}$ for very small $\Delta x$.
+
+Actually, the derivative is a not very common way to write the equation of a line passing over the point $x_0$. Hence, we can use it to approximate $C$ at close values of $x_0$, like this $C(x_0 + \Delta x)$. For many variables, it's a similar process.
+
+We don't have an analytical minima for $C$, but we can calculate $C$ and $dC$, and update $x_0$ till we get to the minimum value of $C$. That's what we do here.
+
 We need the Cost's derivative to find better weights and bias. The complicated thing is keeping track of each step.
 \begin{align}
   dC(\vec{w},b) &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}\nonumber\\
@@ -68,11 +80,11 @@ We need the Cost's derivative to find better weights and bias. The complicated t
 \end{align}
 Equation \ref{diffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
-  L_k(\vec{w},b) &= (y_k - \hat{y_k})^2\\
+  L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2\\
     L_k &= A_k(w_1, w_2, b)^2\\
     dL_k &= 2\,A_k(w1,w2,b)\,dA_k
 \end{align*}
-We named $A_k$ to the difference $y_i-\hat{y}_i$.
+We named $A_k$ to the difference $a_i-\hat{a}_i$.
 So $dC$ was reduced to:
 \begin{align}
   dC &= \frac{1}{2}\sum_{i=0}^{i=2} dL_i\\
@@ -84,10 +96,10 @@ $\nabla\cdot\vec{A}$ is a fancy way to say $d\vec{A}$ but it's the correct way t
 
 We need $dw$ and $db$; and for this $dA_k$:
 \begin{align*}
-  dL_k  &= 2A_k\,(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A}{\partial b}) \\
+  dL_k  &= 2A_k\,(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A_k}{\partial b}) \\
   A_k &= A_k(w_1, w_2, b)\\
-  &= y_k - \vec{w}\cdot{}\vec{x_k} - b\\
-  &= y_k - w_1\,x_{1k} - w_2\,x_{2k}-b\\
+  &= a_k - \vec{w}\cdot{}\vec{x_k} - b\\
+  &= a_k - w_1\,x_{1k} - w_2\,x_{2k}-b\\
   dA_k &= -x_{1k} - x_{2k} -1
 \end{align*}
 where 
@@ -120,13 +132,13 @@ The problem is to find $w_i$, $b$ such that the multidimensional ``plane'' has s
 
 In linear regression, the model is:
 \begin{align*}
- y &= w_1\, x_1 + w_2\, x_2 +\ldots+ w_n\, x_n\\
+ a &= w_1\, x_1 + w_2\, x_2 +\ldots+ w_n\, x_n\\
    &= \sum_i^n w_i\, x_i + b \\
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
 Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write $\vec{y} = \vec{w}\cdot\mathbf{X} + \vec{b}$. This is represented:
 \begin{equation*}
-  [y_1, y_2, \ldots, y_n] = 
+  [a_1, a_2, \ldots, a_n] = 
   [w_1, w_2, \ldots, w_n] \cdot
   \begin{bmatrix}
     x_{11} & x_{12} & \ldots & x_{1m}\\
@@ -141,14 +153,14 @@ There are $m$ examples-columns with $n$ features-rows. Hence $[\mathbf{X}] = m\t
 \subsection{Forward Propagation}
 Take the $k$ column. The Loss $= L(w,b)$ in linear regression is the \textit{Square Error}:
 \begin{align*}
-  L_k(\vec{w},b) &= (y_k - \hat{y}_k)^2\\
-  &= (y_k - \sum_{j=0}^n w_j\cdot{}{\mathbf{X}}_{jk} - b)^2
+  L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2\\
+  &= (a_k - \sum_{j=0}^n w_j\cdot{}{\mathbf{X}}_{jk} - b)^2
 \end{align*}
 The cost in any method/model measures how well it's doing with the current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
 \begin{align}
   C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\nonumber\\
-  &=\frac{1}{m}(\vec{y}_i - \vec{\hat{y}}_i)\cdot{}(\vec{y}_i - \vec{\hat{y}}_i)\label{eq:cmulti}\\
-  &= \frac{1}{m} (\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{y} - \vec{w}\cdot{}\mathbf{X} - \vec{b}) \nonumber
+  &=\frac{1}{m}(\vec{a}_i - \vec{\hat{a}}_i)\cdot{}(\vec{a}_i - \vec{\hat{a}}_i)\label{eq:cmulti}\\
+  &= \frac{1}{m} (\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b}) \nonumber
 \end{align}
 $C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples. $C$ is computed from \ref{eq:cmulti}.
 
@@ -176,15 +188,15 @@ We use the Cost derivative to find the better weight and bias.
 Take a particular column $k$:
 Equation \ref{eq:diff} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
-  L_k(\vec{w},b) &= (y_k - \hat{y_k})^2\\
+  L_k(\vec{w},b) &= (a_k - \hat{a_k})^2\\
     &= A_k(w_1, w_2,\ldots, w_n, b)^2\\
   dL_k &= 2\,A_k(w_1,w_2,\ldots, w_n, b)\cdot{}dA_k
 \end{align*}
-We named $A_k$ to the difference $y_i-\hat{y}_i$.
+We named $A_k$ to the difference $a_i-\hat{a}_i$.
 
 \begin{align*}
-  A_k  &= y_k - \sum_j w_j\cdot{}\mathbf{X}_{jk} - b \\
-  &= y_k - w_1\,x_{1k} \ldots{}-w_n\,x_{nk} - b \\
+  A_k  &= a_k - \sum_j w_j\cdot{}\mathbf{X}_{jk} - b \\
+  &= a_k - w_1\,x_{1k} \ldots{}-w_n\,x_{nk} - b \\
 \end{align*}
 
 \begin{align}
@@ -192,7 +204,7 @@ We named $A_k$ to the difference $y_i-\hat{y}_i$.
   &=  -x_{1k} -x_{2k} \ldots - x_{nk} -1 \label{dA}
 \end{align}
 
-We need the partials. We need $\frac{\partial C}{\partial w}$ and $\frac{\partial C}{\partial b}$. From equation \ref{dA}, it follows:
+From equation \ref{dA}, it follows:
 
 \begin{center}
 \begin{align*}
@@ -209,19 +221,32 @@ We don't need the sum. We also found each partial derivative.
 
 To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
 \begin{align}
-  \vec{w} &= \vec{w} -\frac{\partial C}{\partial w}\,{}\alpha\\
+  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\label{eq:wlin}\\
   b &= b -\frac{\partial C}{\partial b}\,{}\alpha
 \end{align}
 
 $\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max incresing direction otherwise).
 
+\subsubsection{Interpretation}
+
 There is no graphical justification as to why we update $w$ and $b$ like that, but we are moving $w$ against (minus) the gradient multiplied by a constant (alpha) called \textit{learning rate}.
 
 The minus sign is because the gradient always points away from the minimum and we want towards it (in one dimension there are only 2 directions). 
 
-The process is called \textit{Gradient Descent}.
+The meaning of equation \ref{eq:wlin} is important.
+\begin{align}
+  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\\
+  &= \vec{w} -[\frac{\partial C}{\partial w_1}, \frac{\partial C}{\partial w_2},\ldots, \frac{\partial C}{\partial w_n}]\,\alpha\\
+\end{align}
 
-Because the $y_d - y_p$ is squared, MSE is a parabola for $b$ and $w$ then it makes sense: the farther away we are from the minimum the larger the gradient, and the more we want to update $w$ and $b$.
+It means we have a vector of corrections for each slope such that the overall cost is decreased. If we take say $\frac{dC}{dw1}$ it is the sum of slopes for each sample, divided by $m$. 
+
+To have more insight and detail, we could take a look at a dataset with just one feature. Then 
+\begin{align}
+  C &= \sum_i(a_i - a_i)^2 \\ 
+  \frac{\partial C}{dw_1}&= \frac{1}{m}\,\sum_i \frac{dL_i}{dw_1} \\
+  &= \sum_i 2\epsilon_i\,(-x_i)
+\end{align}
 
 
 
