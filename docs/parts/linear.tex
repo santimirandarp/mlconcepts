@@ -243,11 +243,14 @@ It means we have a vector of corrections for each slope such that the overall co
 
 To have more insight and detail, we could take a look at a dataset with just one feature. Then 
 \begin{align}
-  C &= \sum_i(a_i - a_i)^2 \\ 
+  C &= \frac{1}{m}\sum_i(a_i - \hat{a}_i)^2 \\ 
   \frac{\partial C}{dw_1}&= \frac{1}{m}\,\sum_i \frac{dL_i}{dw_1} \\
-  &= \sum_i 2\epsilon_i\,(-x_i)
+  &= \frac{1}{m}\sum_i 2(a_i - \hat{a}_i)_i\,(-x_i)
 \end{align}
 we see the slope depends on the sum of features. Much more can be inspected here.
 
+This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same backpropagation for both methods!
+
+As it will be described, the forward propagation is different (but very simple).
 
 
