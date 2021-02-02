@@ -32,9 +32,11 @@ We calculate cost again:
 
 This is coded:
 \begin{verbatim}
-1/m*(np.dot(A, np.log(Ap).T) + np.dot(1-A, np.log(1-Ap).T))
+cost = 1/m*(np.dot(A, np.log(Ap).T) 
++ np.dot(1-A, np.log(1-Ap).T))
 #or
-1/m*(np.sum(np.multiply(A, np.log(Ap)) + np.multiply(1-A, np.log(1-Ap))))
+Cost = 1/m*(np.sum(np.multiply(A, np.log(Ap)) 
++ np.multiply(1-A, np.log(1-Ap))))
 #tested, yields same number :-)
 \end{verbatim}
 
@@ -42,11 +44,11 @@ This is coded:
 
 \begin{align}
   \frac{\partial L_i}{\partial \vec{w}} = 
-  \frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z}\,\frac{\partial z}{\partial \vec{w}}\\
+  \left(\frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial \vec{w}}\\
   \frac{\partial L_i}{\partial b} = 
-  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z}\,\frac{\partial z}{\partial b}
+  \left(\frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial b}
 \end{align}
-The first two derivatives are the same, let's compute them right away. There are many steps, so we won't need any textual explanation.
+The first two derivatives (enclosed in parens) are the same, let's compute them right away. There is no need for textual explanation.
 i
 \begin{align*}
   \frac{\partial L_i}{\partial \hat{a}_i} &= \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \\
@@ -59,7 +61,7 @@ i
   &= \hat{a}^2\,(\frac{1}{\hat{a}} -1) \\
   \frac{\partial \hat{a}_i}{\partial z} &= \hat{a}_i\,(1-\hat{a}_i)
 \end{align*}
-The last derivative is:
+Hence the derivative is:
 \begin{align*}
   \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z} &= \left[ \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \right]\,\hat{a}_i\,(1-\hat{a}_i)\\
   &= a_i - \hat{a}_i\\
@@ -73,6 +75,10 @@ We are left with:
   \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z}\,\frac{\partial \hat{z}}{\partial b} &= \left(a_i - \hat{a}_i\right)\,1\\
 \end{align*}
 $\vec{x}_i$ are all the features of sample $i$, not just one.
+In code we need an update-all vector, this is implemented:
+$\frac{1}{m}\,np.dot(A-Ap, X)$
+
+
 So part of the derivative turns out to be simple to calculate. Using $dw$, $db$ we can update values:
 
 \begin{align}

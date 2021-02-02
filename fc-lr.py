@@ -3,18 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #X = np.array([[1.01,2.01,3.05,4], [0.98,2.05,3.1,5]])
-X = np.array([[10],[20],[30],[40]])
+X = np.array([[10,20,30,40]])
 X = (X - np.mean(X))/(max(X)-min(X))
 Y = np.array([[1.01,2.02,2.88,4.1]])
-### (4,1) (1, 4)
 
 # forward propagation
 def cost(X, Y, Yp):
     # we need Yp, comes from predict
     # returns cost
-    m = X.shape[1] #4
+    m = X.shape[1] 4
     A = Y - Yp # (1, m)
-    cost = 1/m*np.dot(A,A.T).flatten()
+    cost = 1/m*np.dot(A,A.T)
     return A, cost
 
 def predict(X,w,b):
@@ -32,21 +31,22 @@ def initialize(dim):
 # backward propagation
 def update(X,A,w,b,lr=0.01):
    m = X.shape[1]
-   dw = 1/m*np.dot(2*A, X)*lr
+   dw = 2/m*np.dot(A, X)*lr
    w = w + dw 
-   b = b + np.sum(1/m*2*A*lr)
+   b = b + 2/m*np.sum(A)*lr
    return w, b
 
 def model(X, Y, numIt):
     w,b = initialize(X.shape[1])
-    plt.scatter(X.flatten(), Y.flatten(), label="original")
-    plt.title("Fit line over cycles, features norm")
+    Xflat,Yflat,Ypflat = X.flatten(), Yflat = Y.flatten(), Ypflat = Yp.flatten()
+    plt.scatter(Xflat, Yflat, label="original")
+    plt.title("Fit line over cycles")
     for i in range(numIt):
         Yp = predict(X,w,b)
         A, c = cost(X,Y,Yp)
         w,b = update(X,A,w,b,lr=0.01)
         if i%10==0:
-            plt.plot(X.flatten(),Yp.flatten(), label="it: "+str(i))
+            plt.plot(Xflat,Ypflat,label="it: "+str(i))
     plt.legend(loc="best")
     plt.show()
     print("cost: ", c)
