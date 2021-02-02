@@ -59,7 +59,16 @@ The first two derivatives are the same, let's compute them right away. There are
 \end{align*}
 \begin{align*}
   \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z} &= \left[ \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \right]\,\hat{a}_i\,(1-\hat{a}_i)\\
-  &= a_i - \hat{a}_i
+  &= a_i - \hat{a}_i\\
+  \frac{\partial z_i}{\partial w} &= x_i\\
+  \frac{\partial z_i}{\partial b} &= 1
 \end{align*}
 
-So part of the derivative turns out to be simple to calculate. Still $dw$, $db$ are needed.
+So part of the derivative turns out to be simple to calculate. Using $dw$, $db$ we can update values:
+
+\begin{align*}
+  w_i &= w_i - \frac{\partial C}{\partial w_i}\,\alpha\\
+  \vec{w_i} &= \vec{w_i} - \frac{\partial C}{\partial \vec{w_i}}\,\alpha\\
+  b &= b - \frac{\partial C}{\partial b}\,\alpha
+\end{align*}
+
