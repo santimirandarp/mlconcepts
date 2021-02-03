@@ -1,4 +1,3 @@
-
 def predict(w, b, X_test, Y_test, classes):
    pred = sigmoid(np.dot(w, X_test)+b)
    total = len(pred[0])
