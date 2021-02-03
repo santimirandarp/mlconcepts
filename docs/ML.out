@@ -12,4 +12,5 @@
 \BOOKMARK [2][-]{subsection.5.2}{Backward propagation}{section.5}% 12
 \BOOKMARK [1][-]{section.6}{Shallow Neural Network}{}% 13
 \BOOKMARK [2][-]{subsection.6.1}{Forward Propagation}{section.6}% 14
-\BOOKMARK [1][-]{section.7}{Related Concepts}{}% 15
+\BOOKMARK [2][-]{subsection.6.2}{Implement Forward Propagation}{section.6}% 15
+\BOOKMARK [1][-]{section.7}{Related Concepts}{}% 16

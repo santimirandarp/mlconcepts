@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  2 FEB 2021 22:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  3 FEB 2021 02:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -337,17 +337,17 @@ LaTeX Info: Redefining \nameref on input line 12.
 \openout2 = `parts/Intro.aux'.
 
  (./parts/Intro.tex
-<images/ml.png, id=88, 963.6pt x 519.9425pt>
+<images/ml.png, id=93, 963.6pt x 519.9425pt>
 File: images/ml.png Graphic file (type png)
 <use images/ml.png>
 Package pdftex.def Info: images/ml.png  used on input line 7.
 (pdftex.def)             Requested size: 310.4979pt x 167.53539pt.
-<images/1L-NN.png, id=92, 963.6pt x 722.7pt>
+<images/1L-NN.png, id=97, 963.6pt x 722.7pt>
 File: images/1L-NN.png Graphic file (type png)
 <use images/1L-NN.png>
 Package pdftex.def Info: images/1L-NN.png  used on input line 15.
 (pdftex.def)             Requested size: 345.0pt x 258.74925pt.
-<images/2L-NN.png, id=93, 963.6pt x 722.7pt>
+<images/2L-NN.png, id=98, 963.6pt x 722.7pt>
 File: images/2L-NN.png Graphic file (type png)
 <use images/2L-NN.png>
 Package pdftex.def Info: images/2L-NN.png  used on input line 23.
@@ -361,7 +361,7 @@ LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10> not available
 \openout2 = `parts/linear.aux'.
 
  (./parts/linear.tex
-<images/line_plot.png, id=122, 791.95876pt x 629.35126pt>
+<images/line_plot.png, id=127, 791.95876pt x 629.35126pt>
 File: images/line_plot.png Graphic file (type png)
 <use images/line_plot.png>
 Package pdftex.def Info: images/line_plot.png  used on input line 27.
@@ -370,7 +370,7 @@ Package pdftex.def Info: images/line_plot.png  used on input line 27.
 
 
  <./images/line_plot.png>]
-<images/derivative.png, id=133, 601.24625pt x 437.635pt>
+<images/derivative.png, id=138, 601.24625pt x 437.635pt>
 File: images/derivative.png Graphic file (type png)
 <use images/derivative.png>
 Package pdftex.def Info: images/derivative.png  used on input line 65.
@@ -380,7 +380,7 @@ Package pdftex.def Info: images/derivative.png  used on input line 65.
 \openout2 = `parts/sigmoid.aux'.
 
  (./parts/sigmoid.tex
-<images/sigmoid_plot.png, id=195, 791.95876pt x 629.35126pt>
+<images/sigmoid_plot.png, id=200, 791.95876pt x 629.35126pt>
 File: images/sigmoid_plot.png Graphic file (type png)
 <use images/sigmoid_plot.png>
 Package pdftex.def Info: images/sigmoid_plot.png  used on input line 15.
@@ -399,17 +399,23 @@ Package pdftex.def Info: images/2L-NN.png  used on input line 6.
  [17
 
 
-]) [18]
+]
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 
+45.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
+File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) [18]) [19]
 \openout2 = `parts/Other.aux'.
 
 
 (./parts/Other.tex
-<images/overfitting.png, id=231, 451.6875pt x 333.245pt>
+<images/overfitting.png, id=243, 451.6875pt x 333.245pt>
 File: images/overfitting.png Graphic file (type png)
 <use images/overfitting.png>
 Package pdftex.def Info: images/overfitting.png  used on input line 4.
 (pdftex.def)             Requested size: 172.5pt x 127.27002pt.
-) [19
+) [20
 
 
  <./images/overfitting.png>]
@@ -421,37 +427,38 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 19.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 19.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 19.
 Package rerunfilecheck Info: File `ML.out' has not changed.
-(rerunfilecheck)             Checksum: 79270350CB2806DB83AD6DEBE5F5DBF6;949.
+(rerunfilecheck)             Checksum: AB3987533915D2144BA97D2962BCD2D9;1028.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6700 strings out of 483183
- 99863 string characters out of 5966292
- 369433 words of memory out of 5000000
- 21503 multiletter control sequences out of 15000+600000
- 536044 words of font info for 37 fonts, out of 8000000 for 9000
+ 6723 strings out of 483183
+ 100495 string characters out of 5966292
+ 369481 words of memory out of 5000000
+ 21520 multiletter control sequences out of 15000+600000
+ 536385 words of font info for 38 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,14n,32p,828b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ML.pdf (19 pages, 324177 bytes).
+ </home/sm/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1000.600pk>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on ML.pdf (20 pages, 328655 bytes).
 PDF statistics:
- 301 PDF objects out of 1000 (max. 8388607)
- 249 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
- 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 316 PDF objects out of 1000 (max. 8388607)
+ 262 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 164 words of extra memory for PDF output out of 10000 (max. 10000000)
 
