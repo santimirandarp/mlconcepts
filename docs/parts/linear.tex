@@ -39,8 +39,8 @@ $\vec{w}\cdot{}\vec{x}_i$ can also be denoted $\sum_jw_j\cdot{}\mathbf{X}_{ji}$.
 
 In Linear Regression, the Cost is the averaged sum of $L_i$, and it's the \textit{Mean Square Error}:
 \begin{align}
-  C(w_1, w_2, b) &= \frac{1}{2} \sum_{i=0}^{i=2} L_i(w_1, w_2, b)\\
-  &= \frac{1}{2}([a_1, a_2] - [\hat{a}_1, \hat{a}_2])\cdot{}([a_1, a_2]-[\hat{a}_1, \hat{a}_2])\\
+  C(w_1, w_2, b) &= \frac{1}{2} \sum_{i=0}^{i=2} L_i(w_1, w_2, b)\nonumber\\
+  &= \frac{1}{2}([a_1, a_2] - [\hat{a}_1, \hat{a}_2])\cdot{}([a_1, a_2]-[\hat{a}_1, \hat{a}_2])\nonumber\\
   &=\frac{1}{2}([a_1, a_2] - [w_1, w_2]\cdot{}\mathbf{X}-b)\cdot{}([a_1, a_2] - [w_1,w_2]\cdot{}\mathbf{X} -b) \label{cost}
 \end{align}
 $\frac{1}{2}$ is to average over examples. Equation \ref{cost} is what we implement into code.
@@ -66,19 +66,19 @@ In Python it'd look like:
   \caption{Derivative}\label{fig:basics}
 \end{figure}
 
-For a function of a single variable $C(x)$ the derivative at a point $x_0$ is the slope (figure \ref{fig:basics}) at $x_0$, this is, the ratio $\frac{\Delta C}{\Delta x}$ for very small $\Delta x$.
+For a function of a single variable $C(x)$ the derivative at a point $x_0$ is the slope (figure \ref{fig:basics}) at $x_0$, this is, the ratio $\frac{\Delta C}{\Delta x}$ for very small $\Delta x$. It is the equation of a line passing over the point $x_0$. 
 
-Actually, the derivative is a not very common way to write the equation of a line passing over the point $x_0$. Hence, we can use it to approximate $C$ at close values of $x_0$, like this $C(x_0 + \Delta x)$. For many variables, it's a similar process.
+Hence $C$ can be approximated at close values of $x_0$, as $C(x_0 + \Delta x)$. For many variables, it's a similar process.
 
-We don't have an analytical minima for $C$, but we can calculate $C$ and $dC$, and update $x_0$ till we get to the minimum value of $C$. That's what we do here.
+$C$ has no analytical min, but we can calculate $C$, $dC$ and update $x_0$ till we get to the minimum value of $C$. That's what we do here.
 
-We need the Cost's derivative to find better weights and bias. The complicated thing is keeping track of each step.
+$C(w,b)$ derivative is used to find better weights and bias.
 \begin{align}
-  dC(\vec{w},b) &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}\nonumber\\
+  dC(\vec{w},b) &= \frac{\partial C}{\partial w_1}+ \frac{\partial C}{\partial w_2} + \frac{\partial C}{\partial b}\\
   &= d(\sum_{i=0}^{i=2}L_i) = \sum_{i=0}^{i=2}dL_i(\vec{w},b) \label{diffp}\\
-  &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial w_1} +\frac{\partial L_i}{\partial w_2} + \frac{\partial L}{\partial b}\nonumber
-\end{align}
-Equation \ref{diffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
+  &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial w_1} +\frac{\partial L_i}{\partial w_2} + \frac{\partial L}{\partial b}
+\end{align} 
+These equations general and useful. Take some time to think what they do. Equation \ref{diffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
   L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2\\
     L_k &= A_k(w_1, w_2, b)^2\\
@@ -86,11 +86,11 @@ Equation \ref{diffp} makes use of linearity property of diff. We sum over column
 \end{align*}
 We named $A_k$ to the difference $a_i-\hat{a}_i$.
 So $dC$ was reduced to:
-\begin{align}
+\begin{align*}
   dC &= \frac{1}{2}\sum_{i=0}^{i=2} dL_i\\
   &= \frac{1}{2}\,{}2\sum_{i=0}^{i=2}A_i(w_1, w_2, b)\,dA_i\\
-  &= \frac{1}{2}\,{}2(\nabla\cdot\vec{A})\cdot{}\vec{A}
-\end{align}
+  &= \frac{1}{2}\,{}2(\nabla_{w,b}\cdot\vec{A})\cdot{}\vec{A}
+\end{align*}
 The $2$ were purposedly left, as one of those will normally be a different number, which one? We don't actually need $dC$, but the partials.
 $\nabla\cdot\vec{A}$ is a fancy way to say $d\vec{A}$ but it's the correct way to write it. The parenthesis are relevant for the computational adaptation of the algorithm.
 
@@ -110,10 +110,10 @@ where
 \end{center}
 
 This can be expressed in compact form:
-\begin{align}
+\begin{align*}
   dC &= sum(-\frac{1}{2}\times{}2\vec{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\vec{A}\times{}1)\\
-  &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}  \nonumber
-\end{align}
+  &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}  
+\end{align*}
 
 To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
 \begin{align}
@@ -159,8 +159,8 @@ Take the $k$ column. The Loss $= L(w,b)$ in linear regression is the \textit{Squ
 The cost in any method/model measures how well it's doing with the current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
 \begin{align}
   C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\nonumber\\
-  &=\frac{1}{m}(\vec{a}_i - \vec{\hat{a}}_i)\cdot{}(\vec{a}_i - \vec{\hat{a}}_i)\label{eq:cmulti}\\
-  &= \frac{1}{m} (\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b}) \nonumber
+  &=\frac{1}{m}(\vec{a}_i - \vec{\hat{a}}_i)\cdot{}(\vec{a}_i - \vec{\hat{a}}_i)\nonumber\\
+  &= \frac{1}{m} (\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b}) \label{eq:cmulti}
 \end{align}
 $C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples. $C$ is computed from \ref{eq:cmulti}.
 
@@ -192,7 +192,7 @@ Equation \ref{eq:diff} makes use of linearity property of diff. We sum over colu
     &= A_k(w_1, w_2,\ldots, w_n, b)^2\\
   dL_k &= 2\,A_k(w_1,w_2,\ldots, w_n, b)\cdot{}dA_k
 \end{align*}
-We named $A_k$ to the difference $a_i-\hat{a}_i$.
+We named $A_k$ to the difference $a_k-\hat{a}_k$.
 
 \begin{align*}
   A_k  &= a_k - \sum_j w_j\cdot{}\mathbf{X}_{jk} - b \\
@@ -252,5 +252,3 @@ we see the slope depends on the sum of features. Much more can be inspected here
 This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same backpropagation for both methods!
 
 As it will be described, the forward propagation is different (but very simple).
-
-

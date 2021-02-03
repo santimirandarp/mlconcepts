@@ -10,4 +10,6 @@
 \BOOKMARK [1][-]{section.5}{Sigmoid}{}% 10
 \BOOKMARK [2][-]{subsection.5.1}{Forward Propagation}{section.5}% 11
 \BOOKMARK [2][-]{subsection.5.2}{Backward propagation}{section.5}% 12
-\BOOKMARK [1][-]{section.6}{Related Concepts}{}% 13
+\BOOKMARK [1][-]{section.6}{Shallow Neural Network}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Forward Propagation}{section.6}% 14
+\BOOKMARK [1][-]{section.7}{Related Concepts}{}% 15

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  2 FEB 2021 22:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  2 FEB 2021 21:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**ML.tex
-(./ML.tex
+**../ML.tex
+(../ML.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -258,12 +258,7 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 LaTeX Warning: Unused global option(s):
     [14pt].
 
-(./ML.aux (./parts/Intro.aux) (./parts/linear.aux) (./parts/sigmoid.aux)
-(./parts/shallow.aux
-
-LaTeX Warning: Label `fig:shallow' multiply defined.
-
-) (./parts/Other.aux))
+No file ML.aux.
 \openout1 = `ML.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -282,7 +277,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
-
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count269
@@ -322,136 +316,44 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 12.
 LaTeX Info: Redefining \pageref on input line 12.
 LaTeX Info: Redefining \nameref on input line 12.
-
-(./ML.out) (./ML.out)
 \@outlinefile=\write4
 \openout4 = `ML.out'.
 
- (./ML.toc)
 \tf@toc=\write5
 \openout5 = `ML.toc'.
 
- [1
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-\openout2 = `parts/Intro.aux'.
+! I can't write on file `parts/Intro.aux'.
+\@include ...\immediate \openout \@partaux #1.aux 
+                                                  \immediate \write \@partau...
+l.14 \include{parts/Intro}
+                          
+(Press Enter to retry, or Control-D to exit; default file extension is `.tex')
+Please type another output file name: 
+! I can't write on file `parts/Intro.aux'.
+\@include ...\immediate \openout \@partaux #1.aux 
+                                                  \immediate \write \@partau...
+l.14 \include{parts/Intro}
+                          
+(Press Enter to retry, or Control-D to exit; default file extension is `.tex')
+Please type another output file name: 
+! Emergency stop.
+\@include ...\immediate \openout \@partaux #1.aux 
+                                                  \immediate \write \@partau...
+l.14 \include{parts/Intro}
+                          
+End of file on the terminal!
 
- (./parts/Intro.tex
-<images/ml.png, id=88, 963.6pt x 519.9425pt>
-File: images/ml.png Graphic file (type png)
-<use images/ml.png>
-Package pdftex.def Info: images/ml.png  used on input line 7.
-(pdftex.def)             Requested size: 310.4979pt x 167.53539pt.
-<images/1L-NN.png, id=92, 963.6pt x 722.7pt>
-File: images/1L-NN.png Graphic file (type png)
-<use images/1L-NN.png>
-Package pdftex.def Info: images/1L-NN.png  used on input line 15.
-(pdftex.def)             Requested size: 345.0pt x 258.74925pt.
-<images/2L-NN.png, id=93, 963.6pt x 722.7pt>
-File: images/2L-NN.png Graphic file (type png)
-<use images/2L-NN.png>
-Package pdftex.def Info: images/2L-NN.png  used on input line 23.
-(pdftex.def)             Requested size: 345.0pt x 258.74925pt.
-LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 29.
- [2
-
- <./images/ml.png>] [3 <./images/1L-NN.png>]
-[4 <./images/2L-NN.png>]) [5]
-\openout2 = `parts/linear.aux'.
-
- (./parts/linear.tex
-<images/line_plot.png, id=122, 791.95876pt x 629.35126pt>
-File: images/line_plot.png Graphic file (type png)
-<use images/line_plot.png>
-Package pdftex.def Info: images/line_plot.png  used on input line 27.
-(pdftex.def)             Requested size: 310.4979pt x 246.74242pt.
- [6
-
-
- <./images/line_plot.png>]
-<images/derivative.png, id=133, 601.24625pt x 437.635pt>
-File: images/derivative.png Graphic file (type png)
-<use images/derivative.png>
-Package pdftex.def Info: images/derivative.png  used on input line 65.
-(pdftex.def)             Requested size: 258.75pt x 188.34631pt.
-
-[7] [8 <./images/derivative.png>] [9] [10] [11]) [12] [13]
-\openout2 = `parts/sigmoid.aux'.
-
- (./parts/sigmoid.tex
-<images/sigmoid_plot.png, id=195, 791.95876pt x 629.35126pt>
-File: images/sigmoid_plot.png Graphic file (type png)
-<use images/sigmoid_plot.png>
-Package pdftex.def Info: images/sigmoid_plot.png  used on input line 15.
-(pdftex.def)             Requested size: 310.4979pt x 246.74242pt.
-[14
-
-
- <./images/sigmoid_plot.png>] [15]) [16]
-\openout2 = `parts/shallow.aux'.
-
- (./parts/shallow.tex
-File: images/2L-NN.png Graphic file (type png)
-<use images/2L-NN.png>
-Package pdftex.def Info: images/2L-NN.png  used on input line 6.
-(pdftex.def)             Requested size: 345.0pt x 258.74925pt.
- [17
-
-
-]) [18]
-\openout2 = `parts/Other.aux'.
-
-
-(./parts/Other.tex
-<images/overfitting.png, id=231, 451.6875pt x 333.245pt>
-File: images/overfitting.png Graphic file (type png)
-<use images/overfitting.png>
-Package pdftex.def Info: images/overfitting.png  used on input line 4.
-(pdftex.def)             Requested size: 172.5pt x 127.27002pt.
-) [19
-
-
- <./images/overfitting.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 19.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 19.
- (./ML.aux
-(./parts/Intro.aux) (./parts/linear.aux) (./parts/sigmoid.aux)
-(./parts/shallow.aux) (./parts/Other.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 19.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 19.
-Package rerunfilecheck Info: File `ML.out' has not changed.
-(rerunfilecheck)             Checksum: 79270350CB2806DB83AD6DEBE5F5DBF6;949.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+ 
 Here is how much of TeX's memory you used:
- 6700 strings out of 483183
- 99863 string characters out of 5966292
- 369433 words of memory out of 5000000
- 21503 multiletter control sequences out of 15000+600000
- 536044 words of font info for 37 fonts, out of 8000000 for 9000
+ 6479 strings out of 483183
+ 96892 string characters out of 5966292
+ 356922 words of memory out of 5000000
+ 21407 multiletter control sequences out of 15000+600000
+ 533244 words of font info for 27 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,14n,32p,828b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ML.pdf (19 pages, 324177 bytes).
-PDF statistics:
- 301 PDF objects out of 1000 (max. 8388607)
- 249 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
- 156 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 34i,4n,29p,831b,312s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -10,4 +10,6 @@
 \contentsline {section}{\numberline {5}Sigmoid}{14}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Forward Propagation}{14}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Backward propagation}{15}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Related Concepts}{17}{section.6}%
+\contentsline {section}{\numberline {6}Shallow Neural Network}{17}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Forward Propagation}{17}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Related Concepts}{19}{section.7}%
