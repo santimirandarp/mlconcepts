@@ -84,7 +84,7 @@ In the code, we implement equation \ref{eq:multi} several times. The most import
 
 \begin{verbatim}
 # arch is an array describing the architecture:
-arch = [4,3,2,1] has 4 layers with those nodes.
+arch = [4,3,2,1] #has 4 layers with those nodes.
 def fp(X, arch):
     W,B = initialize(arch[0], X.shape[0]) #nodes x features
     A = predict(W,B,X,np.tanh) # 2, m

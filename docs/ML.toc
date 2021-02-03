@@ -10,7 +10,9 @@
 \contentsline {section}{\numberline {5}Sigmoid}{14}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Forward Propagation}{14}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Backward propagation}{15}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Shallow Neural Network}{17}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Forward Propagation}{17}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Implement Forward Propagation}{18}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Related Concepts}{20}{section.7}%
+\contentsline {section}{\numberline {6}Results}{17}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Interesting}{17}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Shallow Neural Network}{18}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Forward Propagation}{18}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Implement Forward Propagation}{19}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Related Concepts}{21}{section.8}%
