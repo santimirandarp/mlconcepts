@@ -49,8 +49,8 @@ Outliers may be critical on the effect of weights and biases.
 In Python it'd look like:
 \begin{center}
   \begin{BVerbatim}
-  A' = np.dot(w,X) - b
-  diff = A-A' 
+  Ap = np.dot(w,X) - b
+  diff = A-Ap 
   cost = 1/2*np.dot(diff, diff.T)
   \end{BVerbatim}
 \end{center}
@@ -66,35 +66,33 @@ In Python it'd look like:
   \caption{Derivative}\label{fig:basics}
 \end{figure}
 
-For a function of a single variable $C(x)$ the derivative at a point $x_0$ is the slope (figure \ref{fig:basics}) at $x_0$, this is, the ratio $\frac{\Delta C}{\Delta x}$ for very small $\Delta x$. It is the equation of a line passing over the point $x_0$. 
+For a function of a single variable $C(x)$ the derivative at a point $x_0$ is the slope (figure \ref{fig:basics}) at $x_0$.
 
-Hence $C$ can be approximated at close values of $x_0$, as $C(x_0 + \Delta x)$. For many variables, it's a similar process.
+For many variables, it's a similar process: the total derivative of a function is the sum of partial derivatives.
 
-$C$ has no analytical min, but we can calculate $C$, $dC$ and update $x_0$ till we get to the minimum value of $C$. That's what we do here.
-
-$C(w,b)$ derivative is used to find better weights and bias.
+\begin{align}
+  dC(\vec{w},b) &= \frac{\partial C}{\partial w_1}+ \frac{\partial C}{\partial w_2} + \frac{\partial C}{\partial b}\\
+\end{align}
+$C(w,b)$ derivative is used to find better weights and bias:
+\begin{align}
+  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\cdot{}\alpha\\
+  b &= b -\frac{\partial C}{\partial b}\cdot{}\alpha
+\end{align}
+Let's get started.
 \begin{align}
   dC(\vec{w},b) &= \frac{\partial C}{\partial w_1}+ \frac{\partial C}{\partial w_2} + \frac{\partial C}{\partial b}\\
   &= d(\sum_{i=0}^{i=2}L_i) = \sum_{i=0}^{i=2}dL_i(\vec{w},b) \label{diffp}\\
   &=\sum_{i=0}^{i=2} \frac{\partial L_i}{\partial w_1} +\frac{\partial L_i}{\partial w_2} + \frac{\partial L}{\partial b}
 \end{align} 
-These equations general and useful. Take some time to think what they do. Equation \ref{diffp} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
+These equations are important. Equation \ref{diffp} makes use of linearity property of diff.
+
+We sum over columns (each sample). Now, pick up a column/sample $k$:
 \begin{align*}
   L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2\\
     L_k &= A_k(w_1, w_2, b)^2\\
     dL_k &= 2\,A_k(w1,w2,b)\,dA_k
 \end{align*}
-We named $A_k$ to the difference $a_i-\hat{a}_i$.
-So $dC$ was reduced to:
-\begin{align*}
-  dC &= \frac{1}{2}\sum_{i=0}^{i=2} dL_i\\
-  &= \frac{1}{2}\,{}2\sum_{i=0}^{i=2}A_i(w_1, w_2, b)\,dA_i\\
-  &= \frac{1}{2}\,{}2(\nabla_{w,b}\cdot\vec{A})\cdot{}\vec{A}
-\end{align*}
-The $2$ were purposedly left, as one of those will normally be a different number, which one? We don't actually need $dC$, but the partials.
-$\nabla\cdot\vec{A}$ is a fancy way to say $d\vec{A}$ but it's the correct way to write it. The parenthesis are relevant for the computational adaptation of the algorithm.
-
-We need $dw$ and $db$; and for this $dA_k$:
+$A_k$ is the difference $a_i-\hat{a}_i$. We need $dw$ and $db$; and for this $dA_k$:
 \begin{align*}
   dL_k  &= 2A_k\,(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A_k}{\partial b}) \\
   A_k &= A_k(w_1, w_2, b)\\
@@ -111,8 +109,8 @@ where
 
 This can be expressed in compact form:
 \begin{align*}
-  dC &= sum(-\frac{1}{2}\times{}2\vec{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\vec{A}\times{}1)\\
-  &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}  
+  dC &= sum(-\frac{1}{2}\times{}2\vec{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\vec{A}\times{}I)\\
+  &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b} 
 \end{align*}
 
 To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
@@ -124,10 +122,59 @@ $\alpha$ is called \textit{learning rate} and we use to tune the derivation. We 
 
 In deep neural networks $b$ will explicitly be a vector.
 
+\subsubsection{Interpretation}
 
+There is no graphical justification as to why we update $w$ and $b$ like that, but we are moving $w$ against (minus) the gradient multiplied by a constant (alpha) called \textit{learning rate}.
 
+The minus sign is because the gradient always points away from the minimum and we want towards it (in one dimension there are only 2 directions). 
+
+\begin{align}
+  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\\
+  &= \vec{w} -[\frac{\partial C}{\partial w_1}, \frac{\partial C}{\partial w_2},\ldots, \frac{\partial C}{\partial w_n}]\,\alpha\\
+\end{align}
+
+It means we have a vector of corrections for each slope such that the overall cost is decreased. If we take say $\frac{dC}{dw1}$ it is the sum of slopes for each sample, divided by $m$. 
+
+To have more insight and detail, we could take a look at a dataset with just one feature. Then 
+\begin{align*}
+  C &= \frac{1}{m}\sum_i(a_i - \hat{a}_i)^2 \\ 
+  \frac{\partial C}{dw_1}&= \frac{1}{m}\,\sum_i \frac{dL_i}{dw_1} \\
+  &= \frac{1}{m}\sum_i 2(a_i - \hat{a}_i)_i\,(-x_i)
+\end{align*}
+we see the slope depends on the sum of features. Much more can be inspected here.
+
+This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same \textit{backpropagation} for both methods!
+
+\subsection{Alternative Derivation}
+We can also write:
+\begin{align*}
+  dC &= \frac{\partial C}{\partial \mathbf{W}} + \frac{\partial C}{\partial \mathbf{B}}
+\end{align*}
+
+And because 
+
+\begin{align*}
+  C &= \mathbf{A}\cdot\mathbf{A}^T
+\end{align*}
+
+The derivative respect to $A$ is $2A$ and the full is:
+
+\begin{align*}
+  C &= 2\mathbf{A}\left(\frac{\partial A}{\partial \mathbf{W}} + \frac{\partial A}{\partial \mathbf{B}}\right)
+\end{align*}
+And then 
+
+\begin{align*}
+  A &= \vec{a} - \vec{\hat{a}}\\
+  dA&= 2\mathbf{A}\left(\frac{\partial A}{\partial \mathbf{W}} + \frac{\partial A}{\partial \mathbf{B}}\right)\\
+  &= 2\mathbf{A}(\frac{\partial \vec{a}}{\partial \mathbf{W}} + \frac{\partial \vec{\hat{a}}}{\partial \mathbf{B}})\\
+  &= 2\mathbf{A}(\mathbf{X} + \mathbf{I})
+\end{align*}
+that we use to update the values.
 
 \section{Linear Regression: General Derivation}
+Only main differences are shown as the process is the same.
+
 The problem is to find $w_i$, $b$ such that the multidimensional ``plane'' has small error respect to each datapoint. Then for a new datapoint we will have a trained predictor.
 
 In linear regression, the model is:
@@ -150,105 +197,3 @@ Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write
 \end{equation*}
 There are $m$ examples-columns with $n$ features-rows. Hence $[\mathbf{X}] = m\times{}n$
 
-\subsection{Forward Propagation}
-Take the $k$ column. The Loss $= L(w,b)$ in linear regression is the \textit{Square Error}:
-\begin{align*}
-  L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2\\
-  &= (a_k - \sum_{j=0}^n w_j\cdot{}{\mathbf{X}}_{jk} - b)^2
-\end{align*}
-The cost in any method/model measures how well it's doing with the current parameters. In Linear Regression, it is the averaged sum of $L_k$, and it's the \textit{Mean Square Error}:
-\begin{align}
-  C(\vec{w}, \vec{b}) &= \frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)\nonumber\\
-  &=\frac{1}{m}(\vec{a}_i - \vec{\hat{a}}_i)\cdot{}(\vec{a}_i - \vec{\hat{a}}_i)\nonumber\\
-  &= \frac{1}{m} (\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b})\cdot{}(\vec{a} - \vec{w}\cdot{}\mathbf{X} - \vec{b}) \label{eq:cmulti}
-\end{align}
-$C(\vec{w})$ is a way to denote $C$ depends on all the variables in $\vec{w}$. \textit{m} is the number of samples. $C$ is computed from \ref{eq:cmulti}.
-
-In Python it'd look like:
-\begin{center}
-  \begin{BVerbatim}
-  Y' = np.dot(w,X) - b
-  diff = Y-Y' 
-  cost = 1/m*np.dot(diff, diff.T)
-  \end{BVerbatim}
-\end{center}
-\subsection{Backward Propagation}
-
-The cost is a ``bowl'', we will reach the global minimum (or close).
-We use the Cost derivative to find the better weight and bias. 
-
-\begin{align}
-  dC(\vec{w}, \vec{b}) &= \frac{dC}{d\vec{w}} + \frac{dC}{db}\nonumber\\
-  &= \frac{1}{m} d(\sum^m_0 L_i)\nonumber\\
-  &= \frac{1}{m} \sum^m_{i=0} dL_i(\vec{w}, b_i)\label{eq:diff}\\
-  &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{d\vec{w}} + \frac{dL_i}{db}\nonumber\\
-  &= \frac{1}{m} \sum^m_{i=0} \frac{dL_i}{dw_1} +\ldots +\frac{dL_i}{dw_n} + \frac{dL}{db} \nonumber
-\end{align}
-
-Take a particular column $k$:
-Equation \ref{eq:diff} makes use of linearity property of diff. We sum over columns (each sample). Now, pick up a column/sample $k$:
-\begin{align*}
-  L_k(\vec{w},b) &= (a_k - \hat{a_k})^2\\
-    &= A_k(w_1, w_2,\ldots, w_n, b)^2\\
-  dL_k &= 2\,A_k(w_1,w_2,\ldots, w_n, b)\cdot{}dA_k
-\end{align*}
-We named $A_k$ to the difference $a_k-\hat{a}_k$.
-
-\begin{align*}
-  A_k  &= a_k - \sum_j w_j\cdot{}\mathbf{X}_{jk} - b \\
-  &= a_k - w_1\,x_{1k} \ldots{}-w_n\,x_{nk} - b \\
-\end{align*}
-
-\begin{align}
-  dA_k &= \frac{\partial A}{\partial w_1}+ \ldots + \frac{\partial A}{\partial w_n}+ \frac{\partial A}{\partial b} \nonumber\\
-  &=  -x_{1k} -x_{2k} \ldots - x_{nk} -1 \label{dA}
-\end{align}
-
-From equation \ref{dA}, it follows:
-
-\begin{center}
-\begin{align*}
-  \frac{\partial A_{k}}{\partial w_1} = -x_{1k} \hspace{0.5em} \ldots \hspace{0.5em}\frac{\partial A_{k}}{\partial w_n}= -x_{nk}\hspace{2em} \frac{\partial A_k}{\partial b} = -1
-\end{align*} 
-\end{center}
-
-This can be expressed in compact form:
-\begin{align}
-  dC &= sum(-\frac{1}{m}\,{}2\,\mathbf{A}\cdot{}\mathbf{X^T} -\frac{1}{m}\,{}2\mathbf{A}\,{}1)\\
-  &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b}  \nonumber
-\end{align}
-We don't need the sum. We also found each partial derivative.
-
-To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
-\begin{align}
-  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\label{eq:wlin}\\
-  b &= b -\frac{\partial C}{\partial b}\,{}\alpha
-\end{align}
-
-$\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max incresing direction otherwise).
-
-\subsubsection{Interpretation}
-
-There is no graphical justification as to why we update $w$ and $b$ like that, but we are moving $w$ against (minus) the gradient multiplied by a constant (alpha) called \textit{learning rate}.
-
-The minus sign is because the gradient always points away from the minimum and we want towards it (in one dimension there are only 2 directions). 
-
-The meaning of equation \ref{eq:wlin} is important.
-\begin{align}
-  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\\
-  &= \vec{w} -[\frac{\partial C}{\partial w_1}, \frac{\partial C}{\partial w_2},\ldots, \frac{\partial C}{\partial w_n}]\,\alpha\\
-\end{align}
-
-It means we have a vector of corrections for each slope such that the overall cost is decreased. If we take say $\frac{dC}{dw1}$ it is the sum of slopes for each sample, divided by $m$. 
-
-To have more insight and detail, we could take a look at a dataset with just one feature. Then 
-\begin{align}
-  C &= \frac{1}{m}\sum_i(a_i - \hat{a}_i)^2 \\ 
-  \frac{\partial C}{dw_1}&= \frac{1}{m}\,\sum_i \frac{dL_i}{dw_1} \\
-  &= \frac{1}{m}\sum_i 2(a_i - \hat{a}_i)_i\,(-x_i)
-\end{align}
-we see the slope depends on the sum of features. Much more can be inspected here.
-
-This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same backpropagation for both methods!
-
-As it will be described, the forward propagation is different (but very simple).

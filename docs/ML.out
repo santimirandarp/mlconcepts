@@ -3,16 +3,15 @@
 \BOOKMARK [1][-]{section.3}{Example: Multivariable Linear Regression}{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{Forward Propagation}{section.3}% 4
 \BOOKMARK [2][-]{subsection.3.2}{Backward Propagation}{section.3}% 5
-\BOOKMARK [1][-]{section.4}{Linear Regression: General Derivation}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Forward Propagation}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Backward Propagation}{section.4}% 8
-\BOOKMARK [3][-]{subsubsection.4.2.1}{Interpretation}{subsection.4.2}% 9
-\BOOKMARK [1][-]{section.5}{Sigmoid}{}% 10
-\BOOKMARK [2][-]{subsection.5.1}{Forward Propagation}{section.5}% 11
-\BOOKMARK [2][-]{subsection.5.2}{Backward propagation}{section.5}% 12
-\BOOKMARK [1][-]{section.6}{Results}{}% 13
-\BOOKMARK [2][-]{subsection.6.1}{Interesting}{section.6}% 14
-\BOOKMARK [1][-]{section.7}{Shallow Neural Network}{}% 15
-\BOOKMARK [2][-]{subsection.7.1}{Forward Propagation}{section.7}% 16
-\BOOKMARK [2][-]{subsection.7.2}{Implement Forward Propagation}{section.7}% 17
-\BOOKMARK [1][-]{section.8}{Related Concepts}{}% 18
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Interpretation}{subsection.3.2}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Alternative Derivation}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Linear Regression: General Derivation}{}% 8
+\BOOKMARK [1][-]{section.5}{Sigmoid}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Forward Propagation}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{Backward propagation}{section.5}% 11
+\BOOKMARK [1][-]{section.6}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.6.1}{Interesting}{section.6}% 13
+\BOOKMARK [1][-]{section.7}{Shallow Neural Network}{}% 14
+\BOOKMARK [2][-]{subsection.7.1}{Forward Propagation}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.2}{Implement Forward Propagation}{section.7}% 16
+\BOOKMARK [1][-]{section.8}{Related Concepts}{}% 17
