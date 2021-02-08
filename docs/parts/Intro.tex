@@ -1,6 +1,8 @@
 \section{High Level View}
 
-On its core, Machine Learning about is a program that changes from exposure to data (experience) \ref{fig:learn}. Deep Learning is a subfield of machine learning, and shares this concept.
+On its core, Machine Learning about is a program that changes from exposure to data (experience) as it is shown in figure \ref{fig:learn}.
+
+Normally, data and parameters are the input to the model (mathematical function). This outputs a prediction, that we use to update the parameters in such a way that it better fits the data.
 
 \begin{figure}[h]
  \centering
@@ -8,7 +10,7 @@ On its core, Machine Learning about is a program that changes from exposure to d
   \caption{Machine Learning Process}\label{fig:learn}
 \end{figure}
 
-Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found neural network diagrams (see Figures \ref{fig:single} and \ref{fig:shallow}). The second image has been simplified (update isn't included).
+Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found neural network diagrams (see Figures \ref{fig:single} and \ref{fig:shallow}). The second image has been simplified (\textit{update} isn't included).
 
 \begin{figure}
  \centering
@@ -32,15 +34,18 @@ Suppose a mathematical function is given to us:
 $$ \hat{y}(x_1,x_2) = a x_1 + b x_2 + c$$
 where $a$, $b$, $c$ are \textit{parameters}.
 
-In \textit{Forward Propagation} we initialize a set of parameters (say $a,b,c=0$), and use the equation to estimate the real output ($y$). Both values are input to ``$C(y, \hat{y})$'' which is small if we're doing well, or large if bad.
+In \textbf{Forward Propagation} we initialize a set of parameters (say $a,b,c=0$), and use the equation to estimate the real output ($y$). Both values are input to ``$C(y, \hat{y})$'' which is small if we're doing well, or large if bad. 
 
-In the next chapters $y$, $\hat{y}$ are $a$ and $\hat{a}$; this is just the notation used in machine learning.
+So forward propagation is the calculation of $\hat{y}$ and $C(y,\hat{y})$ whatever shape they happen to have. 
 
-In \textit{Backward Propagation} we minimize $C$, by differentiation, and find a way to move our function parameters towards the minimum. We use \textit{Gradient Descent} for this task.
+In the next chapters $y$, $\hat{y}$ are $a$ and $\hat{a}$; this is just the notation used in ML/DL.
 
-Basically, we run an estimation, compute $C$, and use this to update our function's parameters, iteratively.
+In \textbf{Backward Propagation} we minimize $C$, by differentiation, and find a way to move our function parameters towards the minimum of $C$. We use \textit{Gradient Descent} for this task.
+
+The simplest neural network is the single layer. Later, hidden layers are included, from 1 (shallow network), to many (deep network).
 
 We will see examples in detail, starting with multivariable linear regression, that is, a previous step to \textit{Deep Learning}.
 
-The simplest neural network is the single layer. Later, hidden layers are included, from 1 (shallow network), to many (deep network).
+\section{Summary}
+Calculate $\hat{y}$ which is an estimation of $y$, compute $C(y,\hat{y})$, and use this to update $\hat{y}$ parameters, iteratively.
 

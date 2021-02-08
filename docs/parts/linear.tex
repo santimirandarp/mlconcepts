@@ -1,7 +1,7 @@
 \section{Example: Multivariable Linear Regression}
 A linear regression model for 2 features:
 \begin{align*}
- a &= w_1\cdot x_1 + w_2\cdot x_2 + b \\
+  a(x_1, x_2) &= w_1\,x_1 + w_2\,x_2 + b \\
    &= \vec{w}\cdot\vec{x} + b
 \end{align*}
 $w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\vec{x}$ is for one sample. Two or more samples are represented as a matrix:
@@ -16,12 +16,9 @@ $w_1$,$w_2$ control the slopes of this plane, $b$ translates it up and down. $\v
 \end{align*}
 $a_i$ is the result for each sample (columns in the matrix).
 
+The same than for a line (figure \ref{fig:line}) by tuning $W$ and $b$  we can find the best linear fit. The sign of $W$ reflects the line over Y($a$) axis, and its magnitude controls the slope; $b$ translates the line over $x$. Without $b$ the line has to go through the origin. 
+
 We need to do forward and backward propagation.
-
-The same than for a line (figure \ref{fig:line}) by tuning $W$ and $b$  we can find the best fit. Without $b$ the line has to go through the origin. 
-
-The sign of $W$ reflects the line over Y($a$) axis, and the magnitude controls the slope. Also $b$ translates over $x$.
-
 \begin{figure}[h]
  \centering
  \includegraphics[width=0.9\textwidth]{line_plot.png}
@@ -30,7 +27,7 @@ The sign of $W$ reflects the line over Y($a$) axis, and the magnitude controls t
 
 
 \subsection{Forward Propagation}
-The Loss $= Loss(w,b)$ in linear regression is the \textit{Square Error}:
+The Loss denoted $= Loss(w_1,\ldots, w_n, b)$ or just $L(\vec{w},b)$ in linear regression is the \textit{Square Error}:
 \begin{align*}
   L_i(\vec{w}, b) &= (a_i - \hat{a})^2\\
   &=(a_i -\vec{w}\cdot{}\vec{x}_{i} -b)^2
@@ -44,7 +41,7 @@ In Linear Regression, the Cost is the averaged sum of $L_i$, and it's the \texti
   &=\frac{1}{2}([a_1, a_2] - [w_1, w_2]\cdot{}\mathbf{X}-b)\cdot{}([a_1, a_2] - [w_1,w_2]\cdot{}\mathbf{X} -b) \label{cost}
 \end{align}
 $\frac{1}{2}$ is to average over examples. Equation \ref{cost} is what we implement into code.
-Outliers may be critical on the effect of weights and biases.
+%Outliers may be critical on the effect of weights and biases.
 
 In Python it'd look like:
 \begin{center}
@@ -74,10 +71,11 @@ For many variables, it's a similar process: the total derivative of a function i
   dC(\vec{w},b) &= \frac{\partial C}{\partial w_1}+ \frac{\partial C}{\partial w_2} + \frac{\partial C}{\partial b}\\
 \end{align}
 $C(w,b)$ derivative is used to find better weights and bias:
-\begin{align}
+\begin{align*}
+  \vec{w} &= [w_1, w_2] - [\frac{\partial C}{\partial w_1},\frac{\partial C}{\partial w_2}]\cdot{}\alpha\\
   \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\cdot{}\alpha\\
   b &= b -\frac{\partial C}{\partial b}\cdot{}\alpha
-\end{align}
+\end{align*}
 Let's get started.
 \begin{align}
   dC(\vec{w},b) &= \frac{\partial C}{\partial w_1}+ \frac{\partial C}{\partial w_2} + \frac{\partial C}{\partial b}\\
@@ -92,7 +90,7 @@ We sum over columns (each sample). Now, pick up a column/sample $k$:
     L_k &= A_k(w_1, w_2, b)^2\\
     dL_k &= 2\,A_k(w1,w2,b)\,dA_k
 \end{align*}
-$A_k$ is the difference $a_i-\hat{a}_i$. We need $dw$ and $db$; and for this $dA_k$:
+$A_k$ is the difference $a_k-\hat{a}_k$. We need $dw$ and $db$; and for this $dA_k$:
 \begin{align*}
   dL_k  &= 2A_k\,(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A_k}{\partial b}) \\
   A_k &= A_k(w_1, w_2, b)\\
@@ -109,7 +107,7 @@ where
 
 This can be expressed in compact form:
 \begin{align*}
-  dC &= sum(-\frac{1}{2}\times{}2\vec{A}\cdot{}\mathbf{X^T} -\frac{1}{2}\times{}2\vec{A}\times{}I)\\
+  dC &= sum(-\frac{1}{2}\times{}2\mathbf{X}\cdot{}\vec{A^T}-\frac{1}{2}\times{}2\vec{A}\times{}\vec{1})\\
   &= \frac{\partial C}{\partial \vec{w}} + \frac{\partial C}{\partial b} 
 \end{align*}
 
@@ -139,38 +137,11 @@ To have more insight and detail, we could take a look at a dataset with just one
 \begin{align*}
   C &= \frac{1}{m}\sum_i(a_i - \hat{a}_i)^2 \\ 
   \frac{\partial C}{dw_1}&= \frac{1}{m}\,\sum_i \frac{dL_i}{dw_1} \\
-  &= \frac{1}{m}\sum_i 2(a_i - \hat{a}_i)_i\,(-x_i)
+  &= -\frac{2}{m}\sum_i \mathbf{X}_{1i}(\vec{a}_i-\vec{\hat{a}}_i)
 \end{align*}
-we see the slope depends on the sum of features. Much more can be inspected here.
+we see the slope depends on the sum of features times errors. Much more can be inspected here.
 
-This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same \textit{backpropagation} for both methods!
-
-\subsection{Alternative Derivation}
-We can also write:
-\begin{align*}
-  dC &= \frac{\partial C}{\partial \mathbf{W}} + \frac{\partial C}{\partial \mathbf{B}}
-\end{align*}
-
-And because 
-
-\begin{align*}
-  C &= \mathbf{A}\cdot\mathbf{A}^T
-\end{align*}
-
-The derivative respect to $A$ is $2A$ and the full is:
-
-\begin{align*}
-  C &= 2\mathbf{A}\left(\frac{\partial A}{\partial \mathbf{W}} + \frac{\partial A}{\partial \mathbf{B}}\right)
-\end{align*}
-And then 
-
-\begin{align*}
-  A &= \vec{a} - \vec{\hat{a}}\\
-  dA&= 2\mathbf{A}\left(\frac{\partial A}{\partial \mathbf{W}} + \frac{\partial A}{\partial \mathbf{B}}\right)\\
-  &= 2\mathbf{A}(\frac{\partial \vec{a}}{\partial \mathbf{W}} + \frac{\partial \vec{\hat{a}}}{\partial \mathbf{B}})\\
-  &= 2\mathbf{A}(\mathbf{X} + \mathbf{I})
-\end{align*}
-that we use to update the values.
+%This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same \textit{backpropagation} for both methods!
 
 \section{Linear Regression: General Derivation}
 Only main differences are shown as the process is the same.

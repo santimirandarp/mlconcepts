@@ -29,7 +29,7 @@ def initialize(dim):
     return w, b
 
 # backward propagation
-def update(X,A,w,b,lr=0.01):
+def update(X,A,w,b,lr=1):
    m = X.shape[1]
    grad = 2/m*np.sum(A*X, axis=1, keepdims=True)
    dw = grad*lr

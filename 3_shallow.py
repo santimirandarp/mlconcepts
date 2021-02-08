@@ -22,12 +22,11 @@ def predict(W,B,X,fn):
     A = np.dot(W,X) + B
     return fn(A)
 
-arch= [4,3,2,1] #number of nodes for each layer
-def fp(X, arch):
-    W,B = initialize(arch[0], X.shape[0]) #nodes x features
-    A = predict(W,B,X,np.tanh) # 2, m
-    for layer in arch[1:-1]:
-        W,B = initialize(arch[layer], A.shape[0]) 
+def fp(X):
+    arch= [X.shape[0],4,3,2,1] #number of nodes for each layer
+    W,B,A= 0,0,0
+    for layer in arch[0:-1]:
+        W,B = initialize(arch[layer+1], arch[layer]) 
         A = predict(W,B,A,np.tanh) # 2, m
     W,B = initialize(arch[-1], A.shape[0]) #nodes x features
     return predict(W,B,A,sigmoid)
@@ -37,4 +36,4 @@ def cost(X, Y, Yp):
     cost = -1/m*(np.sum(np.multiply(Y, np.log(Yp)) + np.multiply(1-Y, np.log(1-Yp))))
     return cost
 
-print(cost(X,Y,fp(X, arch))) # using zeros for W the result should be 0.69
+print(cost(X,Y,fp(X))) # using zeros for W the result should be 0.69
