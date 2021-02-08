@@ -45,10 +45,10 @@ C = np.sum(
        + multiply(1-A, np.log(1-Ap)),
        axis=0)
 \end{verbatim}
-The updates are: 
+The gradients are: 
 \begin{align}
   \frac{dC}{d\mathbf{W}} &= \mathbf{X}\cdot{}\mathbf{\Delta A}^T\\
-  \frac{dC}{d\mathbf{B}} &= \mathbf{\Delta A}\\
+  \frac{dC}{d\mathbf{B}} &= \mathbf{\Delta A}
 \end{align}
 
 $\mathbf{A}$ was a vector, now it's turned into a matrix, one row for each node. Same thing for $\mathbf{W}$.
