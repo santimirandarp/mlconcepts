@@ -13,19 +13,22 @@ The sign of $w$ reflects the line over $y$ axis, the magnitude controls the slop
 \begin{figure}[h]
  \centering
  \includegraphics[width=0.9\textwidth]{sigmoid_plot.png}
-  \caption{Sigmoid plot} \label{fig:sigmoid}
+  \caption{Sigmoid. Mistake: at $x=0$, $y=(e^{-b}+1)^{-1}$} \label{fig:sigmoid}
 \end{figure}
 
 \subsection{Forward Propagation}
-This step is similar, but with new Loss and $\hat{a}$. 
-The Loss is the Cross Entropy Loss.
+\begin{itemize}
+  \item The Loss is the Cross Entropy Loss,
+  \item The activation is \textit{sigmoid}.
+\end{itemize}
+
 \begin{align}
   \hat{a}_i &= \frac{1}{1+e^{-(\vec{w}\cdot \vec{x}_i + b)}}\\
   L_i &= a_i\,\log(\hat{a}_i) + (1-a_i)\,\log(1-\hat{a}_i)
 \end{align}
-Again $\vec{w}\cdot{}\vec{x}_i$ is shorthand for $\sum_{j} w_j\,\mathbf{X}_{ji}$
+$\vec{w}\cdot{}\vec{x}_i$ is shorthand for $\sum_{j} w_j\,\mathbf{X}_{ji}$ (dot product for vector-matrix)
 
-We calculate cost again:
+\textbf{Cost}
 \begin{align*}
   C(\vec{w}, \vec{b}) &= -\frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)
 \end{align*}
@@ -37,55 +40,54 @@ cost = 1/m*(np.dot(A, np.log(Ap).T)
 #or
 Cost = 1/m*(np.sum(np.multiply(A, np.log(Ap)) 
 + np.multiply(1-A, np.log(1-Ap))))
-#tested, yields same number :-)
+#tested
 \end{verbatim}
 
 \subsection{Backward propagation}
 
 \begin{align}
-  \frac{\partial L_i}{\partial \vec{w}} = 
-  \left(\frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial \vec{w}}\\
+  \frac{\partial L_i}{\partial w_j} = 
+  \left(\frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial w_j}\\
   \frac{\partial L_i}{\partial b} = 
   \left(\frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial b}
 \end{align}
-The first two derivatives (enclosed in parens) are the same, let's compute them right away. There is no need for textual explanation.
-i
+The first two derivatives (enclosed in parens) are the same, let's compute them.
+
 \begin{align*}
-  \frac{\partial L_i}{\partial \hat{a}_i} &= \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \\
-  \frac{\partial \hat{a}}{\partial z} &= \ldots  \label{eq:derZ}\\
-  a(z)&= \frac{1}{1+e^{-z}}\\
-  a(u)&=\frac{1}{u}\\
-  da&=-u^{-2}\,du\\
-  \frac{da}{dz}&=-\left(\frac{1}{1+e^{-z}}\right)^{-2}\,e^{-z}(-1)\\
+  \frac{\partial L_i}{\partial \hat{a}_i} &= \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}_i}\,(-1) \\
+%  \frac{\partial \hat{a}_i}{\partial z_i} &= \ldots  \label{eq:derZ}\\
+%  a(z)&= \frac{1}{1+e^{-z}}\\ we can apply parts if we want
+%  a(u)&=\frac{1}{u}\\
+%  da&=-u^{-2}\,du\\
+  \frac{d\hat{a}_i}{dz}&=-\left(\frac{1}{1+e^{-z}}\right)^{-2}\,e^{-z}(-1)\\
   &=\left(\frac{1}{1+e^{-z}}\right)^{-2}\,(e^{-z} + 1 -1)\\
   &= \hat{a}^2\,(\frac{1}{\hat{a}} -1) \\
   \frac{\partial \hat{a}_i}{\partial z} &= \hat{a}_i\,(1-\hat{a}_i)
 \end{align*}
 Hence the derivative is:
 \begin{align*}
-  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z} &= \left[ \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}}\,(-1) \right]\,\hat{a}_i\,(1-\hat{a}_i)\\
+  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z_i} &= \left[ \frac{a_i}{\hat{a}_i} + \frac{(1-a_i)}{1-\hat{a}_i}\,(-1) \right]\,\hat{a}_i\,(1-\hat{a}_i)\\
   &= a_i - \hat{a}_i\\
-  \frac{\partial z_i}{\partial w} &= x_i\\
+  \frac{\partial z_i}{\partial w_j} &= \mathbf{X}_{ji}\\
   \frac{\partial z_i}{\partial b} &= 1
 \end{align*}
 We are left with:
 
 \begin{align*}
-  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z}\,\frac{\partial \hat{z}}{\partial \vec{w}} &= \left(a_i - \hat{a}_i\right)\,\vec{x}_i\\
-  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}}{\partial z}\,\frac{\partial \hat{z}}{\partial b} &= \left(a_i - \hat{a}_i\right)\,1\\
+  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z_i}\,\frac{\partial z_i}{\partial w_j} &= \left(a_i - \hat{a}_i\right)\,\mathbf{X}_{ji}\\
+  \frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z_i}\,\frac{\partial z_i}{\partial b} &= \left(a_i - \hat{a}_i\right)\,1\\
 \end{align*}
-$\vec{x}_i$ are all the features of sample $i$, not just one.
-In code we need an update-all vector, this is implemented:
-$\frac{1}{m}\,np.dot(A-Ap, X)$
 
-
-So part of the derivative turns out to be simple to calculate. Using $dw$, $db$ we can update values:
-
+We then have:
 \begin{align}
   w_j &= w_j - \frac{\partial C}{\partial w_j}\,\alpha\\
-  &= w_j + \frac{1}{m}\,\sum \frac{\partial L_i}{\partial w_j}\,\alpha\label{eq:same}\\
+  &= w_j + \frac{1}{m}\,\sum \frac{\partial L_i}{\partial w_j}\,\alpha\label{eq:same}
+\end{align}
+But we can compute in general:
+\begin{align}
   \vec{w} &= \vec{w} - \frac{\partial C}{\partial \vec{w}}\,\alpha\\
+  \vec{w} &= \vec{w} - \mathbf{X}\cdot{}\mathbf{A}^T\,\alpha\\
   b &= b - \frac{\partial C}{\partial b}\,\alpha
 \end{align}
 
-When we compute the process involves \ref{eq:same}, and this is the exact same result than for linear regression. 
+And this is the exact same result than for linear regression. 
