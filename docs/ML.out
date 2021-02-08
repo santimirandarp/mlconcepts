@@ -11,7 +11,8 @@
 \BOOKMARK [2][-]{subsection.5.2}{Backward propagation}{section.5}% 11
 \BOOKMARK [1][-]{section.6}{Results}{}% 12
 \BOOKMARK [2][-]{subsection.6.1}{Interesting}{section.6}% 13
-\BOOKMARK [1][-]{section.7}{Shallow Neural Network}{}% 14
-\BOOKMARK [2][-]{subsection.7.1}{Forward Propagation}{section.7}% 15
-\BOOKMARK [2][-]{subsection.7.2}{Implement Forward Propagation}{section.7}% 16
-\BOOKMARK [1][-]{section.8}{Related Concepts}{}% 17
+\BOOKMARK [1][-]{section.7}{Multiclass Network}{}% 14
+\BOOKMARK [1][-]{section.8}{Shallow Neural Network}{}% 15
+\BOOKMARK [2][-]{subsection.8.1}{Forward Propagation}{section.8}% 16
+\BOOKMARK [2][-]{subsection.8.2}{Implement Forward Propagation}{section.8}% 17
+\BOOKMARK [1][-]{section.9}{Related Concepts}{}% 18
