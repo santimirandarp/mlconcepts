@@ -21,8 +21,8 @@ The sign of $w$ reflects the line over $y$ axis, the magnitude controls the slop
 \end{itemize}
 
 \begin{align}
-  \hat{a}_i &= \frac{1}{1+e^{-(\vec{w}\cdot \vec{x}_i + b)}}\\
-  L_i &= a_i\,\log(\hat{a}_i) + (1-a_i)\,\log(1-\hat{a}_i)
+  L_i &= a_i\,\log(\hat{a}_i) + (1-a_i)\,\log(1-\hat{a}_i)\\
+  \hat{a}_i &= \frac{1}{1+e^{-(\vec{w}\cdot \vec{x}_i + b)}}
 \end{align}
 $\vec{w}\cdot{}\vec{x}_i$ is shorthand for $\sum_{j} w_j\,\mathbf{X}_{ji}$ (dot product for vector-matrix)
 
@@ -45,9 +45,9 @@ Cost = 1/m*(np.sum(np.multiply(A, np.log(Ap))
 
 \begin{align}
   \frac{\partial L_i}{\partial w_j} = 
-  \left(\frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial w_j}\\
+  \left(\frac{\partial L_i}{\partial \hat{a}_i}\, \frac{\partial \hat{a}_i}{\partial z_i}\right)\,\frac{\partial z_i}{\partial w_j}\\
   \frac{\partial L_i}{\partial b} = 
-  \left(\frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z}\right)\,\frac{\partial z}{\partial b}
+  \left(\frac{\partial L_i}{\partial \hat{a}_i}\,\frac{\partial \hat{a}_i}{\partial z_i}\right)\,\frac{\partial z_i}{\partial b}
 \end{align}
 The first two derivatives (enclosed in parens) are the same, let's compute them.
 
@@ -57,10 +57,10 @@ The first two derivatives (enclosed in parens) are the same, let's compute them.
 %  a(z)&= \frac{1}{1+e^{-z}}\\ we can apply parts if we want
 %  a(u)&=\frac{1}{u}\\
 %  da&=-u^{-2}\,du\\
-  \frac{d\hat{a}_i}{dz}&=-\left(\frac{1}{1+e^{-z}}\right)^{-2}\,e^{-z}(-1)\\
+  \frac{d\hat{a}_i}{dz_i}&=-\left(\frac{1}{1+e^{-z}}\right)^{-2}\,e^{-z}(-1)\\
   &=\left(\frac{1}{1+e^{-z}}\right)^{-2}\,(e^{-z} + 1 -1)\\
   &= \hat{a}^2\,(\frac{1}{\hat{a}} -1) \\
-  \frac{\partial \hat{a}_i}{\partial z} &= \hat{a}_i\,(1-\hat{a}_i)
+  \frac{\partial \hat{a}_i}{\partial z_i} &= \hat{a}_i\,(1-\hat{a}_i)
 \end{align*}
 Hence the derivative is:
 \begin{align*}
@@ -77,15 +77,16 @@ We are left with:
 \end{align*}
 
 We then have:
-\begin{align}
+\begin{align*}
   w_j &= w_j - \frac{\partial C}{\partial w_j}\,\alpha\\
   &= w_j + \frac{1}{m}\,\sum \frac{\partial L_i}{\partial w_j}\,\alpha\label{eq:same}
-\end{align}
+\end{align*}
 But we can compute in general:
 \begin{align}
-  \vec{w} &= \vec{w} - \frac{\partial C}{\partial \vec{w}}\,\alpha\\
-  \vec{w} &= \vec{w} - \mathbf{X}\cdot{}\mathbf{A}^T\,\alpha\\
-  b &= b - \frac{\partial C}{\partial b}\,\alpha
+  \vec{w} &= \vec{w} - \frac{\partial C}{\partial \vec{w}}\,\alpha\nonumber\\
+  &= \vec{w} + \mathbf{X}\cdot{}\mathbf{\Delta A}^T\,\alpha\\
+  b &= b - \frac{\partial C}{\partial b}\,\alpha\nonumber\\
+  &= b + \mathbf{\Delta A}\,\alpha
 \end{align}
 
-And this is the exact same result than for linear regression. 
+The same result than for linear regression. 

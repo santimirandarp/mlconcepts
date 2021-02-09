@@ -1,11 +1,26 @@
 # Linear Regression as described on the docs
 import numpy as np 
 import matplotlib.pyplot as plt
+import pandas as pd
 
+# commented lines were to test the algorithm
 #X = np.array([[1.01,2.01,3.05,4], [0.98,2.05,3.1,5]])
-X = np.array([[10,20,30,40]])
+#X = np.array([[10,20,30,40]])
+#X = (X - np.mean(X))/(np.max(X)-np.min(X))
+#Y = np.array([[1.01,2.02,2.88,4.1]])
+
+# import swedish kronor dataset
+sw = pd.read_csv('swedish_kronor.csv', delimiter='\t', decimal=',')
+# convert from dataframe to numpy array to get +functionality
+X = sw['X'].to_numpy()
+X = X.reshape(1, X.shape[0])
+Y = sw['Y'].to_numpy()
+Y = Y.reshape(1,Y.shape[0])
+
+
+# normalize data (comment to test without normalization)
 X = (X - np.mean(X))/(np.max(X)-np.min(X))
-Y = np.array([[1.01,2.02,2.88,4.1]])
+
 
 # forward propagation
 def cost(X, Y, Yp):
@@ -29,7 +44,7 @@ def initialize(dim):
     return w, b
 
 # backward propagation
-def update(X,A,w,b,lr=1):
+def update(X,A,w,b,lr=0.1):
    m = X.shape[1]
    grad = 2/m*np.sum(A*X, axis=1, keepdims=True)
    dw = grad*lr
@@ -42,7 +57,7 @@ def model(X, Y, numIt):
     Xflat=X.flatten()
     Yflat=Y.flatten()
     plt.scatter(Xflat, Yflat, label="original")
-    plt.title("Fit line over cycles")
+    plt.title("Fit over cycles")
     for i in range(numIt):
         Yp = predict(X,w,b)
         A, c = cost(X,Y,Yp)
@@ -54,7 +69,7 @@ def model(X, Y, numIt):
     print("cost: ", c)
     return w, b
 
-w, b = model(X,Y,5000)
+w, b = model(X, Y, 500)
 #print("printing w,b", w,b)
 #X = [[1.9],[2.11]]
 #Yp = np.dot(w,X)+b # 1x4

@@ -113,8 +113,10 @@ This can be expressed in compact form:
 
 To update the parameters, \textit{Gradient Descent} method is used. We update the vector $\vec{w}$ as follows:
 \begin{align}
-  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\cdot{}\alpha\\
-  b &= b -\frac{\partial C}{\partial b}\cdot{}\alpha
+  \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\nonumber\\
+  &= \vec{w} +\frac{1}{2}\times{}2\mathbf{X}\cdot{}\vec{A^T}\,\alpha\\ 
+  b &= b -\frac{\partial C}{\partial b}\cdot{}\alpha\nonumber\\
+  &= b +\frac{1}{2}\times{}2\vec{A}\times{}\vec{1}\,\alpha
 \end{align}
 $\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max incresing direction otherwise).
 
