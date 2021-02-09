@@ -34,6 +34,7 @@ def zero_one(arr):
             if el == j:
                 use[j-1] = 1
                 newArr.append(use)
+    newArr=np.array(newArr).T
     return newArr
 
 def to_numpy(X,Y,X_test,Y_test):
@@ -80,7 +81,7 @@ def fp(X, nodes):
     returns prediction
     """
     W,B,A= 0,0,0
-    W,B = initialize(nodes, X.shape[0]) 
+    W,B = initialize(nodes, X.shape[1]) 
     return predict(W,B,A,sigmoid)
 
 def cost(X, A, Ap):
@@ -92,5 +93,5 @@ def cost(X, A, Ap):
 X,Y,c,d = datasets(csv)
 X,Y,c,d = to_numpy(X,Y,c,d)
 Y = zero_one(Y)
-print(Y)
-#print(cost(X,Y,fp(X, 12))) # using zeros for W the result should be 0.69
+
+print(cost(X,Y,fp(X, 9))) # using zeros for W the result should be 0.69
