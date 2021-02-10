@@ -52,15 +52,14 @@ def predict(W,B,X,fn):
 def cost(X, A, Ap):
     m = X.shape[1]
     print(Ap)
-    cost = -1/m*(np.sum(A*np.log(Ap) + (1-A)*np.log(1-Ap), axis=0, keepdims=True))
-    print("cost is:", cost)
+    cost = -1/m*(np.sum(A*np.log(Ap) + (1-A)*np.log(1-Ap), axis=1, keepdims=True))
     return cost
 
 # backpropagation
 def update(W,B,X,Y,Ap):
     diff = (Y-Ap).T
-    W = W - np.dot(X,diff).T*0.000001
-    B = B - diff.T*0.000001
+    W = W + np.dot(X,diff).T*0.001
+    B = B + diff.T*0.001
     return W, B
 
 def model(X,Y,it=100,nodes=10):
@@ -69,7 +68,12 @@ def model(X,Y,it=100,nodes=10):
     for i in range(it):
       Ap = predict(W,B,X,sigmoid)
       W,B = update(W,B,X,Y,Ap)
+      # very sad plot
       if i%(it/10)==0:
-         print(cost(X,Y,Ap))
-         print(W)
-model(X,Y,50000)
+          plt.scatter(cost(X,Y,Ap)[0], i)
+    plt.show()
+    return W,B
+
+W,B = model(X,Y,50000)
+
+
