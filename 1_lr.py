@@ -3,33 +3,39 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# commented lines were to test the algorithm
-#X = np.array([[1.01,2.01,3.05,4], [0.98,2.05,3.1,5]])
-#X = np.array([[10,20,30,40]])
-#X = (X - np.mean(X))/(np.max(X)-np.min(X))
-#Y = np.array([[1.01,2.02,2.88,4.1]])
-
 # import swedish kronor dataset
 sw = pd.read_csv('swedish_kronor.csv', delimiter='\t', decimal=',')
-# convert from dataframe to numpy array to get +functionality
-X = sw['X'].to_numpy()
-X = X.reshape(1, X.shape[0])
-Y = sw['Y'].to_numpy()
-Y = Y.reshape(1,Y.shape[0])
+
+# convert dataframe to numpy.arr to get +functionality
+def make_datasets(X,Y):
+    X, Y = sw['X'].to_numpy(), sw['Y'].to_numpy()
+    X, Y = X.T, Y.T # from colum to row
+    return X, Y
+
+def naive_model(Y):
+    """
+    use this as a baseline
+    if we have larger error it's useless
+    """
+    samples = Y.shape[1]
+    diff = Y-np.mean(Y)
+    rmse = np.sqrt(np.dot(diff,diff.T)/l)
+    return rmse
+
+def normalize(X):
+    """
+    X features, returns normalized features
+    """
+    return (X - np.mean(X))/(np.max(X)-np.min(X))
 
 
-# normalize data (comment to test without normalization)
-X = (X - np.mean(X))/(np.max(X)-np.min(X))
+###### forward propagation
 
-
-# forward propagation
-def cost(X, Y, Yp):
-    # we need Yp, comes from predict
-    # returns cost
-    m = X.shape[1] 
-    A = Y - Yp 
-    cost = 1/m*np.dot(A,A.T)
-    return A, cost
+def initialize(dim):
+    # dim is X.shape[0]
+    w = np.zeros((1, dim))
+    b = 0
+    return w, b
 
 def predict(X,w,b):
     #we need w,b, comes from initialize
@@ -37,11 +43,13 @@ def predict(X,w,b):
     Yp = np.dot(w,X)+b 
     return Yp
 
-def initialize(dim):
-    # dim is X.shape[0]
-    w = np.zeros((1, dim))
-    b = 0
-    return w, b
+def cost(X, Y, Yp):
+    # returns cost
+    m = X.shape[1] 
+    A = Y - Yp 
+    cost = 1/m*np.dot(A,A.T)
+    return A, cost
+
 
 # backward propagation
 def update(X,A,w,b,lr=0.1):
@@ -58,7 +66,7 @@ def model(X, Y, numIt):
     Yflat=Y.flatten()
     plt.scatter(Xflat, Yflat, label="original")
     plt.title("Fit over cycles")
-    A=0
+    A,c = 0,0
     for i in range(numIt):
         Yp = predict(X,w,b)
         A, c = cost(X,Y,Yp)
@@ -68,12 +76,8 @@ def model(X, Y, numIt):
     plt.legend(loc="best")
     plt.show()
     print("cost: ", c)
-    print(A)
-    print("RMSE: ", np.sqrt(np.sum(A)/X.shape[0]))
     return w, b
 
+print('naive estimation', naive_model(Y))
+X = normalize(X)
 w, b = model(X, Y, 500)
-#print("printing w,b", w,b)
-#X = [[1.9],[2.11]]
-#Yp = np.dot(w,X)+b # 1x4
-#print(Yp)

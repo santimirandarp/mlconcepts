@@ -51,8 +51,8 @@ def predict(W,B,X,fn):
 
 def cost(X, A, Ap):
     m = X.shape[1]
-    print(Ap)
     cost = -1/m*(np.sum(A*np.log(Ap) + (1-A)*np.log(1-Ap), axis=1, keepdims=True))
+    print(cost)
     return cost
 
 # backpropagation
