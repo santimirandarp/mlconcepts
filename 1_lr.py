@@ -58,6 +58,7 @@ def model(X, Y, numIt):
     Yflat=Y.flatten()
     plt.scatter(Xflat, Yflat, label="original")
     plt.title("Fit over cycles")
+    A=0
     for i in range(numIt):
         Yp = predict(X,w,b)
         A, c = cost(X,Y,Yp)
@@ -67,6 +68,8 @@ def model(X, Y, numIt):
     plt.legend(loc="best")
     plt.show()
     print("cost: ", c)
+    print(A)
+    print("RMSE: ", np.sqrt(np.sum(A)/X.shape[0]))
     return w, b
 
 w, b = model(X, Y, 500)
