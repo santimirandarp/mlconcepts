@@ -1,31 +1,12 @@
 \section{High Level View}
 
-On its core, Machine Learning about is a program that changes from exposure to data (experience) as it is shown in figure \ref{fig:learn}.
+On its core, Machine Learning about is a program that changes from exposure to data (experience).
 
 Normally, data and parameters are the input to the model (mathematical function). This outputs a prediction, that we use to update the parameters in such a way that it better fits the data.
 
-\begin{figure}[h]
- \centering
- \includegraphics[width=0.9\textwidth]{ml.png}
-  \caption{Machine Learning Process}\label{fig:learn}
-\end{figure}
+Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found neural network diagrams.
 
-Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found neural network diagrams (see Figures \ref{fig:single} and \ref{fig:shallow}). The second image has been simplified (\textit{update} isn't included).
-
-\begin{figure}
- \centering
- \includegraphics[width=\textwidth]{1L-NN.png}
- \caption{Single Layer Neural Network}
- \label{fig:single}
-\end{figure}
-
-
-\begin{figure}
- \centering
- \includegraphics[width=\textwidth]{2L-NN.png}
- \caption{Shallow Neural Network}
- \label{fig:shallow}
-\end{figure}
+Network Diagrams can be found in section \ref{section:figs} 
 
 \section{The steps}
 There are two main steps: \textit{forward} and \textit{backward} propagation. 
@@ -49,3 +30,23 @@ We will see examples in detail, starting with multivariable linear regression, t
 \section{Summary}
 Calculate $\hat{y}$ which is an estimation of $y$, compute $C(y,\hat{y})$, and use this to update $\hat{y}$ parameters, iteratively.
 
+\section{Figures}\label{section:figs}
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.9\textwidth]{ml.png}
+  \caption{Machine Learning Process}\label{fig:learn}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \includegraphics[width=\textwidth]{1L-NN.png}
+ \caption{Single Layer Neural Network}
+ \label{fig:single}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \includegraphics[width=\textwidth]{2L-NN.png}
+ \caption{Shallow Neural Network}
+ \label{fig:shallow}
+\end{figure}

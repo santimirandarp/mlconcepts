@@ -1,10 +1,10 @@
 \section{Sigmoid}
-The derivation is similar to Linear regression. The plot for the equation:
+The activation is:
 \[
   \hat{a}(\vec{x})= \frac{1}{1+e^{-(\vec{w}\cdot{}\vec{x}+b)}}
 \]
 
-for one dimension is on figure \ref{fig:sigmoid}. By tuning $w$ and $b$  we can find the best fit. 
+plot for 1 feature on figure \ref{fig:sigmoid}. By tuning $w$ and $b$  we can find the best fit. 
 
 The sign of $w$ reflects the line over $y$ axis, the magnitude controls the slope. Again, $b$ translates over $x$.
 
@@ -15,22 +15,24 @@ The sign of $w$ reflects the line over $y$ axis, the magnitude controls the slop
 \end{figure}
 
 \subsection{Forward Propagation}
+To recap, 
+
 \begin{itemize}
-  \item The Loss is the Cross Entropy Loss,
-  \item The activation is \textit{sigmoid}.
+  \item The activation is a \textit{sigmoid} function:
+\[
+  \hat{a}_i = \frac{1}{1+e^{-(\sum_j w_j\, \mathbf{X}_{ij} + b)}}
+\]
+
+  \item The Loss is the Cross Entropy Loss:
+\[
+  L_i = a_i\,\log(\hat{a}_i) + (1-a_i)\,\log(1-\hat{a}_i)
+\]
+
+\item The cost:
+\[
+  C(\vec{w}, \vec{b}) = -\frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)
+\]
 \end{itemize}
-
-\begin{align}
-  L_i &= a_i\,\log(\hat{a}_i) + (1-a_i)\,\log(1-\hat{a}_i)\\
-  \hat{a}_i &= \frac{1}{1+e^{-(\vec{w}\cdot \vec{x}_i + b)}}
-\end{align}
-$\vec{w}\cdot{}\vec{x}_i$ is shorthand for $\sum_{j} w_j\,\mathbf{X}_{ji}$ (dot product for vector-matrix)
-
-\textbf{Cost}
-\begin{align*}
-  C(\vec{w}, \vec{b}) &= -\frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)
-\end{align*}
-
 This is coded:
 \begin{verbatim}
 cost = 1/m*(np.dot(A, np.log(Ap).T) 

@@ -4,7 +4,7 @@ This network can be used for multiclass problems, but it's actually used with a 
 
 Now the results and predictions are column vectors. The cost can be thought now as a row vector of $N$ components, for $N$ classes/labels.
 
-Let's see the computing part:
+From the NN diagram, we derive the computations:
 
 \begin{equation*}
   \begin{bmatrix}
@@ -32,7 +32,7 @@ Let's see the computing part:
     b_1\\ b_2\\ \vdots\\ b_s
   \end{bmatrix})
 \end{equation*}
-For $\mathbf{W}$, $s$ dimension is equal to the number of nodes in the output layer, and $n$ to the number of features on the input layer. $\mathbf{B}$ will actually be broadcasted to match the shape of $\mathbf{A}$. 
+$s$ dimension is equal to the number of nodes in the output layer, and $n$ to the number of features on the input layer. $\mathbf{B}$ will actually be broadcasted to match the shape of $\mathbf{A}$. 
 
 The cost for the $j$ node is:
 \begin{align}
