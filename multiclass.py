@@ -13,30 +13,12 @@ To run we need:
 # bring data in
 csv = pd.read_csv('winequality-white.csv', delimiter=';')
 
-# normalized, split datasets
-X,Y,c,d = datasets(csv)
-X,Y,c,d = to_numpy(X,Y,c,d)
-Y = zero_one(Y)
+# generate normalized test and train datasets
+X,Y,X_test,Y_test = datasets(csv)
+X,Y,X_test, Y_test = to_numpy(X,Y,X_test,Y_test)
+Y = zero_one(Y) # converts labels to 0/1 arrays
 
 # forward propagation
-def sigmoid(z):
-    """ takes linear piece
-    returns the prediction"""
-    return 1/(1+np.exp(-z))
-
-def initialize(nodes,features):
-    """
-    the rows of W are nodes
-    the columns of W are features
-    the rows of B are nodes
-
-    returns W, B
-    """
-    w = np.random.rand(nodes, features)
-    #each node computes for a set of features
-    b = np.random.rand(nodes, 1)
-    return w, b
-
 def predict(W,B,X,fn):
     """
     W matrix/vector of weights
@@ -46,8 +28,8 @@ def predict(W,B,X,fn):
 
     Returns the predictions (matrix or vector)
     """
-    A = np.dot(W,X) + B
-    return fn(A)
+    Z = np.dot(W,X) + B
+    return fn(Z)
 
 def cost(X, A, Ap):
     m = X.shape[1]

@@ -7,9 +7,10 @@ import pandas as pd
 sw = pd.read_csv('swedish_kronor.csv', delimiter='\t', decimal=',')
 
 # convert dataframe to numpy.arr to get +functionality
-def make_datasets(X,Y):
+def make_datasets(dataset):
     X, Y = sw['X'].to_numpy(), sw['Y'].to_numpy()
-    X, Y = X.T, Y.T # from colum to row
+    X, Y = X.reshape(1,X.shape[0]), Y.reshape(1,Y.shape[0]) 
+    # from column to row
     return X, Y
 
 def naive_model(Y):
@@ -17,7 +18,7 @@ def naive_model(Y):
     use this as a baseline
     if we have larger error it's useless
     """
-    samples = Y.shape[1]
+    l = Y.shape[1]
     diff = Y-np.mean(Y)
     rmse = np.sqrt(np.dot(diff,diff.T)/l)
     return rmse
@@ -78,6 +79,15 @@ def model(X, Y, numIt):
     print("cost: ", c)
     return w, b
 
-print('naive estimation', naive_model(Y))
+def metric(w,b,X,Y):
+    Yp = np.dot(w,X) + b
+    diff = Y-Yp
+    l = Y.shape[1]
+    rmse = np.sqrt(np.dot(diff, diff.T)/l)
+    return rmse
+
+X,Y = make_datasets(sw)
+print('naive estimation rmse: ', naive_model(Y))
 X = normalize(X)
 w, b = model(X, Y, 500)
+print("model rmse: ", metric(w,b,X,Y))

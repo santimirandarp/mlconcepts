@@ -40,3 +40,21 @@ def to_numpy(X,Y,X_test,Y_test):
     Y_test = Y_test.to_numpy().T
     return X,Y,X_test,Y_test
 
+def sigmoid(z):
+    """ takes linear piece
+    returns the prediction"""
+    return 1/(1+np.exp(-z))
+
+def initialize(nodes,features):
+    """
+    the rows of W are nodes
+    the columns of W are features
+    the rows of B are nodes
+
+    returns W, B
+    """
+    w = np.random.rand(nodes, features)
+    #each node computes for a set of features
+    b = np.random.rand(nodes, 1)
+    return w, b
+
