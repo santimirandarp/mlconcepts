@@ -1,27 +1,38 @@
 # Newbie ML
 This repository holds attempts to understand how neural networks work from a begginers point of view. 
 
-There are a few basic steps we always have to go through:
+## Contribute
+* Clone the repo using `git clone https://www.github.com:santimirandarp/mlconcepts.git` 
+* test the python scripts (**1**, **2**, **3**,..). 
+* You can modify them, draw conclusions and write them to the docs if you find anything interesting.
+* Push changes to repo.
+
+Feel free to write new neural networks and place them in a numbered python file as the other networks.
+
+## General Description
+There are a few basic steps we usually have to go through:
 
 1. Find the data
-This step can take us a while. To practice there are ready-to-use datasets, but otherwise we need to create it. I've gone through this process here. 
+To practice [ready-to-use datasets](https://machinelearningmastery.com/results-for-standard-classification-and-regression-machine-learning-datasets/) are used, otherwise we need to create it. See the process of [creating datasets here](https://www.github.com:santimirandarp/mlimg.git). 
 
-On this repo, standard datasets are used because the main goal is understanding the neural network: performance, accuracy, basic steps and differences, variation with iteration's cycles, and so on.
+2. Treat/Prepare the data
+Split into training and test. Datasets are cleaned up. Utility functions are defined to normalize and center data.
 
-2. Treat the data
-Datasets will probably need to be cleaned up, normalized and split into training, validation and test. We use just one split into training and test, mostly because datasets are small.
 
-3. Define a neural network 
-Depending on the problem we define an architecture and size of the network (width and depth). 
+3. Define a Neural Network 
+Depending on the problem we define a network type: _architecture_ and _size_ of the network (width and depth). 
 
-On this set of problems, we start off by using single or multivariate models (regression or classification). Nice enough, the backpropagation is almost the same, as indicated on wikipedia (and it's deduced from scratch on the docs).
-
-For multiclassification, a model is built up from scratch; and same thing for the first deep network (a shallow network).
+We start off by building single or multivariate models (regression or classification). Next we look for more performance and flexibility using multiclassification, shallow networks and deep networks. All are fully connected NNs.
 
 The last step is to create fully connected deep networks from scratch.
 
 4. Calculate predictions and cost
-This the forward propagation step. In a few examples we try different functions (for deep NNs).
+This the forward propagation step. 
 
 5. Update parameters
-This is the essential step, where the model improves itself (learns). All models are deduced using gradient descent to drive the learning process.
+The model improves itself (learns). All models are deduced using gradient descent to drive the learning process.
+
+## Some findings
+
+* Non-normalized data will usually blow up calculations, as we find out testing (both in regression and classfication, as backpropagation is the same). The reason is gradients depend on features' magnitude.
+* Standard Regression and Classification have the same backpropagation algorithm.
