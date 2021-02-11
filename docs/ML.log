@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  11 FEB 2021 08:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.29)  11 FEB 2021 08:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -453,7 +453,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 22.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 22.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 22.
 Package rerunfilecheck Info: File `ML.out' has not changed.
-(rerunfilecheck)             Checksum: 94D90CA984829686CFE740CEA68C6E7C;1154.
+(rerunfilecheck)             Checksum: 5A033E88A7F135771E35C43B552EAFC5;1176.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -483,7 +483,7 @@ ss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ML.pdf (20 pages, 339771 bytes).
+Output written on ML.pdf (20 pages, 339806 bytes).
 PDF statistics:
  328 PDF objects out of 1000 (max. 8388607)
  272 compressed objects within 3 object streams

@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {2.2}Backward Propagation}{4}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}Interpretation}{7}{subsubsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.3}Many features and samples}{7}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Sigmoid}{9}{section.3}%
+\contentsline {section}{\numberline {3}Mulvariable Binary Regression}{9}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Forward Propagation}{9}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Backward propagation}{10}{subsection.3.2}%
 \contentsline {section}{\numberline {4}Results}{12}{section.4}%
