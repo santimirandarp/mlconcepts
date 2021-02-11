@@ -1,4 +1,4 @@
-\section{Example: Multivariable Linear Regression}
+\section{Multivariable Linear Regression}
 A linear regression model for 2 features:
 \begin{align*}
   a(x_1, x_2) &= w_1\,x_1 + w_2\,x_2 + b \\
@@ -27,7 +27,7 @@ We need to do forward and backward propagation.
 
 
 \subsection{Forward Propagation}
-The following equations depend on the type of problem we want to solve.
+A general network scheme is shown in \ref{fig:single}. Calculations are built following the network. 
 \begin{itemize}
   \item The activation is a linear function:
     \[ \hat{\vec{a}} = \vec{w}\cdot\mathbf{X} + \vec{b}\]
@@ -153,12 +153,12 @@ we see the slope depends on the sum of features times errors. Much more can be i
 
 %This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same \textit{backpropagation} for both methods!
 
-\section{Linear Regression: General Derivation}
-Only main differences are shown as the process is the same.
+\subsection{Many features and samples}
+For a larger problem, the only difference is the size of the matrices.
 
 The problem is to find $w_i$, $b$ such that the multidimensional ``plane'' has small error respect to each datapoint. Then for a new datapoint we will have a trained predictor.
 
-In linear regression, the model is:
+As it was shown, for linear regression the model is:
 \begin{align*}
   \hat{a}(\vec{x}) &= w_1\,x_1 + w_2\,x_2 +\ldots+ w_n\,x_n\\
    &= \sum_i^n w_i\, x_i + b \\
@@ -178,3 +178,4 @@ Here $\vec{x}$ is for one sample. For $n$ samples, it becomes a matrix, we write
 \end{equation*}
 The $b_i$ are all the same number. There are $m$ examples-columns with $n$ features-rows. Hence $[\mathbf{X}] = m\times{}n$
 
+The results are exactly the same than the previous section.
