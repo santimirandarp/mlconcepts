@@ -1,49 +1,8 @@
+# regression or classification with 1 out layer
 import numpy as np
-# generates datasets
-def datasets(df_csv):
-    # get X and normalize
-    ft = df_csv.iloc[:,:-1]
-    ft = (ft-ft.mean())/(ft.max()-ft.mean())
-    print(ft.head()) #just to see the ft normalized
-    rows = df_csv.shape[0]
-    sliceAt = int(np.sqrt(rows))
-    Y = df_csv.iloc[sliceAt:,-1]
-    Y_test = df_csv.iloc[:sliceAt,-1]
-    X = ft.iloc[sliceAt:,:]
-    X_test = ft.iloc[:sliceAt,:]
-    return X,Y,X_test,Y_test
 
-def zero_one(labels):
-    """
-    labels is an array of integers
-    returns an array of 0s 1s for each integer
-    with a one on the position. Example:
-    [1,2] => [[1,0], [0,1]]
-    """
-    newArr=[]
-    arrLen = max(labels) # 9
-    for el in labels:
-        use = np.zeros(arrLen+1) # 9, from 0 to 8
-        for j in range(0,arrLen+1):
-            if el == j:
-                use[j] = 1
-                newArr.append(use)
-    newArr = np.array(newArr).T
-    return newArr
-
-def to_numpy(X,Y,X_test,Y_test):
-    """takes the pandas datasets
-    retrieves numpy arrays"""
-    X = X.to_numpy().T
-    Y = Y.to_numpy().T
-    X_test = X_test.to_numpy().T
-    Y_test = Y_test.to_numpy().T
-    return X,Y,X_test,Y_test
-
-def sigmoid(z):
-    """ takes linear piece
-    returns the prediction"""
-    return 1/(1+np.exp(-z))
+sigmoid = lambda z: 1/(1+np.exp(-z))
+linear = lambda z: z
 
 def initialize(nodes,features):
     """
@@ -57,4 +16,52 @@ def initialize(nodes,features):
     #each node computes for a set of features
     b = np.random.rand(nodes, 1)
     return w, b
+
+# forward propagation
+def predict(W,B,X,m,activation):
+    """
+    W matrix/vector of weights
+    B vector/number of biases
+    X features
+    fn function applied to the linear transform
+
+    Returns the predictions (matrix or vector)
+    """
+    Z = np.dot(W,X) + B
+    return activation(Z)
+
+def cost(X, A, Ap, m, activation):
+    if activation==sigmoid:
+        return -1/m*(np.sum(A*np.log(Ap) + (1-A)*np.log(1-Ap), axis=1, keepdims=True))
+    else:
+        """there may be else if between, for other fns"""
+        diff  = A-Ap
+        return 1/m*np.dot(diff, diff.T)
+
+# backpropagation
+def update(W,B,X,A,Ap,m,lr):
+    c = (1/m)*lr
+    diff = c*(A-Ap)
+    W = W + np.dot(diff,X.T)
+    B = B + diff
+    return W, B
+
+def model(X,A,it=100,activation=sigmoid,lr=0.001):
+    """ 
+    X: matrix of features x samples
+    A: matrix or vector of labels
+    it: number of update iterations
+    activation: for the out layer
+    lr: learning rate
+    """
+    nodes, features, m = A.shape[0], X.shape[0], X.shape[1]
+    # W,B for the 1st calculation
+    W,B = initialize(nodes, features) 
+
+    for i in range(it):
+      Ap = predict(W,B,X,m,activation)
+      W,B = update(W,B,X,A,Ap,m,lr)
+      if i%(it/10)==0:
+          print("Cost cycle %i: "%i,cost(X,A,Ap,m,activation))
+    return W,B
 

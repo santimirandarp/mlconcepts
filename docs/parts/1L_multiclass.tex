@@ -2,7 +2,7 @@
 
 This network can be used for multiclass problems, but it's actually used with a \textit{softmax} function instead of \textit{sigmoid}. 
 
-Now the results and predictions are column vectors. The cost can be thought now as a row vector of $N$ components, for $N$ classes/labels.
+The prediction for a sample ($a$) is a column vector. The cost can be arranged as a row vector of $N$ components, for $N$ different labels.
 
 From the NN diagram, we derive the computations:
 
@@ -43,12 +43,12 @@ which may be coded like this:
 C = np.sum(
          multiply(A, np.log(Ap))
        + multiply(1-A, np.log(1-Ap)),
-       axis=0)
+       axis=1)
 \end{verbatim}
 The gradients are: 
 \begin{align}
-  \frac{dC}{d\mathbf{W}} &= \mathbf{X}\cdot{}\mathbf{\Delta A}^T\\
-  \frac{dC}{d\mathbf{B}} &= \mathbf{\Delta A}
+  \frac{dC}{d\mathbf{W}} &= -\frac{1}{m}\mathbf{\Delta A}\cdot{}\mathbf{X}^T\\
+  \frac{dC}{d\mathbf{B}} &= -\frac{1}{m}\mathbf{\Delta A}
 \end{align}
 
 $\mathbf{A}$ was a vector, now it's turned into a matrix, one row for each node. Same thing for $\mathbf{W}$.
