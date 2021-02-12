@@ -16,15 +16,15 @@ def datasets(df_csv,normalize=True, sliceAt = np.sqrt, to_numpy=to_numpy):
     return test and train datasets.
     The last column has to be Y (labels)"""
     df_csv = df_csv.T # transpose
-    ft = df_csv.iloc[:-1,:] # separate last row Y
+    ft = df_csv.iloc[:-1,:] # exclude last row Y
     if normalize==True:
         #ft = (ft-ft.mean())/(ft.max()-ft.min())
         ft = (ft-ft.mean(axis=0))/(ft.max(axis=0)-ft.min(axis=0))
-    print("Head: ",ft.head()) #just to see the ft normalized
+#    print("Head: ",ft.head()) #just to see the ft normalized
     cols = df_csv.shape[1] 
     sliceAt = int(sliceAt(cols))
-    Y = df_csv.iloc[-1,sliceAt:]
-    Y_test = df_csv.iloc[-1,:sliceAt]
+    Y = df_csv.iloc[-1:,sliceAt:]
+    Y_test = df_csv.iloc[:-1,:sliceAt]
     X = ft.iloc[:,sliceAt:]
     X_test = ft.iloc[:,:sliceAt]
     if to_numpy==to_numpy:
@@ -41,12 +41,14 @@ def zero_one(labels):
     [1,2] => [[1,0], [0,1]]
     """
     newArr=[]
-    arrLen = int(max(labels)) # 9
+    labels=labels.flatten()
+    maxV = int(max(labels))
+    minV = int(min(labels))
     for el in labels:
-        use = np.zeros(arrLen+1) # 9, from 0 to 8
-        for j in range(0,arrLen+1):
-            if el == j:
-                use[j] = 1
+        use = np.zeros(maxV-minV+1) 
+        for j in range(minV,maxV+1):
+            if int(el) == j:
+                use[j-3] = 1
                 newArr.append(use)
     newArr = np.array(newArr).T
     return newArr

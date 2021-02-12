@@ -36,3 +36,11 @@ The model improves itself (learns). All models are deduced using gradient descen
 
 * Non-normalized data will usually blow up calculations, as we find out testing (both in regression and classfication, as backpropagation is the same). The reason is gradients depend on features' magnitude.
 * Standard Regression and Classification have the same backpropagation algorithm.
+
+## General script
+In `function.py` and `csvfns.py` there is a more general set of functions to solve any of this 2 problems:
+1. Multivariate (or single) regression
+2. Multivariate (or single) classification
+The script does not accept deep networks (not even shallows) because it assumes no hidden layer. 
+
+It also makes use of the fact that backpropagation is the same for regression and classification. Hence, the code is brief.

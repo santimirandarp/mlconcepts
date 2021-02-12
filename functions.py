@@ -12,6 +12,8 @@ def initialize(nodes,features):
 
     returns W, B
     """
+    print("number of nodes: ", nodes)
+    print("number of features: ", features)
     w = np.random.rand(nodes, features)
     #each node computes for a set of features
     b = np.random.rand(nodes, 1)
@@ -46,7 +48,7 @@ def update(W,B,X,A,Ap,m,lr):
     B = B + diff
     return W, B
 
-def model(X,A,it=100,activation=sigmoid,lr=0.001):
+def model(X,A,it=100,activation=sigmoid,lr=0.01):
     """ 
     X: matrix of features x samples
     A: matrix or vector of labels
@@ -55,13 +57,31 @@ def model(X,A,it=100,activation=sigmoid,lr=0.001):
     lr: learning rate
     """
     nodes, features, m = A.shape[0], X.shape[0], X.shape[1]
+    print(nodes, features, m)
     # W,B for the 1st calculation
     W,B = initialize(nodes, features) 
-
+    print(W.shape, B.shape)
     for i in range(it):
       Ap = predict(W,B,X,m,activation)
       W,B = update(W,B,X,A,Ap,m,lr)
       if i%(it/10)==0:
-          print("Cost cycle %i: "%i,cost(X,A,Ap,m,activation))
-    return W,B
+          print("Cost cycle %i:\n"%i,cost(X,A,Ap,m,activation))
+    return W,B,Ap
+
+def naive_estim(Y, method="regression", dtype='df'):
+    """
+    use this as a baseline
+    if model has larger error => useless
+    Y column vector
+    method: regression or classification, string
+    dtype: ndarray or df, string
+    """
+    l = Y.shape[0]
+    if method == "classification" and dtype=='df':
+        distribution = (Y.value_counts()/l)*100
+        return distribution
+    elif method == "regression":
+        diff = Y-np.mean(Y)
+        rmse = np.sqrt(np.dot(diff,diff.T)/l)
+        return rmse
 
