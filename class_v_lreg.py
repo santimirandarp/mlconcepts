@@ -31,9 +31,16 @@ csv = pd.read_csv('winequality-white.csv', delimiter=';')
 
 #create normalized datasets
 X,Y,X_test,Y_test = datasets(csv, normalize=True, sliceAt=np.sqrt) 
+
+# convert labels into binary arrays
 Y = zero_one(Y)
+
+# run model
 W,B,Ap = model(X,Y,10000,lr=2.0)
-r = pd.DataFrame(Ap.argmax(axis=0))
+
+# print naive model (44-45% accuracy)
 print("naive estimation[0], class distribution:\n", naive_estim(csv["quality"] , method="classification"))
-r = results_distribution(r)
-print("results", r, r.shape)
+
+# print our own model results
+r = pd.DataFrame(Ap.argmax(axis=0))
+print("results", results_distribution(r))
