@@ -2,11 +2,11 @@
 
 On its core, Machine Learning about is a program that changes from exposure to data (experience).
 
-Normally, data and parameters are the input to the model (mathematical function). This outputs a prediction, that we use to update the parameters in such a way that it better fits the data.
+Data and parameters are the input to a mathematical function. This outputs a prediction, that we later use to update the parameters. The process is iterative.
 
-Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns. This opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found neural network diagrams.
+Deep Learning models complex patterns of data. It's particularly useful for non-linear patterns, and opens up a new space of problems to solve. Because Deep Learning is a part of Machine Learning, the previous logic is found deep network diagrams.
 
-Network Diagrams can be found in section \ref{section:figs} 
+Examples of Network Diagrams can be found in section \ref{section:figs}. 
 
 \subsection{The steps}
 There are two main steps: \textit{forward} and \textit{backward} propagation. 
@@ -19,8 +19,6 @@ In \textbf{Forward Propagation} we initialize a set of parameters (say $a,b,c=0$
 
 So forward propagation is the calculation of $\hat{y}$ and $C(y,\hat{y})$ whatever shape they happen to have. 
 
-In the next chapters $y$, $\hat{y}$ are $a$ and $\hat{a}$; this is just the notation used in ML/DL.
-
 In \textbf{Backward Propagation} we minimize $C$, by differentiation, and find a way to move our function parameters towards the minimum of $C$. We use \textit{Gradient Descent} for this task.
 
 The simplest neural network is the single layer. Later, hidden layers are included, from 1 (shallow network), to many (deep network).
@@ -30,3 +28,4 @@ We will see examples in detail, starting with multivariable linear regression, t
 \subsection{Summary}
 Calculate $\hat{y}$ which is an estimation of $y$, compute $C(y,\hat{y})$, and use this to update $\hat{y}$ parameters, iteratively.
 
+In the next chapters $y$, $\hat{y}$ are $a$ and $\hat{a}$; this is just the notation used in ML/DL.

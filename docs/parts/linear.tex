@@ -27,7 +27,7 @@ We need to do forward and backward propagation.
 
 
 \subsection{Forward Propagation}
-A general network scheme is shown in \ref{fig:single}. Calculations are built following the network. 
+A general network scheme is shown in \ref{fig:single}. Calculations are built following that network scheme. 
 \begin{itemize}
   \item The activation is a linear function:
     \[ \hat{\vec{a}} = \vec{w}\cdot\mathbf{X} + \vec{b}\]
@@ -90,30 +90,21 @@ These equations are important. Equation \ref{eq:start} is always the starting po
 
 What we look for is:
 \begin{align}
-  \frac{\partial C}{\partial w_1} = c\sum_i \frac{\partial Li}{\partial w_1}\nonumber\\
-  \frac{\partial C}{\partial w_2} = c\sum_i \frac{\partial Li}{\partial w_2} \nonumber\\
-  \frac{\partial C}{\partial w_n} = c\sum_i \frac{\partial Li}{\partial w_n} \label{eq:cost_vector} 
+  \frac{\partial C}{\partial w_1} &= c\sum_i \frac{\partial L_i}{\partial w_1} = c\sum_i \frac{\partial L_i}{\partial A_i}\frac{A_i}{\partial w_1}\nonumber\\
+  &\vdots\nonumber\\
+  \frac{\partial C}{\partial w_n} &= c\sum_i \frac{\partial L_i}{\partial w_n}  = c\sum_i \frac{\partial L_i}{\partial A_i}\frac{A_i}{\partial w_n} \label{eq:cost_vector} 
 \end{align}
-$c$ is here $\frac{1}{2}\, 2$. On the left the vector $\frac{dC}{d\vec{w}}$ used later to correct $\vec{w}$. Now, summing over columns (each sample):
+(Remember, updating $w$, $b$, minimizing $C$, fits line to data. That's why we are deriving). Last equality uses the chain rule $df(g(x)) = \frac{df}{dg}\frac{dg}{dx}$. 
+
 \begin{align*}
-  L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2\\
-    L_k &= A_k(w_1, w_2, b)^2\\
-    dL_k &= 2\,A_k(w_1,w_2,b)\,dA_k
+  L_k(\vec{w},b) &= (a_k - \hat{a}_k)^2
 \end{align*}
 $A_k$ is the difference $a_k-\hat{a}_k$. We need $dw$ and $db$; and for this $dA_k$:
+
 \begin{align*}
-  dL_k  &= 2A_k\,(\frac{\partial A_k}{\partial w_1} + \frac{\partial A_k}{\partial w_2} + \frac{\partial A_k}{\partial b}) \\
-  A_k &= A_k(w_1, w_2, b)\\
-  &= a_k - \sum_j w_j\,\mathbf{X}_{jk} - b\\
-  &= a_k - w_1\,\mathbf{X}_{1k} - w_2\,\mathbf{X}_{2k}-b\\
-  dA_k &= -\mathbf{X}_{1k} - \mathbf{X}_{2k} -1
+  \frac{\partial L_k}{\partial w_j} &= 2A_k\,\frac{\partial(a_k - w_j\,\mathbf{X}_{jk} - b)}{\partial w_j}\\
+\sum_k \frac{\partial L_k}{\partial w_j} &= -2\sum_k A_k\,\mathbf{X}_{jk}\\
 \end{align*}
-where 
-\begin{center}
-\begin{align*}
-  \frac{\partial A_{k}}{\partial w_1} &= -\mathbf{X}_{1k}\hspace{2em} \frac{\partial A_{k}}{\partial w_2} = -\mathbf{X}_{2k}\hspace{2em} \frac{\partial A_k}{\partial b} = -1
-\end{align*} 
-\end{center}
 Replacing results in equations \ref{eq:cost_vector}. For example: 
 \begin{align*}
   \frac{\partial C}{\partial w_1} &= \frac{1}{2}\, 2\sum_i \mathbf{X}_{1i}\,(a_i-\hat{a}_i) \\
@@ -128,7 +119,7 @@ Finally, using \textit{Gradient Descent} method, we update vectors:
   b &= b -\frac{\partial C}{\partial b}\cdot{}\alpha\nonumber\\
   &= b +\frac{1}{2}\times{}2\vec{A}\times{}\vec{1}\,\alpha
 \end{align}
-$\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max incresing direction otherwise).
+$\alpha$ is called \textit{learning rate} and we use to tune the derivation. We go against the gradient so the sign is changed to $-$ (it points to max increasing direction otherwise).
 
 \subsubsection{Interpretation}
 
@@ -138,18 +129,15 @@ The minus sign is because the gradient always points away from the minimum and w
 
 \begin{align}
   \vec{w} &= \vec{w} -\frac{\partial C}{\partial \vec{w}}\,\alpha\\
-  &= \vec{w} -[\frac{\partial C}{\partial w_1}, \frac{\partial C}{\partial w_2},\ldots, \frac{\partial C}{\partial w_n}]\,\alpha\\
+  &= \vec{w} -\left[\frac{\partial C}{\partial w_1}, \frac{\partial C}{\partial w_2},\ldots, \frac{\partial C}{\partial w_n}\right]\,\alpha
 \end{align}
 
 It means we have a vector of corrections for each slope such that the overall cost is decreased. If we take say $\frac{dC}{dw_1}$ it is the sum of slopes for each sample, divided by $m$. 
 
-To have more insight and detail, we could take a look at a dataset with just one feature. Then 
+The slope depends on the sum of features times errors, as it was found: 
 \begin{align*}
-  C &= \frac{1}{m}\sum_i(a_i - \hat{a}_i)^2 \\ 
-  \frac{\partial C}{dw_1}&= \frac{1}{m}\,\sum_i \frac{dL_i}{dw_1} \\
-  &= -\frac{2}{m}\sum_i \mathbf{X}_{1i}(\vec{a}_i-\vec{\hat{a}}_i)
+  \frac{\partial C}{dw_1}&= -\frac{2}{m}\sum_i \mathbf{X}_{1i}(\vec{a}_i-\vec{\hat{a}}_i)
 \end{align*}
-we see the slope depends on the sum of features times errors. Much more can be inspected here.
 
 %This is almost the same result we get in the \textit{sigmoid}, just multiplied by $2$. Because the $2$ can be thought as inside the learning rate, we can use the exact same \textit{backpropagation} for both methods!
 

@@ -1,5 +1,5 @@
-\section{Mulvariable Binary Regression}
-The activation is:
+\section{Mulvariate Binary Regression}
+Also known as \textit{logistic regression}. The activation is:
 \[
   \hat{a}(\vec{x})= \frac{1}{1+e^{-(\vec{w}\cdot{}\vec{x}+b)}}
 \]
@@ -20,7 +20,7 @@ The network schema can be found in \ref{fig:single}. It is used to build the cal
 \begin{itemize}
   \item The activation is a \textit{sigmoid} function:
 \[
-  \hat{a}_i = \frac{1}{1+e^{-(\sum_j w_j\, \mathbf{X}_{ij} + b)}}
+  \hat{a}_i = \frac{1}{1+e^{-(\sum_j w_j\, \mathbf{X}_{ji} + b)}}
 \]
 
   \item The Loss is the Cross Entropy Loss:
@@ -30,7 +30,7 @@ The network schema can be found in \ref{fig:single}. It is used to build the cal
 
 \item The cost:
 \[
-  C(\vec{w}, \vec{b}) = -\frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)
+  C(\vec{w}, b) = -\frac{1}{m}\sum_{i=0}^m L_i(\vec{w}, b)
 \]
 \end{itemize}
 This is coded:
@@ -80,15 +80,16 @@ We are left with:
 
 We then have:
 \begin{align*}
-  w_j &= w_j - \frac{\partial C}{\partial w_j}\,\alpha\\
-  &= w_j + \frac{1}{m}\,\sum \frac{\partial L_i}{\partial w_j}\,\alpha\label{eq:same}
+  w_j &= w_j - \alpha\frac{\partial C}{\partial w_j}\\
+  &= w_j + \frac{\alpha}{m}\sum \frac{\partial L_i}{\partial w_j}\label{eq:same}\\
+  &= w_j + \frac{\alpha}{m}\sum_i (a_i-\hat{a}_i)\mathbf{X}_{ji}
 \end{align*}
 But we can compute in general:
 \begin{align}
-  \vec{w} &= \vec{w} - \frac{\partial C}{\partial \vec{w}}\,\alpha\nonumber\\
-  &= \vec{w} + \mathbf{X}\cdot{}\mathbf{\Delta A}^T\,\alpha\\
-  b &= b - \frac{\partial C}{\partial b}\,\alpha\nonumber\\
-  &= b + \mathbf{\Delta A}\,\alpha
+  \vec{w} &= \vec{w} - \frac{\alpha}{m}\,\frac{\partial C}{\partial \vec{w}}\nonumber\\
+  &= \vec{w} + \frac{\alpha}{m}\,\mathbf{X}\cdot{}\mathbf{\Delta A}^T\\
+  b &= b - \frac{\alpha}{m}\,\frac{\partial C}{\partial b}\nonumber\\
+  &= b + \frac{\alpha}{m}\mathbf{\Delta A}
 \end{align}
 
 The same result than for linear regression. 
