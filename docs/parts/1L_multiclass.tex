@@ -1,8 +1,8 @@
 \section{Multiclass Network}
 
-This network can be used for multiclass problems, but it's actually used with a \textit{softmax} function instead of \textit{sigmoid}. 
+This network can be used for multinomial problems (classification).
 
-The prediction for a sample ($a$) is a column vector. The cost can be arranged as a row vector of $N$ components, for $N$ different labels.
+The prediction for a sample $a$ is a column vector of $s$ nodes. The cost is a row vector of $n$ components, for $n$ different labels.
 
 From the NN diagram, we derive the computations:
 
@@ -38,13 +38,17 @@ The cost for the $j$ node is:
 \begin{align}
   C_j = -\frac{1}{m}\left(\sum_i \mathbf{A}_{ji}\log(\hat{\mathbf{A}}_{ji}) + (1-\mathbf{A}_{ji})\log(1-\hat{\mathbf{A}}_{ji})\right) 
 \end{align}
-which may be coded like this:
-\begin{verbatim}
+coded:
+
+\begin{center}
+\begin{BVerbatim}
 C = np.sum(
          multiply(A, np.log(Ap))
        + multiply(1-A, np.log(1-Ap)),
        axis=1)
-\end{verbatim}
+\end{BVerbatim}
+\end{center}
+
 The gradients are: 
 \begin{align}
   \frac{dC}{d\mathbf{W}} &= -\frac{1}{m}\mathbf{\Delta A}\cdot{}\mathbf{X}^T\\

@@ -1,62 +1,55 @@
 \section{Shallow Neural Network}
-
-Standalone regressions approximate data with a single function. Hence they can't represent complex patterns. 
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{2L-NN.png}
-  \caption{Shallow NN diagram}\label{fig:shallow}
-\end{figure}
-We calculate what is shown in \ref{fig:shallow}.
+A shallow network adds a hidden layer. This helps to model more complex data patterns respect to standalone linear or logistic regression. The next calculations follow the network on figure \ref{fig:shallow}.
 
 \subsection{Forward Propagation}
-What changes is $W$, passes from a vector to a matrix. Each row will represent a node.
+\begin{itemize}
+  \item activation tanh hidden layer, 
+  \item activation sigmoid output layer,
+  \item cost is a number given by log-loss
+\end{itemize}
+
+$\mathbf{W}$, passes from a vector to a matrix. Each row will represent a node.
 
 \begin{align}
-  \mathbf{A} = \mathbf{W} \cdot{} \mathbf{X} + \mathbf{B} \label{eq:multi}
+  \mathbf{A}^{[i]} = \mathbf{W}^{[i]} \cdot{} \mathbf{A}^{[i-1]} + \mathbf{B}^{[i]} \label{eq:multi}
 \end{align}
 
 \begin{equation*}
   \begin{bmatrix}
-    a_1^1 &\ldots & a_m^1\\
-    a_1^2 &\ldots & a_m^2\\
-    \vdots &\ldots & \vdots\\
-    a_1^s &\ldots & a_m^s\\
+    a_{11}^{[i]} &\ldots & a_{1m}^{[i]}\\
+    \vdots &\ddots & \vdots\\
+    a_{s1}^{[i]}  &\ldots & a_{sm}^{[i]}\\
   \end{bmatrix}
   = 
   \begin{bmatrix}
-    w_1^1& w_2^1& \ldots& w_n^1\\
-    w_1^2& w_2^2& \ldots& w_n^2\\
-    \vdots& \vdots& \ddots& \vdots\\
-    w_1^s& w_2^s& \ldots& w_n^1\\
+    w_{11}^{[i]}& \ldots& w_{1n}^{[i]}\\
+    \vdots& \vdots& \ddots\\
+    w_{s1}^{[i]}& \ldots& w_{sn}^{[i]}\\
   \end{bmatrix}
   \begin{bmatrix}
-    x_{11} & x_{12} & \ldots & x_{1m}\\
-    x_{21} & x_{22} & \ldots & x_{2m}\\
-    \vdots & \vdots & \ddots & \vdots\\
-    x_{n1} & x_{22} & \ldots & x_{nm}\\
+    a^{[i-1]}_{11} & \ldots & a^{[i-1]}_{1m}\\
+    \vdots & \ddots & \vdots\\
+    a^{[i-1]}_{n1} & \ldots & a^{[i-1]}_{nm}\\
   \end{bmatrix}
-  + \begin{bmatrix}b_1\\ b_2\\ \vdots\\ b_n\end{bmatrix}
+  + \begin{bmatrix}b_1^{[i]}\\ \vdots\\ b_s^{[i]}\end{bmatrix}
 \end{equation*}
 
-$A$ acts now like $X$, each column being a sample. Each row belongs to a node. And each activation in the row, is a linear combination of weights and bias from that node, and a sample from $X$.
+For any $\mathbf{A}$, each column correlates to a sample. Each row is always a node, for $\mathbf{{A}^{[i-1]}}$ this is the number of features.
 
-This process can be done iteratively, with many layers.
-\begin{itemize}
-  \item Each \textit{row in the is associated with a single node} in the neural network. 
-  \item Each \textit{column is instead refered to a sample} of $X$ going through each node, so it's a \textit{different linear combination of the features}. 
-\end{itemize}
+And each output activation in the row, is a linear combination of weights and bias from that node.
 
-To look at detailed take a hidden layer with two nodes, and two initial input features.
+\subsubsection{Why non-linear}
+The activation in the hidden layer can not be linear. Take a hidden layer with two nodes, and two initial input features.
 
 \begin{equation*}
   \begin{bmatrix}
-    a_1^1 & a_2^1\\
-    a_1^2 & a_2^2\\
+    a_{11} & a_{12}\\
+    a_{21} & a_{22}\\
   \end{bmatrix}
   = 
   \begin{bmatrix}
-    w_1^1& w_2^1\\
-    w_1^2& w_2^2
+    w_{11}& w_{12}\\
+    w_{21}& w_{22}
   \end{bmatrix}
   \begin{bmatrix}
     x_{11} & x_{12}\\
@@ -65,35 +58,36 @@ To look at detailed take a hidden layer with two nodes, and two initial input fe
   + \begin{bmatrix}b_1\\ b_2\end{bmatrix}
 \end{equation*}
 
-They compute:
+First row in the output matrix is for node $1$. First term is for first sample, second for second sample. Second row are computations for node $2$.
 
+So the first column is:
 \begin{align*}
-  a_1^1 &= w_1^1\,x_{11} + w_2^1\,x_{21} + b_1\\
-  a^2_1 &= w_1^2\,x_{11} + w_2^2\,x_{21} + b_2\\
-  a_2^1 &= w_1^1\,x_{12} + w_2^1\,x_{22} + b_1 \\
-  a_2^2 &= w_1^2\,x_{12} + w_2^2\,x_{22} + b_2
+  a_{11} &= w_{11}\,x_{11} + w_{12}\,x_{21} + b_1\\
+  a_{21} &= w_{21}\,x_{11} + w_{22}\,x_{21} + b_2\\
 \end{align*}
-The upper number is the neuron, lower number is the sample. If each of those is input to a linear function the result is $r_1 = c_1\,a_1^1 + c_2\, a_1^2 + b$ and $r_2 = c_1\,a_2^1 + c_2\, a_2^2+b$ this is the same than using a single neuron. The same thing happens if we have any other linear piece like a sigmoid. Hence \textit{linear functions aren't normally used in hidden layers.}
-
-But the whole reasoning is useful for other hidden layers.
-
-Luckily, each activation is input to a function, hence the whole matrix is passed through a function (easy to do in python).
+When is input to another linear function the result is $r_1 = c_1\,a_{11} + c_2\,a_{21} + b1$. This is the same than using a single linear neuron! The same thing happens if we a sigmoid. Hence \textit{linear functions aren't normally used in hidden layers.}
 
 \subsection{Implement Forward Propagation}
 In the code, we implement equation \ref{eq:multi} several times. The most important piece is:
 
-\begin{verbatim}
-# arch is an array describing the architecture:
-arch = [4,3,2,1] #has 4 layers with those nodes.
-def fp(X, arch):
-    W,B = initialize(arch[0], X.shape[0]) #nodes x features
-    A = predict(W,B,X,np.tanh) # 2, m
-    for layer in arch[1:-1]:
-        W,B = initialize(arch[layer], A.shape[0]) 
-        A = predict(W,B,A,np.tanh) # 2, m
-    W,B = initialize(arch[-1], A.shape[0]) #nodes x features
-    return predict(W,B,A,sigmoid)
-\end{verbatim}
-
+\begin{center}
+\begin{BVerbatim}
+def fp(A0,m,nodes=[4,3,2,1],hfn=np.tanh,ofn=sigmoid):
+    """
+    A0, matrix of samples
+    nodes: architecture, list of nodes per layer
+    hfn: hidden layer function
+    ofn: output layer function
+    returns row vector/matrix of predictions
+    """
+    W,B = initialize(nodes[0], A0.shape[0]) 
+    Ap = predict(W,B,A0,m,hfn) # nodesL x samples
+    for l in range(len(nodes[1:-1])):
+        W,B = initialize(nodes[l+1], nodes[l]) 
+        Ap = predict(W,B,Ap,m,hfn) # nodes x samples 
+    W,B = initialize(nodes[-1], Ap.shape[0]) #nodes x nodes_prev
+    return predict(W,B,Ap,m,ofn)
+\end{BVerbatim}
+\end{center}
 Sanity check: $W$, $b$ aren't initialized as zeros, but if they were and the output is a sigmoid, the result has to be $0.69$.
 
