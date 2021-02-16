@@ -65,7 +65,12 @@ So the first column is:
   a_{11} &= w_{11}\,x_{11} + w_{12}\,x_{21} + b_1\\
   a_{21} &= w_{21}\,x_{11} + w_{22}\,x_{21} + b_2\\
 \end{align*}
-When is input to another linear function the result is $r_1 = c_1\,a_{11} + c_2\,a_{21} + b1$. This is the same than using a single linear neuron! The same thing happens if we a sigmoid. Hence \textit{linear functions aren't normally used in hidden layers.}
+When is input to another linear function the result is 
+\begin{align*}
+  r_1 &= c_1\,a_{11} + c_2\,a_{21} + b_1\\
+  &= c\,x_{12} + c'\,x_{21} + b_1
+\end{align*}
+This is the same than using a single linear neuron! The same thing happens if we a sigmoid. Hence \textit{linear functions aren't normally used in hidden layers.}
 
 \subsection{Implement Forward Propagation}
 In the code, we implement equation \ref{eq:multi} several times. The most important piece is:
@@ -89,5 +94,12 @@ def fp(A0,m,nodes=[4,3,2,1],hfn=np.tanh,ofn=sigmoid):
     return predict(W,B,Ap,m,ofn)
 \end{BVerbatim}
 \end{center}
-Sanity check: $W$, $b$ aren't initialized as zeros, but if they were and the output is a sigmoid, the result has to be $0.69$.
+Sanity check: $W$, $b$ aren't initialized as zeros, but if they were and the output is a sigmoid, the result has to be $0.69$ (tested on scripts).
 
+\subsection{Backward propagation}
+The quantities to compute are:
+\begin{itemize}
+  \item C, dC
+  \item dL
+  \item $w'$, $b'$
+\end{itemize}

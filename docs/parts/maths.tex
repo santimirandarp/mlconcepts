@@ -1,0 +1,51 @@
+\section{Math: Basic intuitions}
+Sometimes we forget mathematics is pure representation. We could wake up and come up with a symbolic system to represent things or processes. Languages, chemistry, mathematics, all belong to this symbolic realm of \textit{representation}.
+
+Matrices can be thought as standalone entities, with rules and operations that are defined in some way. When representing physics, the rules have to be coherent with reality, and that's how we test a matrix is correct. 
+
+As a side note, it's a curiosity for us how maths can be so well suited to represent phenomena in the world in such a condensed way. There is an essay from a Nobel Prize winner \href{https://en.wikipedia.org/wiki/The_Unreasonable_Effectiveness_of_Mathematics_in_the_Natural_Sciences}{The Unreasonable Effectiveness of Mathematics in the Natural Sciences}. 
+
+Another way to see matrices - apart from a rectangle of elements - is as an extension of equations. Indeed, they come up as a handy notation of sets of equations (no need if there is just one equation). This seems a good starting point. Summation, multiplication, derivation and operations defined for equations are supposed to exist, or have some analogous.
+
+\subsection{A concrete example}
+We are told that the relation mass of flour (kilograms) to volume (in litres) of water for a particular recipe is $2$ plus $3$. Hence $F = 2\,W + 3$
+
+A thousand recipes containing Flour and Water in different proportions is needed for a dinner. There are $1000$ equations similar to the one above $F= k\,W + b$. $k$, $c$ being constants. 
+
+This can be represented as a matrix:
+\begin{align*}
+\begin{bmatrix}
+f_1\\
+f_2\\
+\vdots\\
+f_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+k_1 & 0 & \hdots & 0_n \\
+0 & k_2 & \hdots & 0_n \\
+\vdots & & \hdots & \vdots \\
+0 & 0 & 0 & k_n
+\end{bmatrix}
+\begin{bmatrix}
+W_1\\
+W_2\\
+\vdots\\
+W_n
+\end{bmatrix}
++
+\begin{bmatrix}
+b_1\\
+b_2\\
+\vdots\\
+b_n
+\end{bmatrix}
+\end{align*}
+
+What would mean to find $d\mathbf{F}$? It has to be defined. It is the derivative of each equation. The equation $i^{th}$ is $f_i(w_i) = w_i\,k_i + b_i$, then $df_i = \frac{df_i}{dw_i} = k_i$. In this case, we are tempted to write: the result $d\mathbf{F} = [k_1, k_2,\hdots, k_n]$. But actually, the best notation is the matrix of coefficients written above. Hence $d\mathbf{F} = \mathbf{k}$.
+
+What would happen if each $f_i$ is in a exponent, for example? $f_i(w_i) =  e^{w_i\,k_i + b_i}$. How are the $1000$ equations represented? Just $e^\mathbf{F}$ would indicate that. What is the derivative?
+
+\begin{equation*}\frac{df}{dw} = e^{w_i\,k_i + b_i}\, k_i\end{equation*}. Then $$\frac{d\mathbf{F}}{dW}= \mathbf{k} \, e^\mathbf{F}$$
+
+  In this way many derivatives can be found. For example $d\mathbf{x}^T\mathbf{x} = 2 \mathbf{x}$. Because $\mathbf{x}^T\mathbf{x}$ is a representation of a set of equations of this kind: $x^2$. A \href{https://www.gatsby.ucl.ac.uk/teaching/courses/sntn/sntn-2017/resources/Matrix_derivatives_cribsheet.pdf}{list of useful derivatives}.

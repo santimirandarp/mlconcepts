@@ -4,7 +4,7 @@ import numpy as np
 sigmoid = lambda z: 1/(1+np.exp(-z))
 linear = lambda z: z
 
-def initialize(nodes,features):
+def initialize(nodes,features, itype="z"):
     """
     the rows of W are nodes
     the columns of W are features
@@ -14,12 +14,15 @@ def initialize(nodes,features):
     """
     print("number of nodes: ", nodes)
     print("number of features: ", features)
-    w = np.random.rand(nodes, features)
-    #each node computes for a set of features
-    b = np.random.rand(nodes, 1)
-    return w, b
+    if itype=="r":
+      w = np.random.rand(nodes, features)
+      b = np.random.rand(nodes, 1)
+      return w, b
+    elif itype == "z":    
+      w = np.zeros((nodes, features))
+      b = np.zeros((nodes, 1))
+      return w, b
 
-# forward propagation
 def predict(W,B,X,m,activation):
     """
     W matrix/vector of weights
@@ -32,10 +35,16 @@ def predict(W,B,X,m,activation):
     Z = np.dot(W,X) + B
     return activation(Z)
 
-def cost(X, A, Ap, m, activation):
-    if activation==sigmoid:
+def cost(A, Ap, m, activation="sigmoid"):
+    """
+    A:labels, 
+    Ap:predicted labels,
+    m: N samples,
+    activation: str sigmoid/linear, etc
+    """
+    if activation=="sigmoid":
         return -1/m*(np.sum(A*np.log(Ap) + (1-A)*np.log(1-Ap), axis=1, keepdims=True))
-    else:
+    elif activation=="linear":
         """there may be else if between, for other fns"""
         diff  = A-Ap
         return 1/m*np.dot(diff, diff.T)
