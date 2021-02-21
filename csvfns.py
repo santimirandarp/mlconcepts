@@ -26,20 +26,17 @@ def toXY(table, Ykey=False, Yindex=False):
     X = table #where Y has been removed
     return X, Y
 
-def to_numpy(X,Y,X_test,Y_test, traspose=True):
+def to_numpy(X,Y,X_test,Y_test):
     """takes the pandas datasets
     retrieves numpy arrays"""
     X = X.to_numpy()
     Y = Y.to_numpy()
     X_test = X_test.to_numpy()
     Y_test = Y_test.to_numpy()
-    return X,Y,X_test,Y_test if traspose else  X.T,Y.T,X_test.T,Y_test.T
+    return X,Y,X_test,Y_test 
 
-def normalize(X):
-    """X could be np array or pandas"""
-    return (X-X.mean(axis=0))/(X.max(axis=0)-X.min(axis=0))
 
-def trainAndTest(X,Y,norm=True,sliceAt = np.sqrt):
+def trainAndTest(X,Y, sliceAt = np.sqrt):
     """
     Assumes X shape (samples, features) as in a table
     Y (samples,1)
@@ -48,7 +45,6 @@ def trainAndTest(X,Y,norm=True,sliceAt = np.sqrt):
     """
     m = X.shape[0] 
     sliceAt = int(sliceAt(m))
-    if norm: X = normalize(X) 
     Y = Y.iloc[sliceAt:]
     Y_test = Y.iloc[:sliceAt]
     X = X.iloc[sliceAt:,:]
