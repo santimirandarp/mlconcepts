@@ -2,9 +2,8 @@
 This repository holds attempts to understand how neural networks work from a begginers point of view. 
 
 ## Contribute
-* Clone the repo using `git clone https://www.github.com:santimirandarp/mlconcepts.git` 
+* Clone `git clone https://www.github.com:santimirandarp/mlconcepts.git` 
 * test the python scripts (**1**, **2**, **3**,..). 
-* You can modify them, draw conclusions and write them to the docs if you find anything interesting.
 * Push changes to repo.
 
 Feel free to write new neural networks and place them in a numbered python file as the other networks.
@@ -18,6 +17,7 @@ To practice [ready-to-use datasets](https://machinelearningmastery.com/results-f
 2. Treat/Prepare the data
 Split into training and test. Datasets are cleaned up. Utility functions are defined to normalize and center data.
 
+A few functions for this matter are under `csvfn.py`.
 
 3. Define a Neural Network 
 Depending on the problem we define a network type: _architecture_ and _size_ of the network (width and depth). 
@@ -38,9 +38,6 @@ The model improves itself (learns). All models are deduced using gradient descen
 * Standard Regression and Classification have the same backpropagation algorithm.
 
 ## General script
-In `function.py` and `csvfns.py` there is a more general set of functions to solve any of this 2 problems:
-1. Multivariate (or single) regression
-2. Multivariate (or single) classification
-The script does not accept deep networks (not even shallows) because it assumes no hidden layer. 
+After writing many concrete algorithms we start to feel like creating more abstract functions for each task (they repeat again and again).
 
-It also makes use of the fact that backpropagation is the same for regression and classification. Hence, the code is brief.
+`functions.py` does exactly that for simple networks. It uses the fact that backpropagation is the same for regression and classification. 
