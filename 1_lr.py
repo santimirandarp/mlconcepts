@@ -2,38 +2,32 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 import pandas as pd
+from csvfns import *
+from functions import naive_model
 
-# import swedish kronor dataset
 sw = pd.read_csv('swedish_kronor.csv', delimiter='\t', decimal=',')
 
-# convert dataframe to numpy.arr to get +functionality
-def make_datasets(dataset):
-    X, Y = sw['X'].to_numpy(), sw['Y'].to_numpy()
-    X, Y = X.reshape(1,X.shape[0]), Y.reshape(1,Y.shape[0]) 
-    # from column to row
-    return X, Y
+"""
+Next steps keep the columns,
+but slices sw (table) and normalizes
+features
+"""
+X,Y = toXY(sw, Ykey="Y")
+X = normalize(X)
 
-def naive_model(Y):
-    """
-    use this as a baseline
-    if we have larger error it's useless
-    """
-    l = Y.shape[1]
-    diff = Y-np.mean(Y)
-    rmse = np.sqrt(np.dot(diff,diff.T)/l)
-    return rmse
+print(X)
 
-def normalize(X):
-    """
-    X features, returns normalized features
-    """
-    return (X - np.mean(X))/(np.max(X)-np.min(X))
+" splits to create test and train dataframes"
+X,Y,X_test,Y_test = trainAndTest(X,Y)
 
+" convert dataframes to numpy (easier) and traspose"
+X,Y,X_test,Y_test = to_numpy(X,Y,X_test,Y_test, traspose=True)
 
-###### forward propagation
+print("X shape is", X.shape, "Y shape is", Y.shape)
+
 
 def initialize(dim):
-    # dim is X.shape[0]
+    # dm is X.shape[0]
     w = np.zeros((1, dim))
     b = 0
     return w, b
@@ -86,8 +80,6 @@ def metric(w,b,X,Y):
     rmse = np.sqrt(np.dot(diff, diff.T)/l)
     return rmse
 
-X,Y = make_datasets(sw)
 print('naive estimation rmse: ', naive_model(Y))
-X = normalize(X)
 w, b = model(X, Y, 500)
 print("model rmse: ", metric(w,b,X,Y))

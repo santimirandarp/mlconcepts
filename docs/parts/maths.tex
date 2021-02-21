@@ -1,16 +1,55 @@
 \section{Math: Basic intuitions}
-Sometimes we forget mathematics is pure representation. We could wake up and come up with a symbolic system to represent things or processes. Languages, chemistry, mathematics, all belong to this symbolic realm of \textit{representation}.
+Matrices are a rectangles of elements. Hence they have width and height (dimensions).
 
-Matrices can be thought as standalone entities, with rules and operations that are defined in some way. When representing physics, the rules have to be coherent with reality, and that's how we test a matrix is correct. 
+They come up as a handy notation for sets of equations (no need if there is just one equation). 
 
-As a side note, it's a curiosity for us how maths can be so well suited to represent phenomena in the world in such a condensed way. There is an essay from a Nobel Prize winner \href{https://en.wikipedia.org/wiki/The_Unreasonable_Effectiveness_of_Mathematics_in_the_Natural_Sciences}{The Unreasonable Effectiveness of Mathematics in the Natural Sciences}. 
+\subsection{Examples}
+\textbf{One equation, one Variable}
+We are told that the relation mass of flour (kilograms) to volume (in litres) of water for a particular recipe is: $$f = 2\,w + 3$$
+The change or derivative is $$\frac{df}{dw} = 2x$$
 
-Another way to see matrices - apart from a rectangle of elements - is as an extension of equations. Indeed, they come up as a handy notation of sets of equations (no need if there is just one equation). This seems a good starting point. Summation, multiplication, derivation and operations defined for equations are supposed to exist, or have some analogous.
+\textbf{One equation, many variables}
+Let's create an example where the weight of flour is always double the volume of water, $\frac{1}{5}$ of sunflower oil, and $0.01$ potasium carbonate. 
 
-\subsection{A concrete example}
-We are told that the relation mass of flour (kilograms) to volume (in litres) of water for a particular recipe is $2$ plus $3$. Hence $F = 2\,W + 3$
+$$f(w,so,k) = 2\,w + \frac{1}{5}\,so + 0.01\,k$$
 
-A thousand recipes containing Flour and Water in different proportions is needed for a dinner. There are $1000$ equations similar to the one above $F= k\,W + b$. $k$, $c$ being constants. 
+Now $f$ depends on many ingredients, instead of $f(w)$ we have $f(w,so,k,\ldots)$. In standard notation this is $f(x,y,z,\ldots)$. 
+
+The derivative has to contemplate each variable,
+
+\begin{align*}
+  \nabla f(w,so,k) &= \frac{df}{dw} + \frac{df}{dso} \frac{df}{dk}\\
+&=2 + \frac{1}{5} + 0.01
+\end{align*}
+Now $df$ is normally written $\nabla f$ but it means the same, derivatives respect to each component. Adding up we get a total change $df$, but a different view is keeping them separate, and hence the information on each direction (axis) isn't loose.
+
+\begin{align*}
+\nabla f(w,so,k) =
+\begin{bmatrix}
+   \frac{df}{dw} \\ \frac{df}{dso} \\ \frac{df}{dk}
+\end{bmatrix}
+=
+\begin{bmatrix}
+  2 \\ \frac{1}{5} \\ 0.01
+\end{bmatrix}
+\end{align*}
+
+This is part of \textit{multivariate calculus} needed for DL.
+
+\begin{center}
+\begin{tabular}{cc}
+  $df(x)$ & $\nabla f(x,y,z,\ldots)$\\
+  $\frac{df}{dx}$ & $\frac{\partial f}{\partial x}+\frac{\partial f}{\partial z}+\ldots$
+\end{tabular}
+\end{center}
+
+It was shown how many variables naturally lead to vectors - this is, they can be arranged as vectors.
+
+\textbf{Many equations, one variable}
+
+What happens with many equations? 
+
+A thousand recipes containing Flour and Water in different proportions is needed for a dinner. There are $1000$ equations similar to the one above $f= k\,w + b$. $k$, $c$ being constants. $w$ could very well be a single pixel of an image. 
 
 This can be represented as a matrix:
 \begin{align*}
@@ -18,34 +57,36 @@ This can be represented as a matrix:
 f_1\\
 f_2\\
 \vdots\\
-f_n
+  f_{1000}
 \end{bmatrix}
 =
 \begin{bmatrix}
 k_1 & 0 & \hdots & 0_n \\
 0 & k_2 & \hdots & 0_n \\
 \vdots & & \hdots & \vdots \\
-0 & 0 & 0 & k_n
+  0 & 0 & 0 & k_{1000}
 \end{bmatrix}
 \begin{bmatrix}
 W_1\\
 W_2\\
 \vdots\\
-W_n
+  W_{1000}
 \end{bmatrix}
 +
 \begin{bmatrix}
 b_1\\
 b_2\\
 \vdots\\
-b_n
+  b_{1000}
 \end{bmatrix}
 \end{align*}
 
-What would mean to find $d\mathbf{F}$? It has to be defined. It is the derivative of each equation. The equation $i^{th}$ is $f_i(w_i) = w_i\,k_i + b_i$, then $df_i = \frac{df_i}{dw_i} = k_i$. In this case, we are tempted to write: the result $d\mathbf{F} = [k_1, k_2,\hdots, k_n]$. But actually, the best notation is the matrix of coefficients written above. Hence $d\mathbf{F} = \mathbf{k}$.
+What would mean to find $d\mathbf{F}$? The equation $i^{th}$ is $f_i(w_i) = w_i\,k_i + b_i$, then $df_i = \frac{df_i}{dw_i} = k_i$ (and terms different from $i$ are $0$). $$d\mathbf{F} = \mathbf{k}$$.
 
 What would happen if each $f_i$ is in a exponent, for example? $f_i(w_i) =  e^{w_i\,k_i + b_i}$. How are the $1000$ equations represented? Just $e^\mathbf{F}$ would indicate that. What is the derivative?
 
 \begin{equation*}\frac{df}{dw} = e^{w_i\,k_i + b_i}\, k_i\end{equation*}. Then $$\frac{d\mathbf{F}}{dW}= \mathbf{k} \, e^\mathbf{F}$$
 
   In this way many derivatives can be found. For example $d\mathbf{x}^T\mathbf{x} = 2 \mathbf{x}$. Because $\mathbf{x}^T\mathbf{x}$ is a representation of a set of equations of this kind: $x^2$. A \href{https://www.gatsby.ucl.ac.uk/teaching/courses/sntn/sntn-2017/resources/Matrix_derivatives_cribsheet.pdf}{list of useful derivatives}.
+
+For many variables, the matrix $\mathbf{k}$ has numbers other than $0$.

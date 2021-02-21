@@ -1,34 +1,58 @@
 import numpy as np
-# generates datasets
 
-# also built into datasets
-def to_numpy(X,Y,X_test,Y_test):
+"""Set of utilities to prepare the data"""
+
+def toXY(table, Ykey=False, Yindex=False):
+    """
+    returns X,Y as dataframes
+    table: from csv_read, dataframe
+    Ykey: string to access df's Y key
+    Yindex: alternative to Ykey. Can be + or -
+    """
+    Y,X = None, None
+    if isinstance(Ykey, str):
+        Y = table[Ykey]
+        del table[Ykey]
+    elif isinstance(Yindex, int):
+        if Yindex != -1:
+            Y = table.iloc[:, Yindex:Yindex+1]
+            del table.iloc[:, Yindex:Yindex+1]
+        elif Yindex==-1:
+            Y = table.iloc[:, Yindex:]
+            del table.iloc[:, Yindex:]
+    else:
+        print('Execution Error. Did you pass Ykey or Yindex?')
+        return None
+    X = table #where Y has been removed
+    return X, Y
+
+def to_numpy(X,Y,X_test,Y_test, traspose=True):
     """takes the pandas datasets
     retrieves numpy arrays"""
     X = X.to_numpy()
     Y = Y.to_numpy()
     X_test = X_test.to_numpy()
     Y_test = Y_test.to_numpy()
-    return X,Y,X_test,Y_test
+    return X,Y,X_test,Y_test if traspose else  X.T,Y.T,X_test.T,Y_test.T
 
-def datasets(df_csv,normalize=True, sliceAt = np.sqrt, to_numpy=to_numpy):
-    """from 2 columns (features and labels), 
-    return test and train datasets.
-    The last column has to be Y (labels)"""
-    df_csv = df_csv.T # transpose
-    ft = df_csv.iloc[:-1,:] # exclude last row Y
-    if normalize==True:
-        #ft = (ft-ft.mean())/(ft.max()-ft.min())
-        ft = (ft-ft.mean(axis=0))/(ft.max(axis=0)-ft.min(axis=0))
-#    print("Head: ",ft.head()) #just to see the ft normalized
-    cols = df_csv.shape[1] 
-    sliceAt = int(sliceAt(cols))
-    Y = df_csv.iloc[-1:,sliceAt:]
-    Y_test = df_csv.iloc[:-1,:sliceAt]
-    X = ft.iloc[:,sliceAt:]
-    X_test = ft.iloc[:,:sliceAt]
-    if to_numpy==to_numpy:
-        return to_numpy(X,Y,X_test,Y_test)
+def normalize(X):
+    """X could be np array or pandas"""
+    return (X-X.mean(axis=0))/(X.max(axis=0)-X.min(axis=0))
+
+def trainAndTest(X,Y,norm=True,sliceAt = np.sqrt):
+    """
+    Assumes X shape (samples, features) as in a table
+    Y (samples,1)
+    sliceAt is the operation done over m
+    lambda functions can be defined on the fly
+    """
+    m = X.shape[0] 
+    sliceAt = int(sliceAt(m))
+    if norm: X = normalize(X) 
+    Y = Y.iloc[sliceAt:]
+    Y_test = Y.iloc[:sliceAt]
+    X = X.iloc[sliceAt:,:]
+    X_test = X.iloc[:sliceAt,:]
     return X,Y,X_test,Y_test
 
 

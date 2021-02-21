@@ -2,9 +2,9 @@
 import numpy as np
 
 sigmoid = lambda z: 1/(1+np.exp(-z))
-linear = lambda z: z
+identity = lambda z: z
 
-def initialize(nodes,features, itype="z"):
+def initialize(nodes,features,fill="zeros"):
     """
     the rows of W are nodes
     the columns of W are features
@@ -14,11 +14,11 @@ def initialize(nodes,features, itype="z"):
     """
     print("number of nodes: ", nodes)
     print("number of features: ", features)
-    if itype=="r":
+    if fill == "random":
       w = np.random.rand(nodes, features)
       b = np.random.rand(nodes, 1)
       return w, b
-    elif itype == "z":    
+    elif fill == "zeros":    
       w = np.zeros((nodes, features))
       b = np.zeros((nodes, 1))
       return w, b
@@ -40,11 +40,11 @@ def cost(A, Ap, m, activation="sigmoid"):
     A:labels, 
     Ap:predicted labels,
     m: N samples,
-    activation: str sigmoid/linear, etc
+    activation: str sigmoid/identity, etc
     """
     if activation=="sigmoid":
         return -1/m*(np.sum(A*np.log(Ap) + (1-A)*np.log(1-Ap), axis=1, keepdims=True))
-    elif activation=="linear":
+    elif activation=="identity":
         """there may be else if between, for other fns"""
         diff  = A-Ap
         return 1/m*np.dot(diff, diff.T)
@@ -93,4 +93,14 @@ def naive_estim(Y, method="regression", dtype='df'):
         diff = Y-np.mean(Y)
         rmse = np.sqrt(np.dot(diff,diff.T)/l)
         return rmse
+
+def naive_model(Y):
+    """
+    use this as a baseline
+    if we have larger error it's useless
+    """
+    l = Y.shape[1]
+    diff = Y-np.mean(Y)
+    rmse = np.sqrt(np.dot(diff,diff.T)/l)
+    return rmse
 
