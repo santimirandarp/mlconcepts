@@ -14,3 +14,8 @@ Training error: blue; validation error: red, both as a function of the number of
 
 Why a CNN? It's the current state-of-the-art approach to creating computer vision models.
 
+\textit{Cost vs Metric}
+
+Cost is the function we use to improve the model by gradient descent. We also compare the cost for training set vs cost for the test set, and look for the minimum so there is no overfitting.
+
+But for reporting a number measuring how well the model has done there is the Metric. It could be the cost, or not. In the case of linear regression the cost is MSE, but the Metric normally used is RMSE so the result has same units than $y$.

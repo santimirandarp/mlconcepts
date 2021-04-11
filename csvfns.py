@@ -12,29 +12,19 @@ def toXY(table, Ykey=False, Yindex=False):
     Y,X = None, None
     if isinstance(Ykey, str):
         Y = table[Ykey]
-        del table[Ykey]
+        table.drop(columns=Ykey, inplace=True)
     elif isinstance(Yindex, int):
         if Yindex != -1:
             Y = table.iloc[:, Yindex:Yindex+1]
-            del table.iloc[:, Yindex:Yindex+1]
+            table.drop(columns=table.iloc[:,Yindex:Yindex+1].columns.tolist(),inplace=True) 
         elif Yindex==-1:
             Y = table.iloc[:, Yindex:]
-            del table.iloc[:, Yindex:]
+            table.drop(columns=table.iloc[:,Yindex:].columns.tolist(),inplace=True)
     else:
         print('Execution Error. Did you pass Ykey or Yindex?')
         return None
     X = table #where Y has been removed
     return X, Y
-
-def to_numpy(X,Y,X_test,Y_test):
-    """takes the pandas datasets
-    retrieves numpy arrays"""
-    X = X.to_numpy()
-    Y = Y.to_numpy()
-    X_test = X_test.to_numpy()
-    Y_test = Y_test.to_numpy()
-    return X,Y,X_test,Y_test 
-
 
 def trainAndTest(X,Y, sliceAt = np.sqrt):
     """
@@ -52,8 +42,18 @@ def trainAndTest(X,Y, sliceAt = np.sqrt):
     return X,Y,X_test,Y_test
 
 
+def to_numpy(X,Y,X_test,Y_test):
+    """takes the pandas datasets
+    retrieves numpy arrays"""
+    X = X.to_numpy()
+    Y = Y.to_numpy()
+    X_test = X_test.to_numpy()
+    Y_test = Y_test.to_numpy()
+    return X,Y,X_test,Y_test 
+
+
 # utility for multiclass problems
-def zero_one(labels):
+def hotencode(labels):
     """
     labels is an array of integers
     returns an array of 0s 1s for each integer
